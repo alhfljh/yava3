@@ -2,23 +2,40 @@ package jp.co.sss.crud.form;
 
 import java.util.Date;
 
+<<<<<<< HEAD
+=======
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+>>>>>>> 84c10cb627cf09158e1117fe7f01da5ae7dda266
 public class EmployeeForm {
 	/** 社員ID */
+	@NotNull
+	@Max(value = 99999)
 	private Integer empId;
 
 	/** パスワード */
+	@NotNull
+	@Pattern(regexp="{a-zA-Z0-9}+$")
 	private String empPass;
 
 	/** 社員名 */
+	@NotNull
+	@Size(max=30)
 	private String empName;
 
 	/** 性別 */
 	private Integer gender;
 
 	/** 住所 */
+	@NotNull
+	@Size(max=60)
 	private String address;
 
 	/** 生年月日 */
+	@NotNull
 	private Date birthday;
 
 	/** 権限 */
