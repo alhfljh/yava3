@@ -8,7 +8,7 @@
 
 <body class="admin user_list">
 	<h3>社員一覧画面</h3>
-	
+
 	<!-- セッション中にユーザ情報が存在する場合のみ以下の処理を実行する。 -->
 	<!-- なお、セッション中のユーザ情報がない（null）の場合、-->
 	<!-- フィルターの処理により、当該Thymeleaf処理完了後にログイン画面にリダイレクトする。 -->
@@ -17,7 +17,7 @@
 	</div>
 
 
-<!-- ***検索結果が０件の場合*** -->
+	<!-- ***検索結果が０件の場合*** -->
 	<!-- ***falseを書き換え、表示内容を記述すること*** -->
 	<th:block th:if="${#lists.isEmpty(emp)}">
 		<div class="message">
@@ -44,22 +44,28 @@
 			<th class="deptName">部署名</th>
 		</tr>
 
-<!--		 ***####を書き換え、社員情報を全件出力する*** -->
-<!--		<tr th:each="####:####">-->
-			<tr th:each="employee:${emp}">
+		<!--		 ***####を書き換え、社員情報を全件出力する*** -->
+		<!--		<tr th:each="####:####">-->
+		<tr th:each="employee:${emp}">
 			<td th:text="${employee.empId}"></td>
 			<td th:text="${employee.empName}"></td>
-			<td th:text="${employee.gender}"></td>
+			<td th:switch="${employee.gender}">
+				<span th:case="1">男性</span>
+				<span th:case="2">女性</span>
+			</td>
 			<td th:text="${employee.address}"></td>
-			<td th:text="${employee.birthday}"></td>
-			<td th:text="${employee.authority}"></td>
+			<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
+			<td th:switch="${employee.authority}">
+				<span th:case="1">一般</span>
+				<span th:case="2">管理者</span>
+			</td>
 			<td th:text="${employee.department.deptName}"></td>
-			</tr>
+		</tr>
 
 		</tr>
-<!--		 ***####を書き換え、社員情報を全件出力する ここまで*** -->
+		<!--		 ***####を書き換え、社員情報を全件出力する ここまで*** -->
 	</table>
-<!--	 ***検索結果がある場合 ここまで*** -->
+	<!--	 ***検索結果がある場合 ここまで*** -->
 
 </body>
 
