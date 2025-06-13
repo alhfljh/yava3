@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+
 public class EmployeeForm {
 	/** 社員ID */
 	@NotNull
@@ -41,6 +42,9 @@ public class EmployeeForm {
 
 	/** 部署ID */
 	private Integer deptId;
+	
+	/** 部署名 */
+	private String deptName;
 
 	/**
 	 * 社員IDの取得
@@ -193,4 +197,25 @@ public class EmployeeForm {
 	public void setDeptId(Integer deptId) {
 		this.deptId = deptId;
 	}
+	
+	/**
+	 * 部署名の取得
+	 *
+	 * @return 部署名
+	 */
+	public String getDeptName() {
+		return deptName;
+	}
+
+	/**
+	 * 部署名のセット
+	 *
+	 * @param deptName
+	 *            部署名
+	 */
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	
 }
