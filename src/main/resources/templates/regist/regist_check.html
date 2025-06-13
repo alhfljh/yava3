@@ -16,60 +16,60 @@
 		</div>
 		<div class="form">
 			<div class="label">社員名：</div>
-			<div class="input" th:text="####"></div>
+			<div class="input" th:text="${empName}"></div>
 		</div>
 		<div class="form">
 			<div class="label">性別：</div>
-			<div class="input" th:switch="####">
+			<div class="input" th:switch="${gender}">
 				<span th:case="1">男性</span>
 				<span th:case="2">女性</span>
 			</div>
 		</div>
 		<div class="form">
 			<div class="label">住所：</div>
-			<div class="input" th:text="####"></div>
+			<div class="input" th:text="${address}"></div>
 		</div>
 		<div class="form">
 			<div class="label">生年月日：</div>
-			<div class="input" th:text="####"></div>
+			<div class="input" th:text="${birthday}"></div>
 		</div>
 		<div class="form">
 			<div class="label">権限：</div>
-			<div class="input" th:switch="####">
+			<div class="input" th:switch="${authority}">
 				<span th:case="1">一般</span>
 				<span th:case="2">管理者</span>
 			</div>
 		</div>
 		<div class="form">
 			<div class="label">部署名：</div>
-			<div class="input" th:text="####"></div>
+			<div class="input" th:text="${deptName}"></div>
 		</div>
-		<form th:action="####" method="post" th:object="####">
+		<form th:action="@{/complete}" method="post" th:object="${EmployeeForm}">
 			<div class="form">
 				<div class="label"></div>
 				<div class="input">
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
+					<input type="hidden" th:field="*{empPass}" />
+					<input type="hidden" th:field="*{empName}" />
+					<input type="hidden" th:field="*{gender}" />
+					<input type="hidden" th:field="*{address}" />
+					<input type="hidden" th:field="*{birthday}" />
+					<input type="hidden" th:field="*{authority}" />
+					<input type="hidden" th:field="*{deptName}" />
 					<input type="submit" value="登録" />
 				</div>
 			</div>
 		</form>
-		<form th:action="####" method="post" th:object="####">
+		<form th:action="@{/input}" method="post" th:object="${regist_form}">
 			<div class="form">
 				<div class="label"></div>
 				<div class="input">
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
+					<input type="hidden" th:field="*{empPass}" />
+					<input type="hidden" th:field="*{empName}" />
+					<input type="hidden" th:field="*{gender}" />
+					<input type="hidden" th:field="*{address}" />
+					<input type="hidden" th:field="*{birthday}" />
+					<input type="hidden" th:field="*{authority}" />
+					<input type="hidden" th:field="*{deptName}" />
 					<input type="submit" value="戻る" />
 				</div>
 			</div>
