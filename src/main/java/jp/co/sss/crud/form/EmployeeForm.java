@@ -2,14 +2,12 @@ package jp.co.sss.crud.form;
 
 import java.util.Date;
 
-<<<<<<< HEAD
-=======
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
->>>>>>> 84c10cb627cf09158e1117fe7f01da5ae7dda266
+
 public class EmployeeForm {
 	/** 社員ID */
 	@NotNull
