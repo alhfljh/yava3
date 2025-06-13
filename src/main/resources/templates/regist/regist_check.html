@@ -44,32 +44,32 @@
 			<div class="label">部署名：</div>
 			<div class="input" th:text="${deptName}"></div>
 		</div>
-		<form th:action="####" method="post" th:object="####">
+		<form th:action="@{/complete}" method="post" th:object="*{regist_form}">
 			<div class="form">
 				<div class="label"></div>
 				<div class="input">
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
+					<input type="hidden" th:field="*{empPass}" />
+					<input type="hidden" th:field="*{empName}" />
+					<input type="hidden" th:field="*{gender}" />
+					<input type="hidden" th:field="*{address}" />
+					<input type="hidden" th:field="*{birthday}" />
+					<input type="hidden" th:field="*{authority}" />
+					<input type="hidden" th:field="*{deptName}" />
 					<input type="submit" value="登録" />
 				</div>
 			</div>
 		</form>
-		<form th:action="####" method="post" th:object="####">
+		<form th:action="@{/input}" method="post" th:object="*{regist_form}">
 			<div class="form">
 				<div class="label"></div>
 				<div class="input">
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
-					<input type="hidden" th:field="####" />
+					<input type="hidden" th:field="*{empPass}" />
+					<input type="hidden" th:field="*{empName}" />
+					<input type="hidden" th:field="*{gender}" />
+					<input type="hidden" th:field="*{address}" />
+					<input type="hidden" th:field="*{birthday}" />
+					<input type="hidden" th:field="*{authority}" />
+					<input type="hidden" th:field="*{deptName}" />
 					<input type="submit" value="戻る" />
 				</div>
 			</div>
