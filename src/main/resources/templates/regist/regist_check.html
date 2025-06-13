@@ -44,7 +44,7 @@
 			<div class="label">部署名：</div>
 			<div class="input" th:text="${deptName}"></div>
 		</div>
-		<form th:action="@{/complete}" method="post" th:object="${EmployeeForm}">
+		<form th:action="@{/complete}" method="post" th:object="${employeeForm}">
 			<div class="form">
 				<div class="label"></div>
 				<div class="input">
@@ -59,7 +59,7 @@
 				</div>
 			</div>
 		</form>
-		<form th:action="@{/input}" method="post" th:object="${regist_form}">
+		<form th:action="@{/input}" method="post" th:object="${employeeForm}">
 			<div class="form">
 				<div class="label"></div>
 				<div class="input">
