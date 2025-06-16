@@ -35,20 +35,19 @@ public class RegistController {
 	@RequestMapping(path = "/regist/check", method = RequestMethod.POST)
 	public String registCheck(@Valid @ModelAttribute EmployeeForm employeeForm, BindingResult result, Model model) {
 
+		
 		if (result.hasErrors()) {
-			return "regist/regist_input";
+			return "regist/regist_input";	
 		}
-		if (employeeForm != null) {
-			EmployeeForm employeeform = new EmployeeForm();
+		
+            
+		    EmployeeForm employeeform = new EmployeeForm();
 			BeanUtils.copyProperties(employeeForm, employeeform);
 			model.addAttribute("employee", employeeform);
 
 			return "regist/regist_check";
-
-		} else {
-			return "regist/regist_input";
-		}
-	}
+        }
+	
 
 	@RequestMapping(path = "/regist/complete", method = RequestMethod.POST)
 	public String registComplete(@ModelAttribute EmployeeForm employeeForm) {
