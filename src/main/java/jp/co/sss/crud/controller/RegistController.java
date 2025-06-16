@@ -26,6 +26,8 @@ public class RegistController {
 	
 	@RequestMapping(path="/regist/input", method = RequestMethod.GET)
 	public String registInput(@ModelAttribute EmployeeForm employeeForm) {
+		employeeForm.setAuthority(1);
+		employeeForm.setGender(1);
 		return "regist/regist_input";
 	}
 	
