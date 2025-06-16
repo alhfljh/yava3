@@ -12,7 +12,7 @@ import jp.co.sss.crud.entity.Employee;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	
 	//findBy○○で、○○を条件とした部分検索を行う
-	//EnpIdAndEmpPassが縺ｪ繧薙→縺九°繧薙→縺
+	//EnpIdAndEmpPassが条件になる
 	Employee findByEmpIdAndEmpPass(int empId, String empPass);
 	List<Employee> findByEmpNameContaining(String name);
 
