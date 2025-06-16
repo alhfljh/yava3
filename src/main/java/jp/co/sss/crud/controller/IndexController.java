@@ -35,7 +35,7 @@ public class IndexController {
 
 	/**
 	 * @param loginForm
-	 * @return
+	 * @return ログイン画面のHTML（index）
 	 */
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String index(@ModelAttribute LoginForm loginForm) {
@@ -48,16 +48,16 @@ public class IndexController {
 	 * @param result
 	 * @param session
 	 * @param model
-	 * @return
+	 * @return ログイン画面のHTML（index.html）
 	 */
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	public String login(
 			@Valid @ModelAttribute LoginForm loginForm,
 			BindingResult result, HttpSession session, Model model) {
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "index";
 		}
-		
+
 		int empId = loginForm.getEmpId();
 		String empPass = loginForm.getEmpPass();
 		Employee employee = employeeRepository.findByEmpIdAndEmpPass(empId, empPass);
@@ -79,7 +79,10 @@ public class IndexController {
 	}
 
 	/**
-	 * @return
+	 * 各画面でログアウトボタンが押下されたらこのURLへ遷移
+	 * セッションスコープに保存された情報を破棄し、"/"のURL（ログイン画面）へリダイレクト
+	 * 
+	 * @return ログイン画面（リダイレクト）
 	 */
 	@RequestMapping(path = "/logout", method = RequestMethod.GET)
 	public String logout() {
@@ -87,7 +90,5 @@ public class IndexController {
 		session.invalidate();
 		return "redirect:/";
 	}
-	
-	
 
 }
