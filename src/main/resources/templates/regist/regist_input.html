@@ -10,7 +10,7 @@
 	<h3>社員登録入力画面</h3>
 <!--	  class名とボタンの変更は行なわないこと。-->
 	<div class="update">
-		<form th:action="@{/regist/regist_check}" method="post" th:object="${employeeForm}">
+		<form th:action="@{/regist/check}" method="post" th:object="${employeeForm}">
 				
 <!--			<p>-->
 <!--				<span th:each="error:${#fields.detailedErrors()}">-->
@@ -22,12 +22,14 @@
 				<div class="label">パスワード：</div>
 				<div class="input">
 					<input type="password" th:field="*{empPass}" />
+<!--					<span th:errors="*{empPass}"></span>-->
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">社員名：</div>
 				<div class="input">
 					<input type="text" th:field="*{empName}" />
+<!--					<span th:errors="*{empName}"></span>-->
 				</div>
 			</div>
 			<div class="form">
@@ -41,12 +43,14 @@
 				<div class="label">住所：</div>
 				<div class="input">
 					<input type="text" th:field="*{address}" />
+<!--					<span th:errors="*{address}"></span>-->
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">生年月日：</div>
 				<div class="input">
 					<input type="text" th:field="*{birthday}" /> (YYYY/MM/DD)
+<!--					<span th:errors="*{birthday}"></span>-->
 				</div>
 			</div>
 			<div class="form">
@@ -59,7 +63,7 @@
 			<div class="form">
 				<div class="label">部署名：</div>
 				<div class="input">
-					<select th:field="*{deptName}">
+					<select th:field="*{deptId}">
 						<option value="1">営業部</option>
 						<option value="2">経理部</option>
 						<option value="3">総務部</option>
