@@ -31,7 +31,7 @@
 		</div>
 		<div class="form">
 			<div class="label">生年月日：</div>
-			<div class="input" th:text="${employee.birthday}"></div>
+			<div class="input" th:text="${#dates.format(employee.birthday,'yyyy/MM/dd')}"></div>
 		</div>
 		<div class="form">
 			<div class="label">権限：</div>

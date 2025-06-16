@@ -10,7 +10,6 @@ import jakarta.validation.constraints.Size;
 
 public class EmployeeForm {
 	/** 社員ID */
-	@NotNull
 	@Max(value = 99999)
 	private Integer empId;
 
