@@ -15,7 +15,7 @@ import jp.co.sss.crud.entity.Employee;
 import jp.co.sss.crud.form.LoginForm;
 import jp.co.sss.crud.repository.EmployeeRepository;
 
-/** ログイン画面周りの挙動を管理するクラス*/
+/** ログイン画面周りの挙動を管理するコントローラ*/
 @Controller
 public class IndexController {
 
@@ -34,6 +34,9 @@ public class IndexController {
 	HttpSession session;
 
 	/**
+	 * ログイン画面に遷移する際の挙動について
+	 * 念のためセッションスコープの内容を破棄し、index.html（ログイン画面）を表示
+	 * 
 	 * @param loginForm
 	 * @return ログイン画面のHTML（index）
 	 */
@@ -44,10 +47,12 @@ public class IndexController {
 	}
 
 	/**
-	 * @param loginForm
-	 * @param result
-	 * @param session
-	 * @param model
+	 * ログインボタンが押下されたらこのURLへ遷移
+	 * 
+	 * @param loginForm　入力された値をLoginForm.javaへ入れる
+	 * @param result　BindingResult…入力チェックの判定結果を保存
+	 * @param session　入力した値をセッションスコープに保存
+	 * @param model　メソッドが呼ばれた際に、Modelオブジェクトがこの引数に渡された状態でメソッドが実行されます。
 	 * @return ログイン画面のHTML（index.html）
 	 */
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
@@ -61,7 +66,12 @@ public class IndexController {
 		int empId = loginForm.getEmpId();
 		String empPass = loginForm.getEmpPass();
 		Employee employee = employeeRepository.findByEmpIdAndEmpPass(empId, empPass);
-
+		
+		
+		/** 
+		 * 入力した社員ID、パスワードに合致する社員がいた場合
+		 * エラーメッセージを表示し、もう一回ログイン画面を表示
+		 */
 		if (employee != null) {
 			EmployeeBean employeeBean = new EmployeeBean();
 			employeeBean.setEmpId(employee.getEmpId());
@@ -71,6 +81,10 @@ public class IndexController {
 			// 一覧へリダイレクト
 			return "redirect:/list";
 
+			/** 
+			 * 入力した社員ID、パスワードに合致する社員がいなかった場合
+			 * エラーメッセージを表示し、もう一回ログイン画面を表示
+			 */
 		} else {
 			model.addAttribute("errMessage", "社員ID、またはパスワードが間違っています。");
 			return "index";
