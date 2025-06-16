@@ -15,6 +15,13 @@
 	<div class="regist_link">
 		<a th:href="@{/regist/input}">新規社員登録</a>
 	</div>
+<<<<<<< HEAD
+=======
+
+
+	<!-- ***検索結果が０件の場合*** -->
+	<!-- ***falseを書き換え、表示内容を記述すること*** -->
+>>>>>>> 8476ff85d8a028142a1cd9a530526c5e67fd4cf5
 	<th:block th:if="${#lists.isEmpty(emp)}">
 		<div class="message">
 			<!--以下に該当する社員が存在しないときのメッセージを記述する -->
@@ -34,6 +41,7 @@
 			<th class="deptName">部署名</th>
 		</tr>
 
+<<<<<<< HEAD
 <!--		 ***####を書き換え、社員情報を全件出力する*** -->
 			<tr th:each="employee:${emp}">
 			<td th:text="${employee.empId}"></td>
@@ -44,13 +52,30 @@
 			<td th:text="${#dates.format(employee.birthday,'yyyy/MM/dd')}" ></td>
 			<td th:if="${employee.authority}==1">一般</td>
 			<td th:if="${employee.authority}==2">管理者</td>
+=======
+		<!--		 ***####を書き換え、社員情報を全件出力する*** -->
+		<!--		<tr th:each="####:####">-->
+		<tr th:each="employee:${emp}">
+			<td th:text="${employee.empId}"></td>
+			<td th:text="${employee.empName}"></td>
+			<td th:switch="${employee.gender}">
+				<span th:case="1">男性</span>
+				<span th:case="2">女性</span>
+			</td>
+			<td th:text="${employee.address}"></td>
+			<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
+			<td th:switch="${employee.authority}">
+				<span th:case="1">一般</span>
+				<span th:case="2">管理者</span>
+			</td>
+>>>>>>> 8476ff85d8a028142a1cd9a530526c5e67fd4cf5
 			<td th:text="${employee.department.deptName}"></td>
-			</tr>
+		</tr>
 
 		</tr>
-<!--		 ***####を書き換え、社員情報を全件出力する ここまで*** -->
+		<!--		 ***####を書き換え、社員情報を全件出力する ここまで*** -->
 	</table>
-<!--	 ***検索結果がある場合 ここまで*** -->
+	<!--	 ***検索結果がある場合 ここまで*** -->
 
 </body>
 

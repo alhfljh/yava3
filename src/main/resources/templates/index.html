@@ -24,12 +24,14 @@
 			<div class="label">社員ID</div>
 				<div class="login_input">
 				<input type="text" th:field="*{empId}" />
+				<span th:errors="*{empId}"></span><br>
 			</div>
 			</div>
 			<div class="login_form">
 			<div class="label">パスワード</div>
 			<div class="input">
 				<input type="password" th:field="*{empPass}" />
+				<span th:errors="*{empPass}"></span><br>
 			</div>
 			</div>
 			<div class="login_form">

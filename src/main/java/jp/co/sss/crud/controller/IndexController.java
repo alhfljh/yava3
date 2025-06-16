@@ -3,11 +3,13 @@ package jp.co.sss.crud.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import jp.co.sss.crud.bean.EmployeeBean;
 import jp.co.sss.crud.entity.Employee;
 import jp.co.sss.crud.form.LoginForm;
@@ -29,7 +31,13 @@ public class IndexController {
 	}
 
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public String login(@ModelAttribute LoginForm loginForm, HttpSession session, Model model) {
+	public String login(
+			@Valid @ModelAttribute LoginForm loginForm,
+			BindingResult result, HttpSession session, Model model) {
+		if(result.hasErrors()) {
+			return "index";
+		}
+		
 		int empId = loginForm.getEmpId();
 		String empPass = loginForm.getEmpPass();
 		Employee employee = employeeRepository.findByEmpIdAndEmpPass(empId, empPass);
@@ -56,5 +64,7 @@ public class IndexController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	
 
 }
