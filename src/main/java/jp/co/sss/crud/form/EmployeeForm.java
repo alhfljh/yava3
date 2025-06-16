@@ -17,7 +17,6 @@ public class EmployeeForm {
 	/** パスワード */
 	@NotNull
 	@Pattern(regexp="{a-zA-Z0-9}+$")
-
 	private String empPass;
 
 	/** 社員名 */
