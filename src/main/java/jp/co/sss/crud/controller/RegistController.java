@@ -66,9 +66,6 @@ public class RegistController {
 		BeanUtils.copyProperties(employeeForm,employee);
 		employee.setDepartment(department);
 		employee = repository.save(employee);
-
-		
-		
 		
 		return "regist/regist_complete";
 
