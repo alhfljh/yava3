@@ -14,9 +14,16 @@ import jp.co.sss.crud.repository.EmployeeRepository;
 @Controller
 public class ListEmpNameController {
 
+	/**エンプロイリポジトリを生成もしくは宣言*/
 	@Autowired
 	EmployeeRepository repository;
 	
+	/**
+	 * 社員名検索の結果をempという名前でリクエストスコープに保存
+	 * @param employeeForm
+	 * @param model
+	 * @return　社員一覧画面に遷移
+	 */
 	@RequestMapping(path = "/list/empName", method = RequestMethod.GET)
 	public String empName(@ModelAttribute EmployeeForm employeeForm, Model model) {
 		String empName = employeeForm.getEmpName();
