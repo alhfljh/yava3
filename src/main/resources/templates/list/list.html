@@ -16,9 +16,6 @@
 		<a th:href="@{/regist/input}">新規社員登録</a>
 	</div>
 
-
-	<!-- ***検索結果が０件の場合*** -->
-	<!-- ***falseを書き換え、表示内容を記述すること*** -->
 	<th:block th:if="${#lists.isEmpty(emp)}">
 		<div class="message">
 			<!--以下に該当する社員が存在しないときのメッセージを記述する -->
@@ -27,12 +24,6 @@
 			<p class="back_to_top_link"><a th:href="@{/list}">一覧表示に戻る</a></p>
 		</div>
 	</th:block>
-
-	<!-- ***検索結果が０件の場合 ここまで*** -->
-
-	<!-- ***検索結果がある場合*** -->
-	<!-- Employeeテーブルからclass名を指定すること。 -->
-	<!-- ***trueを書き換えること*** -->
 	<table class="list_table" th:if="${!(#lists.isEmpty(emp))}">
 		<tr>
 			<th class="empId">社員ID</th>
@@ -43,9 +34,6 @@
 			<th class="authority">権限</th>
 			<th class="deptName">部署名</th>
 		</tr>
-
-		<!--		 ***####を書き換え、社員情報を全件出力する*** -->
-		<!--		<tr th:each="####:####">-->
 		<tr th:each="employee:${emp}">
 			<td th:text="${employee.empId}"></td>
 			<td th:text="${employee.empName}"></td>
@@ -59,6 +47,7 @@
 				<span th:case="1">一般</span>
 				<span th:case="2">管理者</span>
 			</td>
+
 			<td th:text="${employee.department.deptName}"></td>
 		</tr>
 

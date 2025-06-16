@@ -2,7 +2,7 @@ package jp.co.sss.crud.bean;
 
 import java.util.Date;
 
-/** 社員の情報を入れる変数の箱を作成、管理するクラス*/
+/** 社員の情報を入れる変数の箱を保持する機能としてJavaBeanを利用している*/
 public class EmployeeBean {
 
 	/**社員のID（数値型）を作成*/
