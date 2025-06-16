@@ -21,16 +21,14 @@ public class IndexController {
 
 	/** 
 	 * EmployeeRepository（従業員リポジトリ）呼び出し
-	 * 従業員リポジトリをDIコンテナに登録
-	 * これで、new演算子を記述しなくても従業員リポジトリのオブジェクトを利用できるように
+	 * →実質new演算子でオブジェクト生成したのと同じ意味を持つ
 	 */
 	@Autowired
 	EmployeeRepository employeeRepository;
 
 	/** 
 	 * セッションスコープ（クラスライブラリ）呼び出し
-	 * セッションスコープをDIコンテナに登録
-	 * これで、new演算子を記述しなくてもセッションスコープを利用できるように
+	 * →実質new演算子でオブジェクト生成したのと同じ意味を持つ
 	 */
 	@Autowired
 	HttpSession session;
@@ -54,7 +52,7 @@ public class IndexController {
 	 * @param loginForm　入力された値をLoginForm.javaへ入れる
 	 * @param result　BindingResult…入力チェックの判定結果を保存
 	 * @param session　入力した値をセッションスコープに保存
-	 * @param model　メソッドが呼ばれた際に、Modelオブジェクトがこの引数に渡された状態でメソッドが実行されます。
+	 * @param model　メソッドが呼ばれた際に、Modelオブジェクトがこの引数に渡された状態でメソッドが実行される。
 	 * @return ログイン画面のHTML（index.html）
 	 */
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
