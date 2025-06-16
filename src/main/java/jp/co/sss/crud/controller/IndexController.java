@@ -63,11 +63,13 @@ public class IndexController {
 			return "index";
 		}
 
+		//入力された社員IDがgetEmpId()に保存されているので、その値を持ってくる
+		//入力された社員パスワードについても同じ
 		int empId = loginForm.getEmpId();
 		String empPass = loginForm.getEmpPass();
+		//EmployeeRepositoryで作成した「findByEmpIdAndEmpPass」をここで使用
 		Employee employee = employeeRepository.findByEmpIdAndEmpPass(empId, empPass);
-		
-		
+
 		/** 
 		 * 入力した社員ID、パスワードに合致する社員がいた場合
 		 * エラーメッセージを表示し、もう一回ログイン画面を表示
