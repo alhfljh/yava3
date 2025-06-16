@@ -24,12 +24,23 @@ public class IndexController {
 	@Autowired
 	HttpSession session;
 
+	/**
+	 * @param loginForm
+	 * @return
+	 */
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String index(@ModelAttribute LoginForm loginForm) {
 		session.invalidate();
 		return "index";
 	}
 
+	/**
+	 * @param loginForm
+	 * @param result
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	public String login(
 			@Valid @ModelAttribute LoginForm loginForm,
@@ -58,6 +69,9 @@ public class IndexController {
 
 	}
 
+	/**
+	 * @return
+	 */
 	@RequestMapping(path = "/logout", method = RequestMethod.GET)
 	public String logout() {
 		// セッションの破棄
