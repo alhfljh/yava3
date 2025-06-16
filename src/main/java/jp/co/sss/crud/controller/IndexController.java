@@ -15,12 +15,21 @@ import jp.co.sss.crud.entity.Employee;
 import jp.co.sss.crud.form.LoginForm;
 import jp.co.sss.crud.repository.EmployeeRepository;
 
+/** ログイン画面周りの挙動を管理するクラス*/
 @Controller
 public class IndexController {
 
+	/** 
+	 * 従業員リポジトリをDIコンテナに登録
+	 * これで、new演算子を記述しなくても従業員リポジトリのオブジェクトを利用できるように
+	 */
 	@Autowired
 	EmployeeRepository employeeRepository;
 
+	/** 
+	 * セッションスコープをDIコンテナに登録
+	 * これで、new演算子を記述しなくてもセッションスコープを利用できるように
+	 */
 	@Autowired
 	HttpSession session;
 
