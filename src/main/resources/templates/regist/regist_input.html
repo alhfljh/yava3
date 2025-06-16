@@ -11,30 +11,24 @@
 <!--	  class名とボタンの変更は行なわないこと。-->
 	<div class="update">
 		<form th:action="@{/regist/check}" method="post" th:object="${employeeForm}">
-				
-<!--			<p>-->
-<!--				<span th:each="error:${#fields.detailedErrors()}">-->
-<!--					<span th:text="${error.message}"></span><br />-->
-<!--				</span>-->
-<!--			</p>-->
 
 			<div class="form">
 				<div class="label">パスワード：</div>
 				<div class="input">
 					<input type="password" th:field="*{empPass}" />
-<!--					<span th:errors="*{empPass}"></span>-->
+					<span th:errors="*{empPass}"></span>
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">社員名：</div>
 				<div class="input">
 					<input type="text" th:field="*{empName}" />
-<!--					<span th:errors="*{empName}"></span>-->
+					<span th:errors="*{empName}"></span>
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">性別：</div>
-				<div class="input">
+				<div class="input" th:checked>
 					<input type="radio" th:field="*{gender}" value="1" />男性&nbsp;
 					<input type="radio" th:field="*{gender}" value="2" />女性
 				</div>
@@ -43,19 +37,19 @@
 				<div class="label">住所：</div>
 				<div class="input">
 					<input type="text" th:field="*{address}" />
-<!--					<span th:errors="*{address}"></span>-->
+					<span th:errors="*{address}"></span>
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">生年月日：</div>
 				<div class="input">
 					<input type="text" th:field="*{birthday}" /> (YYYY/MM/DD)
-<!--					<span th:errors="*{birthday}"></span>-->
+					<span th:errors="*{birthday}"></span>
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">権限：</div>
-				<div class="input">
+				<div class="input" th:checked>
 					<input type="radio" th:field="*{authority}" value="1" />一般&nbsp;&nbsp;
 					<input type="radio" th:field="*{authority}" value="2" />管理者
 				</div>
