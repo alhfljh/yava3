@@ -20,6 +20,7 @@ import jp.co.sss.crud.repository.EmployeeRepository;
 public class IndexController {
 
 	/** 
+	 * EmployeeRepository（従業員リポジトリ）呼び出し
 	 * 従業員リポジトリをDIコンテナに登録
 	 * これで、new演算子を記述しなくても従業員リポジトリのオブジェクトを利用できるように
 	 */
@@ -27,6 +28,7 @@ public class IndexController {
 	EmployeeRepository employeeRepository;
 
 	/** 
+	 * セッションスコープ（クラスライブラリ）呼び出し
 	 * セッションスコープをDIコンテナに登録
 	 * これで、new演算子を記述しなくてもセッションスコープを利用できるように
 	 */
