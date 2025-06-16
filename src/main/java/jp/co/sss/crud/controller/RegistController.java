@@ -22,54 +22,49 @@ public class RegistController {
 	EmployeeRepository repository;
 	DepartmentRepository deptrepository;
 
-	
-	
-	@RequestMapping(path="/regist/input", method = RequestMethod.GET)
+	@RequestMapping(path = "/regist/input", method = RequestMethod.GET)
 	public String registInput(@ModelAttribute EmployeeForm employeeForm) {
 		employeeForm.setAuthority(1);
 		employeeForm.setGender(1);
 		return "regist/regist_input";
 	}
-	
-	@RequestMapping(path="/regist/inp", method = RequestMethod.POST)
+
+	@RequestMapping(path = "/regist/inp", method = RequestMethod.POST)
 	public String registInp(@ModelAttribute EmployeeForm employeeForm) {
 		return "regist/regist_input";
 	}
-	
-	@RequestMapping(path="/regist/check", method = RequestMethod.POST)
-	public String registCheck(@Valid @ModelAttribute EmployeeForm employeeForm, BindingResult result,Model model) {
-		EmployeeForm employeeform = new EmployeeForm();
-		BeanUtils.copyProperties(employeeForm,employeeform);
-		model.addAttribute("employee",employeeform);
-		
-		System.out.println(employeeform.getEmpName()+"aaaa");		
-//		System.out.println(employeeform.getDeptName()+"bbbb");		
-//		if(result.hasErrors()) {
-//			return "regist/regit_input";
-//		}
-//		if(employeeForm !=null) {
-	
-		
-		return "regist/regist_check";
-	
-//	}else {
-//		return "regist/regist_input";
-//		}
+
+	@RequestMapping(path = "/regist/check", method = RequestMethod.POST)
+	public String registCheck(@Valid @ModelAttribute EmployeeForm employeeForm, BindingResult result, Model model) {
+
+		if (result.hasErrors()) {
+			return "regist/regist_input";
+		}
+		if (employeeForm != null) {
+			EmployeeForm employeeform = new EmployeeForm();
+			BeanUtils.copyProperties(employeeForm, employeeform);
+			model.addAttribute("employee", employeeform);
+
+			return "regist/regist_check";
+
+		} else {
+			return "regist/regist_input";
+		}
 	}
-	
-	@RequestMapping(path="/regist/complete", method = RequestMethod.POST)
+
+	@RequestMapping(path = "/regist/complete", method = RequestMethod.POST)
 	public String registComplete(@ModelAttribute EmployeeForm employeeForm) {
-					
+
 		Employee employee = new Employee();
 		Department department = new Department();
 		int deptId = employeeForm.getDeptId();
 		department.setDeptId(deptId);
 
-		BeanUtils.copyProperties(employeeForm,employee);
+		BeanUtils.copyProperties(employeeForm, employee);
 		employee.setDepartment(department);
 		employee = repository.save(employee);
-		
+
 		return "regist/regist_complete";
 
-    }
+	}
 }
