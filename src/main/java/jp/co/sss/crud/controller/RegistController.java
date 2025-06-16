@@ -29,6 +29,8 @@ public class RegistController {
 	 */
 	@RequestMapping(path = "/regist/input", method = RequestMethod.GET)
 	public String registInput(@ModelAttribute EmployeeForm employeeForm) {
+		employeeForm.setAuthority(1);
+		employeeForm.setGender(1);
 		return "regist/regist_input";
 	}
 	
@@ -55,20 +57,19 @@ public class RegistController {
 	@RequestMapping(path = "/regist/check", method = RequestMethod.POST)
 	public String registCheck(@Valid @ModelAttribute EmployeeForm employeeForm, BindingResult result, Model model) {
 
+		
 		if (result.hasErrors()) {
-			return "regist/regist_input";
+			return "regist/regist_input";	
 		}
-		if (employeeForm != null) {
-			EmployeeForm employeeform = new EmployeeForm();
+		
+            
+		    EmployeeForm employeeform = new EmployeeForm();
 			BeanUtils.copyProperties(employeeForm, employeeform);
 			model.addAttribute("employee", employeeform);
 
 			return "regist/regist_check";
-
-		} else {
-			return "regist/regist_input";
-		}
-	}
+        }
+	
 
 	/**
 	 * 入力された情報をエンプロイエンティティに保存

@@ -4,7 +4,6 @@ package jp.co.sss.crud.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -25,7 +24,7 @@ public class ListEmpNameController {
 	 * @return　社員一覧画面に遷移
 	 */
 	@RequestMapping(path = "/list/empName", method = RequestMethod.GET)
-	public String empName(@ModelAttribute EmployeeForm employeeForm, Model model) {
+	public String empName(EmployeeForm employeeForm, Model model) {
 		String empName = employeeForm.getEmpName();
 		
 		System.out.println(empName+"エラーやで");
