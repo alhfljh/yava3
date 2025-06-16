@@ -18,20 +18,40 @@ import jp.co.sss.crud.repository.EmployeeRepository;
 
 @Controller
 public class RegistController {
+	/**エンプロイリポジトリを生成もしくは宣言 */
 	@Autowired
 	EmployeeRepository repository;
 	DepartmentRepository deptrepository;
-
+	
+	/**
+	 * @param employeeForm
+	 * @return 社員登録入力画面へ遷移
+	 */
 	@RequestMapping(path = "/regist/input", method = RequestMethod.GET)
 	public String registInput(@ModelAttribute EmployeeForm employeeForm) {
 		return "regist/regist_input";
 	}
+	
+	 
+	/**
+	 * @param employeeForm
+	 * @return 社員登録入力画面へ遷移
 
+	 */
 	@RequestMapping(path = "/regist/inp", method = RequestMethod.POST)
 	public String registInp(@ModelAttribute EmployeeForm employeeForm) {
 		return "regist/regist_input";
 	}
-
+	
+	/**
+	 * 入力チェック
+	 * 入力画面に入力された情報を表示する。
+	 * 再度入力内容をリクエストスコープへ保存する。
+	 * @param employeeForm
+	 * @param result
+	 * @param model
+	 * @return 社員登録入力画面へ遷移
+	 */
 	@RequestMapping(path = "/regist/check", method = RequestMethod.POST)
 	public String registCheck(@Valid @ModelAttribute EmployeeForm employeeForm, BindingResult result, Model model) {
 
@@ -50,6 +70,11 @@ public class RegistController {
 		}
 	}
 
+	/**
+	 * 入力された情報をエンプロイエンティティに保存
+	 * @param employeeForm
+	 * @return 社員登録完了画面
+	 */
 	@RequestMapping(path = "/regist/complete", method = RequestMethod.POST)
 	public String registComplete(@ModelAttribute EmployeeForm employeeForm) {
 
