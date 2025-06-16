@@ -75,10 +75,13 @@ public class IndexController {
 		 * エラーメッセージを表示し、もう一回ログイン画面を表示
 		 */
 		if (employee != null) {
+			//employeeBeanのデータの箱を作成（EmployeeBean.javaの設計図を元に）
 			EmployeeBean employeeBean = new EmployeeBean();
+			//employeeBeanの箱に、EmpId、EmpName、Authorityの値を入れる
 			employeeBean.setEmpId(employee.getEmpId());
 			employeeBean.setEmpName(employee.getEmpName());
 			employeeBean.setAuthority(employee.getAuthority());
+			//employeeBeanに入れた値3つを、user属性でリクエストスコープに代入
 			session.setAttribute("user", employeeBean);
 			// 一覧へリダイレクト
 			return "redirect:/list";
