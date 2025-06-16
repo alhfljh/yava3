@@ -32,7 +32,7 @@ public class EmployeeBean {
 	/**
 	 * 社員IDの取得
 	 * 
-	 * @return
+	 * @return 社員ID
 	 */
 	public Integer getEmpId() {
 		return empId;
@@ -51,7 +51,7 @@ public class EmployeeBean {
 	/**
 	 * 社員のパスワードの取得
 	 * 
-	 * @return
+	 * @return 社員パスワード
 	 */
 	public String getEmpPass() {
 		return empPass;
@@ -70,7 +70,7 @@ public class EmployeeBean {
 	/**
 	 * 社員名の取得
 	 * 
-	 * @return
+	 * @return 社員名
 	 */
 	public String getEmpName() {
 		return empName;
@@ -89,7 +89,7 @@ public class EmployeeBean {
 	/**
 	 * 社員の性別の取得
 	 * 
-	 * @return
+	 * @return 性別
 	 */
 	public Integer getGender() {
 		return gender;
@@ -108,7 +108,7 @@ public class EmployeeBean {
 	/**
 	 * 社員の住所の取得
 	 * 
-	 * @return
+	 * @return 住所
 	 */
 	public String getAddress() {
 		return address;
@@ -127,7 +127,7 @@ public class EmployeeBean {
 	/**
 	 * 社員の誕生日の取得
 	 * 
-	 * @return
+	 * @return 誕生日
 	 */
 	public Date getBirthday() {
 		return birthday;
@@ -146,7 +146,7 @@ public class EmployeeBean {
 	/**
 	 * 社員の権限の取得
 	 * 
-	 * @return
+	 * @return 社員権限
 	 */
 	public Integer getAuthority() {
 		return authority;
@@ -165,7 +165,7 @@ public class EmployeeBean {
 	/**
 	 * 社員の所属している部署IDの取得
 	 * 
-	 * @return
+	 * @return 部署ID
 	 */
 	public Integer getDeptId() {
 		return deptId;
