@@ -94,7 +94,7 @@ div.input {
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
-	width: 470px;
+	width: 1000px;
 	height: 35px;
 	text-align: left;
 	
@@ -120,7 +120,7 @@ div.login_label {
 
 div.login_input {
 	
-	width: 410px;
+	width: 1000px;
 	height: 35px;
 	text-align: left;
 }
