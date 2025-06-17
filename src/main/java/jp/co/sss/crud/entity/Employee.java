@@ -20,7 +20,7 @@ import jakarta.persistence.Table;
 public class Employee {
 	/**
 	 * 社員IDの列を作成
-	 * 社員IDを主キーとして指定
+	 * 主キー社員ID
 	 * シーケンスによってIDが自動採番される
 	 */
 	@Id

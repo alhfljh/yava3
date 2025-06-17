@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.sss.crud.repository.EmployeeRepository;
 
 /**
- *一覧表示画面の挙動を管理する
+ * 社員一覧表示画面の挙動を管理する
+ * （社員名検索をしていない、デフォルトの状態での社員一覧表示）
  */
 @Controller
 public class ListController {
@@ -20,6 +21,8 @@ public class ListController {
 	
 	/**
 	 * リクエストスコープにエンプロイリポジトリで社員一覧を保存
+	 * →findAll()なので、全ての社員を表示する処理
+	 * 
 	 * @param model
 	 * @return　社員一覧画面へ遷移
 	 */
