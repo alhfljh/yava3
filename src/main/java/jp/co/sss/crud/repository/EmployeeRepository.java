@@ -12,14 +12,25 @@ import jp.co.sss.crud.entity.Employee;
  */
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-	//findBy○○で、○○を条件とした部分検索を行う
-	//Employeeエンティティの中から、EmpIdとEmpPassを条件にして検索
-	//→ログイン画面にて入力された社員ID（EmpId）と社員（EmpPass）が存在しているか確認するためのもの
+	/**
+	 * findBy○○で、○○を条件とした部分検索を行う
+	 *
+	 *Employeeエンティティの中から、EmpIdとEmpPassを条件にして検索
+	 *→ログイン画面にて入力された社員ID（EmpId）と社員（EmpPass）が存在しているか確認するためのもの
+	 *
+	 * @param empId
+	 * @param empPass
+	 * @return
+	 */
 	Employee findByEmpIdAndEmpPass(int empId, String empPass);
 
-	//社員エンティティ（List<Employee>）から、
-	//検索した文字列（EmpName）が含まれている（Containing）レコードを検索
-	//→社員名検索にて、入力した文字列が社員一覧の表にあるかどうかを確認するためのもの
+	/** 社員エンティティ（List<Employee>）から、
+	 *検索した文字列（EmpName）が含まれている（Containing）レコードを検索
+	 *→社員名検索にて、入力した文字列が社員一覧の表にあるかどうかを確認するためのもの
+	 *
+	 * @param name
+	 * @return 
+	 */
 	List<Employee> findByEmpNameContaining(String name);
 
 }
