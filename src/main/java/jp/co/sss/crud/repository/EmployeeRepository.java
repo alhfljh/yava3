@@ -25,7 +25,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	 */
 	Employee findByEmpIdAndEmpPass(int empId, String empPass);
 
-	/** 社員エンティティ（List<Employee>）から、
+	/** 
+	 * 社員エンティティ（List<Employee>）から、
 	 *検索した文字列（EmpName）が含まれている（Containing）レコードを検索
 	 *→社員名検索にて、入力した文字列が社員一覧の表にあるかどうかを確認するためのもの
 	 *
