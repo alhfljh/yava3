@@ -40,7 +40,7 @@ public class RegistController {
 	 * @return 社員登録入力画面へ遷移
 
 	 */
-	@RequestMapping(path = "/regist/inp", method = RequestMethod.POST)
+	@RequestMapping(path = "/regist/back", method = RequestMethod.POST)
 	public String registInp(@ModelAttribute EmployeeForm employeeForm) {
 		return "regist/regist_input";
 	}
