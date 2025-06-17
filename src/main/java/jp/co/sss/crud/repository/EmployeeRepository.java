@@ -20,7 +20,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	 *
 	 * @param empId
 	 * @param empPass
-	 * @return
+	 * @return ログイン画面のHTML（index.html）
+	 * 		 または社員一覧表示画面（list.html）
 	 */
 	Employee findByEmpIdAndEmpPass(int empId, String empPass);
 
@@ -29,7 +30,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	 *→社員名検索にて、入力した文字列が社員一覧の表にあるかどうかを確認するためのもの
 	 *
 	 * @param name
-	 * @return 
+	 * @return 社員一覧表示画面（list.html）
 	 */
 	List<Employee> findByEmpNameContaining(String name);
 
