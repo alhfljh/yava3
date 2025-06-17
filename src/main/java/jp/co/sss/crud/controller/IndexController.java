@@ -52,7 +52,7 @@ public class IndexController {
 	 * @param loginForm　入力された値をLoginForm.javaへ入れる
 	 * @param result　BindingResult…入力チェックの判定結果を保存
 	 * @param session　入力した値をセッションスコープに保存
-	 * @param model　メソッドが呼ばれた際に、Modelオブジェクトがこの引数に渡された状態でメソッドが実行される。
+	 * @param model　メソッドが呼ばれた際に、Modelオブジェクトがこの引数に渡された状態でメソッドが実行される
 	 * @return ログイン画面のHTML（index.html）
 	 */
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
@@ -63,8 +63,11 @@ public class IndexController {
 			return "index";
 		}
 
-		//入力された社員IDがgetEmpId()に保存されているので、その値を持ってくる
-		//入力された社員パスワードについても同じ
+		/*
+		 * 入力された社員IDがgetEmpId()に保存されているので、その値を持ってくる
+		 *
+		 *入力された社員パスワードについても同じ
+		 */
 		int empId = loginForm.getEmpId();
 		String empPass = loginForm.getEmpPass();
 		//EmployeeRepositoryで作成した「findByEmpIdAndEmpPass」をここで使用
@@ -75,10 +78,13 @@ public class IndexController {
 		 * エラーメッセージを表示し、もう一回ログイン画面を表示
 		 */
 		if (employee != null) {
+			//employeeBeanのデータの箱を作成（EmployeeBean.javaの設計図を元に）
 			EmployeeBean employeeBean = new EmployeeBean();
+			//employeeBeanの箱に、EmpId、EmpName、Authorityの値を入れる
 			employeeBean.setEmpId(employee.getEmpId());
 			employeeBean.setEmpName(employee.getEmpName());
 			employeeBean.setAuthority(employee.getAuthority());
+			//employeeBeanに入れた値3つを、user属性でリクエストスコープに代入
 			session.setAttribute("user", employeeBean);
 			// 一覧へリダイレクト
 			return "redirect:/list";
