@@ -13,7 +13,7 @@ body {
 	flex-direction: row;
 	justify-content: space-between;
 	width: 920px;
-	margin: 0px auto;
+	margin: 0px;
 }
 
 .login {
@@ -21,11 +21,22 @@ body {
 }
 
 /* ---- ヘッダー ---- */
-header {
+.header-box{
 	height: 60px;
+}
+
+header {
+	height: 50px;
 	width: 100%;
 	background-color: #87CEEB;
 	padding-top: 10px;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index:100;
+    display:flex;
+    justify-content:space-between;
+
 }
 
 header .title {
@@ -43,7 +54,7 @@ header .user_info {
 
 /* ---- サイドバー ---- */
 aside {
-	width: 200px;
+	width: 260px;
 }
 
 aside .title {
@@ -58,7 +69,8 @@ aside .form {
 }
 
 aside input[type=text] {
-	width: 110px;
+	width: 170px;
+	height: 30px;
 	margin-right: 10px;
 }
 
@@ -70,6 +82,7 @@ aside select {
 
 aside input[type=submit] {
 	width: 50px;
+	height: 30px;
 	margin-right: 5px;
 }
 
@@ -89,3 +102,69 @@ footer {
 	font-size: 8pt;
 	line-height: 30px;
 }
+
+/*---- 追加した ----*/
+.tab-switch {
+    --active-tab-color:#757F96; /*選択したタブの色*/
+    display: flex; /* タブを横並びに */
+    flex-wrap: wrap; /* 幅に応じて折り返し */
+    max-width: 500px; /* コンテナの最大幅を指定 */
+    margin: auto;/* コンテナの中央寄せ */
+    justify-content: center;/* タブの中央寄せ */
+    gap: 10px 5px;/* タブ間の余白 */
+}
+
+/* 各タブボタンのスタイル設定 */
+.tab-switch > label {
+    flex: 1 1 auto; /* タブが均等に幅をとるが、幅を超えると折り返す */
+    order: -1; /* コンテンツより上に表示 */
+    position: relative; /* ::beforeの絶対位置指定に使用 */
+    padding: .7em 1em; /* タブの内側余白 */
+    border-bottom:1px solid var(--active-tab-color); /* タブの下線 */
+    color: var(--active-tab-color); /* タブの文字色 */
+    text-align: center; /* テキストを中央揃え */
+    cursor: pointer; /* ホバー時にポインター表示 */
+    transition:.3s all;/*変化を滑らかに*/
+}
+
+/* タブのホバーおよび選択時の色 */
+.tab-switch > label:hover,
+.tab-switch label:has(:checked) {
+    background-color: var(--active-tab-color); /* ホバー/選択時の背景色 */
+    color: #fff; /* ホバー/選択時の文字色 */
+}
+
+/* 選択されたタブの下に表示される三角形のスタイル */
+.tab-switch label:has(:checked)::before {
+    position: absolute; /* 三角形をタブ内の特定位置に配置 */
+    bottom: -8px; /* 三角形をタブの下に表示 */
+    left: 50%; /* 中央寄せ */
+    transform: translateX(-50%); /* 三角形の中央揃え調整 */
+    width: 18px; /* 三角形の幅 */
+    height: 9px; /* 三角形の高さ */
+    background-color: var(--active-tab-color); /* 三角形の背景色 */
+    content: ''; /* 擬似要素の内容（空） */
+    clip-path: polygon(0 0, 100% 0, 50% 100%); /* 三角形の形状を作成 */
+}
+
+/* ラジオボタンの非表示設定 */
+.radio{
+    display: none;  /*実際のラジオボタンは非表示 */
+}
+
+/* タブのコンテンツエリアの設定 */
+.tab-switch > div {
+    display: none; /* 初期状態では非表示 */
+    width: 100%; /* コンテンツ幅を全体に設定 */
+    padding: 1.5em 1em; /* 内側余白 */
+}
+
+/* 選択されたタブに対応するコンテンツを表示 */
+.tab-switch label:has(:checked) + div {
+    display: block; /* 選択されたタブの内容を表示 */
+}
+
+
+
+
+
