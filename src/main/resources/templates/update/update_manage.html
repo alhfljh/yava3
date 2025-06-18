@@ -7,15 +7,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<body>
+<body class="admin user_update_input_admin">
 	<div class="header-box"></div>
 	<th:block th:fragment="layout-main">
 		<div th:object="${loginForm}">
-			<h3>登録内容変更画面</h3>
+			<div class="update">
+			<h3>登録内容変更</h3>
 			<!-- 入力フォーム(CSS)からclass名を作成してください。-->
 			<div>変更したい社員の社員IDを入力してください</div>
 			<div class="form">
-				<form th:action="@{/update/input}" , method="post">
+				<div class="label">社員ID：</div>
+				<th:action="@{/update/input}" , method="post">
 					<input type="text" name="empId" />
 
 					<input type="submit" value="検索" />
@@ -23,6 +25,15 @@
 			</div>
 		</form>
 		</div>
+		</div>
+		<form th:action="@{/list}">
+			<div class="form">
+				<div class="label"></div>
+				<div class="input">
+					<input type="submit" value="戻る" />
+				</div>
+			</div>
+		</form>
 	</th:block>
 </body>
 
