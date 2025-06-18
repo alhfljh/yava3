@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jp.co.sss.crud.entity.Employee;
 import jp.co.sss.crud.form.EmployeeForm;
+import jp.co.sss.crud.form.LoginForm;
 import jp.co.sss.crud.repository.EmployeeRepository;
 
 @Controller
@@ -18,6 +20,24 @@ import jp.co.sss.crud.repository.EmployeeRepository;
 	@Autowired
 	EmployeeRepository employeeRepository;
 	HttpSession session;
+	
+	@RequestMapping(path="/update/manage")
+	public String updateManage(@ModelAttribute LoginForm loginForm,HttpServletRequest request,Model model) {
+
+		HttpSession session = request.getSession();
+		System.out.println(session+"ここにもあります");
+		session.getAttribute("manage");
+		Integer manage = (Integer) session.getAttribute("manage");
+		System.out.println(manage+"ここにあります");
+		if ( manage == 2) {
+			
+			return "/update/update_manage";
+		} else {
+//			model.addAttribute("errMessage", "権限がありません");
+			return "list/list";
+		}
+		
+	}
 	
 	@RequestMapping(path="/update/input",method= RequestMethod.POST)
 	public String upDate(@ModelAttribute EmployeeForm employeeForm,Model model) {

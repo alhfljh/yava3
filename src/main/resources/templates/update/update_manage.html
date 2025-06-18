@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_3block :: layout(~{::body/content()})}">
+
+<head>
+	<title>登録内容変更 | 社員管理システム</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+	<div class="header-box"></div>
+	<th:block th:fragment="layout-main">
+		<div th:object="${loginForm}">
+			<h3>登録内容変更画面</h3>
+			<!-- 入力フォーム(CSS)からclass名を作成してください。-->
+			<div>変更したい社員の社員IDを入力してください</div>
+			<div class="form">
+				<form th:action="@{/update/input}" , method="post">
+					<input type="text" name="empId" />
+
+					<input type="submit" value="検索" />
+				</form>
+			</div>
+		</form>
+		</div>
+	</th:block>
+</body>
+
+</html>
