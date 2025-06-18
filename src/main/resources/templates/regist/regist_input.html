@@ -17,14 +17,14 @@
 			<div class="form">
 				<div class="label">パスワード：</div>
 				<div class="input">
-					<input type="password" th:field="*{empPass}" />
+					<input type="password" th:field="*{empPass}"placeholder="パスワードを入力" />
 					<span th:errors="*{empPass}"></span>
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">社員名：</div>
 				<div class="input">
-					<input type="text" th:field="*{empName}" />
+					<input type="text" th:field="*{empName}" placeholder="山田太郎"/>
 					<span th:errors="*{empName}"></span>
 				</div>
 			</div>
@@ -38,14 +38,14 @@
 			<div class="form">
 				<div class="label">住所：</div>
 				<div class="input">
-					<input type="text" th:field="*{address}" />
+					<input type="text" th:field="*{address}" placeholder="東京都"/>
 					<span th:errors="*{address}"></span>
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">生年月日：</div>
 				<div class="input">
-					<input type="text" th:field="*{birthday}" /> (YYYY/MM/DD)
+					<input type="text" th:field="*{birthday}" placeholder="2000/01/01"/> (YYYY/MM/DD)
 					<span th:errors="*{birthday}"></span>
 				</div>
 			</div>
