@@ -15,6 +15,14 @@
 	<div class="regist_link">
 		<a th:href="@{/regist/input}">新規社員登録</a>
 	</div>
+	
+	<div class="form">
+			<form th:action="@{/update/input}", method="post">
+				<input type="text" name="empId" />
+				
+				<input type="submit" value="検索" />
+			</form>
+	</div>
 
 	<th:block th:if="${#lists.isEmpty(emp)}">
 		<div class="message">
