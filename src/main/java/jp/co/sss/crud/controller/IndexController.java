@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jp.co.sss.crud.bean.EmployeeBean;
 import jp.co.sss.crud.entity.Employee;
+import jp.co.sss.crud.form.EmployeeForm;
 import jp.co.sss.crud.form.LoginForm;
 import jp.co.sss.crud.repository.EmployeeRepository;
 
@@ -99,6 +100,20 @@ public class IndexController {
 		}
 
 	}
+	
+//	追加した↓
+		@RequestMapping(path = "/delete/input")
+		public String delete(Model model) {
+			model.addAttribute("emp", employeeRepository.findAll());
+			return "delete/delete_input";
+			}
+		
+		@RequestMapping(path = "/delete/comp", method = RequestMethod.POST)
+		public String deleteComp(@ModelAttribute EmployeeForm employeeForm, Model model) {
+			employeeRepository.deleteById(employeeForm.getEmpId());
+			return "delete/delete_complete";
+			}
+//	追加した↑
 
 	/**
 	 * 各画面でログアウトボタンが押下されたらこのURLへ遷移
