@@ -97,6 +97,7 @@ div.input {
 	width: 1000px;
 	height: 35px;
 	text-align: left;
+/*	overflow-wrap:break-word;*/
 	
 }
 
