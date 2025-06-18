@@ -35,4 +35,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	 */
 	List<Employee> findByEmpNameContaining(String name);
 
+	Employee findByEmpId(Integer empId);
+
+	
+
+
 }

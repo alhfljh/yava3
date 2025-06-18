@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>社員削除画面</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="admin user_list">
+	<div class="header-box"></div>
+	<h3>社員の削除</h3>
+
+	<form method="post" th:action="@{/delete/comp}" onsubmit="confirmSubmission(event)">
+		社員ID：<input type="text" name="empId" placeholder="IDを入力" />
+		<input type="submit" value="削除する" />
+	</form>
+
+	<script>
+		function confirmSubmission(event) {
+			const userConfirmed = confirm("本当に削除しますか？");
+			if (!userConfirmed) {
+				event.preventDefault();
+			}
+		}
+	</script>
+
+	<br>
+
+	<table class="list_table">
+
+		<tr>
+			<th class="empId">社員ID</th>
+			<th class="empName">社員名</th>
+			<th class="gender">性別</th>
+			<th class="address">住所</th>
+			<th class="birthday">生年月日</th>
+			<th class="authority">権限</th>
+			<th class="deptName">部署名</th>
+		</tr>
+		<tr th:each="employee:${emp}">
+			<td th:text="${employee.empId}"></td>
+			<td th:text="${employee.empName}"></td>
+			<td th:switch="${employee.gender}">
+				<span th:case="1">男性</span>
+				<span th:case="2">女性</span>
+			</td>
+			<td th:text="${employee.address}"></td>
+			<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
+			<td th:switch="${employee.authority}">
+				<span th:case="1">一般</span>
+				<span th:case="2">管理者</span>
+			</td>
+
+			<td th:text="${employee.department.deptName}"></td>
+		</tr>
+		</tr>
+	</table>
+
+
+	<p class="complete_link"><a th:href="@{/list}">一覧表示に戻る</a></p>
+
+</body>
+
+</html>

@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jp.co.sss.crud.bean.EmployeeBean;
 import jp.co.sss.crud.entity.Employee;
+import jp.co.sss.crud.form.EmployeeForm;
 import jp.co.sss.crud.form.LoginForm;
 import jp.co.sss.crud.repository.EmployeeRepository;
 
@@ -86,6 +88,8 @@ public class IndexController {
 			employeeBean.setAuthority(employee.getAuthority());
 			//employeeBeanに入れた値3つを、user属性でリクエストスコープに代入
 			session.setAttribute("user", employeeBean);
+			session.setAttribute("manage", employeeBean.getAuthority());
+
 			// 一覧へリダイレクト
 			return "redirect:/list";
 
@@ -99,6 +103,28 @@ public class IndexController {
 		}
 
 	}
+
+	//	追加した↓
+	@RequestMapping(path = "/delete/input")
+	public String delete(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		session.getAttribute("manage");
+		Integer manage = (Integer) session.getAttribute("manage");
+		if (manage == 2) {
+			model.addAttribute("emp", employeeRepository.findAll());
+			return "delete/delete_input";
+		} else {
+			return "list/list";
+		}
+
+	}
+
+	@RequestMapping(path = "/delete/comp", method = RequestMethod.POST)
+	public String deleteComp(@ModelAttribute EmployeeForm employeeForm, Model model) {
+		employeeRepository.deleteById(employeeForm.getEmpId());
+		return "delete/delete_complete";
+	}
+	//	追加した↑
 
 	/**
 	 * 各画面でログアウトボタンが押下されたらこのURLへ遷移

@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
 
 <head>
-	<title>会員登録確認 | シェアードショップ</title>
+	<title>登録変更確認 | シェアードショップ</title>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<body class="admin user_regist_check_admin">
+<body class="admin user_update_check_admin">
 	<div class="header-box"></div>
-	<h3>社員登録確認画面</h3>
+	<h3>登録変更確認画面</h3>
 	 <!-- class名とボタンの変更は行なわないこと。-->
 	<div class="update">
 		<div class="form">
@@ -18,42 +18,43 @@
 		</div>
 		<div class="form">
 			<div class="label">社員名：</div>
-			<div class="input" th:text="${employee.empName}"></div>
+			<div class="input" th:text="${update_employee.empName}"></div>
 		</div>
 		<div class="form">
 			<div class="label">性別：</div>
-			<div class="input" th:switch="${employee.gender}">
+			<div class="input" th:switch="${update_employee.gender}">
 				<span th:case="1">男性</span>
 				<span th:case="2">女性</span>
 			</div>
 		</div>
 		<div class="form">
 			<div class="label">住所：</div>
-			<div class="input" th:text="${employee.address}"></div>
+			<div class="input" th:text="${update_employee.address}"></div>
 		</div>
 		<div class="form">
 			<div class="label">生年月日：</div>
-			<div class="input" th:text="${#dates.format(employee.birthday,'yyyy/MM/dd')}"></div>
+			<div class="input" th:text="${#dates.format(update_employee.birthday,'yyyy/MM/dd')}"></div>
 		</div>
 		<div class="form">
 			<div class="label">権限：</div>
-			<div class="input" th:switch="${employee.authority}">
+			<div class="input" th:switch="${update_employee.authority}">
 				<span th:case="1">一般</span>
 				<span th:case="2">管理者</span>
 			</div>
 		</div>
 		<div class="form">
 			<div class="label">部署名：</div>
-			<div class="input" th:switch="${employee.deptId}">
+			<div class="input" th:switch="${update_employee.deptId}">
 				<span th:case="1">営業部</span>
 				<span th:case="2">経理部</span>
 				<span th:case="3">総務部</span>
 			</div>
 		</div>
-		<form th:action="@{/regist/complete}" method="post" th:object="${employee}">
+		<form th:action="@{/update/complete}" method="post" th:object="${update_employee}">
 			<div class="form">
 				<div class="label"></div>
 				<div class="input">
+					<input type="hidden" th:field="*{empId}" />
 					<input type="hidden" th:field="*{empPass}" />
 					<input type="hidden" th:field="*{empName}" />
 					<input type="hidden" th:field="*{gender}" />
@@ -62,14 +63,15 @@
 					<input type="hidden" th:field="*{authority}" />
 					<input type="hidden" th:field="*{deptId}" />
 										
-					<input type="submit" value="登録" />
+					<input type="submit" value="変更" />
 				</div>
 			</div>
 		</form>
-		<form th:action="@{/regist/back}" method="post" th:object="${employee}">
+		<form th:action="@{/update/back}" method="post" th:object="${update_employee}">
 			<div class="form">
 				<div class="label"></div>
 				<div class="input">
+					<input type="hidden" th:field="*{empId}" />
 					<input type="hidden" th:field="*{empPass}" />
 					<input type="hidden" th:field="*{empName}" />
 					<input type="hidden" th:field="*{gender}" />
