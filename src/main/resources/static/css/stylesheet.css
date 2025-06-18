@@ -128,8 +128,7 @@ div.login_input {
 
 /* ---- 処理完了メッセージの出力箇所 ---- */
 div.message {
-	height: 150px;
-	padding-top: 30px;
+	height: 70px;
 	text-align: center;
 }
 
