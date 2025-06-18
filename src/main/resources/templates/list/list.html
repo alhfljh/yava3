@@ -54,6 +54,15 @@
 				</tr>
 				</tr>
 			</table>
+			<div class="message">
+				<p class="back_to_top_link">
+					<a th:href="@{/list}">
+						<span class="pipeline" th:text="${ToTheList}">
+							
+						</span>
+					</a>
+				</p>
+			</div>
 		</div>
 
 
@@ -74,73 +83,31 @@
 		</div>
 
 
-		<label><input type="radio" name="TAB" class="radio">登録</label>
-		<div class"tab-content">
-			<a th:href="@{/regist/input}">新規社員登録</a>
-		</div>
+
+		<th:block th:if="${session.user.authority == 2}">
+
+			<label><input type="radio" name="TAB" class="radio">登録</label>
+			<div class"tab-content">
+				<a th:href="@{/regist/input}">新規社員登録</a>
+			</div>
 
 
 
-		<label><input type="radio" name="TAB" class="radio">削除</label>
-		<div class"tab-content">
-			<a th:href="@{/delete/input}">社員削除</a>
-		</div>
-		
-		
-		<label><input type="radio" name="TAB" class="radio">登録内容変更</label>
-		<div class"tab-content">
-			<div class="title">管理者ツール</div>
-			<a th:href="@{/update/manage}">登録内容変更</a>
-		</div>
+			<label><input type="radio" name="TAB" class="radio">削除</label>
+			<div class"tab-content">
+				<a th:href="@{/delete/input}">社員削除</a>
+			</div>
+
+
+			<label><input type="radio" name="TAB" class="radio">登録内容変更</label>
+			<div class"tab-content">
+				<div class="title">管理者ツール</div>
+				<a th:href="@{/update/manage}">登録内容変更</a>
+			</div>
+			</th:block>
 	</div>
 
 
-		<!--ここまで　追加した。以下適当にコメントアウトした。-->
-
-
-		<!--    <div class="regist_link">-->
-		<!--		<a th:href="@{/regist/input}">新規社員登録</a>-->
-		<!--	</div>-->
-
-		<!--	<th:block th:if="${#lists.isEmpty(emp)}">-->
-		<!--		<div class="message">-->
-		<!--			以下に該当する社員が存在しないときのメッセージを記述する -->
-		<!--			<p class="back_to_top_message">該当する社員が存在しません。</p>-->
-		<!--			以下に一覧表示に戻るリンクを記述する -->
-		<!--			<p class="back_to_top_link"><a th:href="@{/list}">一覧表示に戻る</a></p>-->
-		<!--		</div>-->
-		<!--	</th:block>-->
-		<!--	<table class="list_table" th:if="${!(#lists.isEmpty(emp))}">-->
-		<!--		<tr>-->
-		<!--			<th class="empId">社員ID</th>-->
-		<!--			<th class="empName">社員名</th>-->
-		<!--			<th class="gender">性別</th>-->
-		<!--			<th class="address">住所</th>-->
-		<!--			<th class="birthday">生年月日</th>-->
-		<!--			<th class="authority">権限</th>-->
-		<!--			<th class="deptName">部署名</th>-->
-		<!--		</tr>-->
-		<!--		<tr th:each="employee:${emp}">-->
-		<!--			<td th:text="${employee.empId}"></td>-->
-		<!--			<td th:text="${employee.empName}"></td>-->
-		<!--			<td th:switch="${employee.gender}">-->
-		<!--				<span th:case="1">男性</span>-->
-		<!--				<span th:case="2">女性</span>-->
-		<!--			</td>-->
-		<!--			<td th:text="${employee.address}"></td>-->
-		<!--			<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>-->
-		<!--			<td th:switch="${employee.authority}">-->
-		<!--				<span th:case="1">一般</span>-->
-		<!--				<span th:case="2">管理者</span>-->
-		<!--			</td>-->
-
-		<!--			<td th:text="${employee.department.deptName}"></td>-->
-		<!--		</tr>-->
-
-		<!--		</tr>-->
-		<!--				 ***####を書き換え、社員情報を全件出力する ここまで*** -->
-		<!--	</table>-->
-		<!--		 ***検索結果がある場合 ここまで*** -->
 
 </body>
 
