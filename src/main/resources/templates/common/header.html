@@ -3,16 +3,22 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
 	<th:block id="header" th:fragment="layout-header">
 		<div class="content">
 			<div class="title">社員管理システム</div>
+<!--			<a th:href= "@{/gamingChange}" name="gamingTitle">ゲーミングモードをOFFにする</a> -->
+<!--			社員管理システムの動きを無くしたい場合はlayout.cssへ-->
 			<div th:if="${session.user != null}" class="user_info">
 				ようこそ、<span class="pipeline" th:text="${session.user.empName}"></span>さん
-				<span class="pipeline">|</span><a th:href="@{/logout}">ログアウト</a>
+				<br>
+				あなたの権限：<span class="pipeline" th:switch="${session.user.authority}">
+					<span th:case="1">一般</span>
+					<span th:case="2">管理者</span>
+				</span>
+				　　　　　　<a th:href="@{/logout}">ログアウト</a>
 			</div>
 		</div>
 	</th:block>
