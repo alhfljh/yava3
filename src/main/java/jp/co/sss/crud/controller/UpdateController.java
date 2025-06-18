@@ -45,15 +45,13 @@ import jp.co.sss.crud.repository.EmployeeRepository;
 		
 		
 	}
+	@RequestMapping(path = "/update/back", method = RequestMethod.POST)
+	public String registInp(@ModelAttribute EmployeeForm employeeForm) {
+		return "update/update_input";
+	}
+	
 	@RequestMapping(path="/update/checked", method=RequestMethod.POST)
 	public String updateCheak(@ModelAttribute EmployeeForm employeeForm,Model model) {
-
-		System.out.println("ご機嫌いかが");
-////		if (result.hasErrors()) {
-////			System.out.println("ななめ");
-////			return "update/update_input";	
-////		}
-		System.out.println("最高");
 		    EmployeeForm employeeform = new EmployeeForm();
 			BeanUtils.copyProperties(employeeForm, employeeform);
 			model.addAttribute("update_employee", employeeform);
