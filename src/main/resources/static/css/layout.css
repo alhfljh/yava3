@@ -134,10 +134,13 @@ article {
 /* ---- フッター ---- */
 footer {
 	height: 30px;
+	width:100%;
 	background-color: #87CEEB;
 	text-align: center;
 	font-size: 8pt;
 	line-height: 30px;
+    position:absolute;
+    bottom:0;
 }
 
 /*---- 追加した ----*/
