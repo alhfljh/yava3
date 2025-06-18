@@ -41,17 +41,33 @@ header {
 
 }
 
+/* ゲーミングモードを解放したい場合はコメントアウトした文のコメントを外してください
+　後にアプリ内にゲーミングモードON/OFFを実装予定*/
+
 header .title {
+	font-family: "HGP創英角ﾎﾟｯﾌﾟ体";
 	margin-left: 10px;
 	line-height: 45px;
-	font-size: 25pt;
+	font-size: 20pt;
+	background: linear-gradient(to left, #e60000, #f39800, #fff100, #009944, #0068b7, #1d2088, #920783);
+	background-size: 200%;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: 1s title linear infinite;
+}
+
+@keyframes title {
+	100% {
+		background-position: 200%;
+	} 
 }
 
 header .user_info {
-	margin-right: 10px;
-	line-height: 45px;
+	margin-right: 30px;
+	line-height: 20px;
 	text-align: right;
 }
+
 
 
 /* ---- サイドバー ---- */
