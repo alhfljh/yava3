@@ -7,8 +7,9 @@
 
 <body>
 	<th:block id="header" th:fragment="layout-header">
-		<div class="content">
-			<div class="title">社員管理システム</div>
+		<adiv class="content">
+			<div class="title" ><a th:href="@{/list}"class="tai">社員管理システム</a></div>
+			
 <!--			<a th:href= "@{/gamingChange}" name="gamingTitle">ゲーミングモードをOFFにする</a> -->
 <!--			社員管理システムの動きを無くしたい場合はlayout.cssへ-->
 			<div th:if="${session.user != null}" class="user_info">

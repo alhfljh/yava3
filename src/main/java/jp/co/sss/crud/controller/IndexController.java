@@ -107,16 +107,10 @@ public class IndexController {
 	//	追加した↓
 	@RequestMapping(path = "/delete/input")
 	public String delete(HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession();
-		session.getAttribute("manage");
-		Integer manage = (Integer) session.getAttribute("manage");
-		if (manage == 2) {
-			model.addAttribute("emp", employeeRepository.findAll());
+		
+			model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdAsc());
 			return "delete/delete_input";
-		} else {
-			return "list/list";
-		}
-
+		
 	}
 
 	@RequestMapping(path = "/delete/comp", method = RequestMethod.POST)

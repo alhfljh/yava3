@@ -37,6 +37,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
 	Employee findByEmpId(Integer empId);
 
+	List<Employee> findAllByOrderByEmpIdAsc();
+
 	
 
 

@@ -28,7 +28,7 @@ public class ListController {
 	 */
 	@RequestMapping("/list")
 	public String list(Model model) {
-		model.addAttribute("emp",repository.findAll());
+		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		return "list/list";
 	}
 }
