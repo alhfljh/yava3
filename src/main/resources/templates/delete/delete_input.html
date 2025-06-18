@@ -37,6 +37,7 @@
 			<th class="birthday">生年月日</th>
 			<th class="authority">権限</th>
 			<th class="deptName">部署名</th>
+<!--			<th >顔</th>-->
 		</tr>
 		<tr th:each="employee:${emp}">
 			<td th:text="${employee.empId}"></td>
@@ -51,8 +52,19 @@
 				<span th:case="1">一般</span>
 				<span th:case="2">管理者</span>
 			</td>
-
 			<td th:text="${employee.department.deptName}"></td>
+			
+<!--			<td th:switch="${employee.empId%8}">-->
+<!--				<span th:case="0"><a th:href="@{/img/santaisyou.jpg}"><img th:src="@{/img/santaisyou.jpg}"width="90" ></a></span>-->
+<!--				<span th:case="1"><a th:href="@{/img/俺.jpg}"><img th:src="@{/img/俺.jpg}" width="90"></a></span>-->
+<!--				<span th:case="2"><a th:href="@{/img/rukaku.gif}"><img th:src="@{/img/rukaku.gif}" width="90"></a></span>-->
+<!--				<span th:case="3"><a th:href="@{/img/R.gif}"><img th:src="@{/img/R.gif}"width="90" ></a></span>-->
+<!--				<span th:case="4"><a th:href="@{/img/原田.jpg}"><img th:src="@{/img/原田.jpg}"width="90" ></a></span>-->
+<!--				<span th:case="5"><a th:href="@{/img/th.gif}"><img th:src="@{/img/th.gif}"width="90" ></a></span>-->
+<!--				<span th:case="6"><a th:href="@{/img/man.jpg}"><img th:src="@{/img/man.jpg}" width="90"></a></span>-->
+<!--				<span th:case="7"><a th:href="@{/img/man2.jpg}"><img th:src="@{/img/man2.jpg}"width="90" ></a></span>-->
+<!--				<span th:case="8"><a th:href="@{/img/man3.jpg}"><img th:src="@{/img/man3.jpg}" width="90"></a></span>-->
+<!--			</td>-->
 		</tr>
 		</tr>
 	</table>
