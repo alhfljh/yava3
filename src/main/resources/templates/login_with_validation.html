@@ -1,0 +1,18 @@
+<!DOCTYPE html>  
+<html xmlns:th="http://www.thymeleaf.org">  
+<head>  
+<meta charset="UTF-8">  
+<title>Insert title here</title>  
+</head>  
+<body>  
+<div>ログイン</div>  
+<form method="post" th:action="@{/loginWithValidation}"  
+th:object="${loginFormWithValidation}"> 
+ユーザ ID:<input type="text" th:field="*{userId}" /> 
+<span th:errors="*{userId}"></span><br> 
+パスワード:<input type="password" th:field="*{password}" /> 
+<span th:errors="*{password}"></span><br> 
+<input type="submit" value="ログイン" /> 
+</form> 
+</body>  
+</html> 
