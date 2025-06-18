@@ -38,6 +38,8 @@ header {
     z-index:100;
     display:flex;
     justify-content:space-between;
+    
+	
 
 }
 
@@ -48,12 +50,14 @@ header .title {
 	font-family: "HGP創英角ﾎﾟｯﾌﾟ体";
 	margin-left: 10px;
 	line-height: 45px;
-	font-size: 20pt;
+	font-size: 30pt;
 	background: linear-gradient(to left, #e60000, #f39800, #fff100, #009944, #0068b7, #1d2088, #920783);
 	background-size: 200%;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	animation: 1s title linear infinite;
+	-webkit-text-stroke:2px black;
+	animation: 5s title linear infinite;	
+	
 }
 
 @keyframes title {
