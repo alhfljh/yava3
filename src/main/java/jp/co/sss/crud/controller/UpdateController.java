@@ -24,16 +24,7 @@ import jp.co.sss.crud.repository.EmployeeRepository;
 	@RequestMapping(path="/update/manage")
 	public String updateManage(@ModelAttribute LoginForm loginForm,HttpServletRequest request,Model model) {
 
-		HttpSession session = request.getSession();
-		session.getAttribute("manage");
-		Integer manage = (Integer) session.getAttribute("manage");
-		if ( manage == 2) {
-			
 			return "/update/update_manage";
-		} else {
-//			model.addAttribute("errMessage", "権限がありません");
-			return "list/list";
-		}
 		
 	}
 	
