@@ -14,10 +14,10 @@
 			<div class="update">
 			<h3>登録内容変更</h3>
 			<!-- 入力フォーム(CSS)からclass名を作成してください。-->
-			<div>変更したい社員の社員IDを入力してください</div>
+			<div class="spece">変更したい社員の社員IDを入力してください</div>
 			<div class="form">
 				<div class="label">社員ID：</div>
-				<th:action="@{/update/input}" , method="post">
+				<form th:action="@{/update/input}" , method="post">
 					<input type="text" name="empId" />
 
 					<input type="submit" value="検索" />
@@ -28,9 +28,8 @@
 		</div>
 		<form th:action="@{/list}">
 			<div class="form">
-				<div class="label"></div>
 				<div class="input">
-					<input type="submit" value="一覧に戻る" />
+					<input type="submit" value="一覧表示に戻る"/>
 				</div>
 			</div>
 		</form>
