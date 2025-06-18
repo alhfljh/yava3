@@ -25,10 +25,8 @@ import jp.co.sss.crud.repository.EmployeeRepository;
 	public String updateManage(@ModelAttribute LoginForm loginForm,HttpServletRequest request,Model model) {
 
 		HttpSession session = request.getSession();
-		System.out.println(session+"ここにもあります");
 		session.getAttribute("manage");
 		Integer manage = (Integer) session.getAttribute("manage");
-		System.out.println(manage+"ここにあります");
 		if ( manage == 2) {
 			
 			return "/update/update_manage";
