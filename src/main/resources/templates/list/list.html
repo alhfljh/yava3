@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
-
+ 
 <head>
 	<title>社員一覧 | 社員管理システム</title>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-
+ 
 <body class="admin user_list">
 	<div class="header-box"></div>
 	<h3>社員管理</h3>
-
+ 
 	<!-- セッション中にユーザ情報が存在する場合のみ以下の処理を実行する。 -->
 	<!-- なお、セッション中のユーザ情報がない（null）の場合、-->
 	<!-- フィルターの処理により、当該Thymeleaf処理完了後にログイン画面にリダイレクトする。 -->
 	<!--　　　↓コメントアウトした。タブスイッチ追加。-->
 	<div class="tab-switch">
-
+ 
 		<label><input type="radio" name="TAB" checked class="radio">社員一覧</label>
 		<div class=tab-content>
 			<th:block th:if="${#lists.isEmpty(emp)}">
@@ -25,7 +25,7 @@
 					<p class="back_to_top_link"><a th:href="@{/list}">一覧表示に戻る</a></p>
 				</div>
 			</th:block>
-
+ 
 			<table class="list_table" th:if="${!(#lists.isEmpty(emp))}">
 				<tr>
 					<th class="empId">社員ID</th>
@@ -35,6 +35,7 @@
 					<th class="birthday">生年月日</th>
 					<th class="authority">権限</th>
 					<th class="deptName">部署名</th>
+<!--					<th >顔</th>-->
 				</tr>
 				<tr th:each="employee:${emp}">
 					<td th:text="${employee.empId}"></td>
@@ -49,8 +50,19 @@
 						<span th:case="1">一般</span>
 						<span th:case="2">管理者</span>
 					</td>
-
 					<td th:text="${employee.department.deptName}"></td>
+					
+<!--					<td th:switch="${employee.empId%8}">-->
+<!--						<span th:case="0"><img th:src="@{/img/santaisyou.jpg}"width="90" ></span>-->
+<!--						<span th:case="1"><a th:href="@{/img/俺.JPG}"><img th:src="@{/img/俺.jpg}" width="90"></a></span>-->
+<!--						<span th:case="2"><img th:src="@{/img/rukaku.gif}" width="90"></span>-->
+<!--						<span th:case="3"><img th:src="@{/img/R.gif}"width="90" ></span>-->
+<!--						<span th:case="4"><img th:src="@{/img/原田.jpg}"width="90" ></span>-->
+<!--						<span th:case="5"><img th:src="@{/img/th.gif}"width="90" ></span>-->
+<!--						<span th:case="6"><img th:src="@{/img/man.jpg}" width="90"></span>-->
+<!--						<span th:case="7"><img th:src="@{/img/man2.jpg}"width="90" ></span>-->
+<!--						<span th:case="8"><img th:src="@{/img/man3.jpg}" width="90"></span>-->
+<!--					</td>-->
 				</tr>
 				</tr>
 			</table>
@@ -64,23 +76,44 @@
 				</p>
 			</div>
 		</div>
-
-
+ 
+ 
 		<label><input type="radio" name="TAB" class="radio">検索</label>
 		<div class"tab-content">
 			<aside th:fragment="layout-sidebar"
 				th:class="${session.user == null or session.user.authority == 1} ? ${'search'} : ${'admin_menu'}">
 				<div class="title">社員名検索</div>
-
+ 
 				<div class="form">
 					<form th:action="@{/list/empName}" , method="get">
 						<input type="text" name="empName" placeholder="名前を入力">
 						<input type="submit" value="検索" />
 					</form>
-
+ 
 				</div>
 			</aside>
 		</div>
+ 
+ 
+<!--		<label><input type="radio" name="TAB" class="radio">登録</label>-->
+<!--		<div class"tab-content">-->
+<!--			<a th:href="@{/regist/input}">新規社員登録</a>-->
+<!--		</div>-->
+ 
+ 
+ 
+ 
+ 
+<!--		<label><input type="radio" name="TAB" class="radio">削除</label>-->
+<!--		<div class"tab-content">-->
+<!--			<a th:href="@{/delete/input}">社員削除</a>-->
+<!--		</div>-->
+<!--		<label><input type="radio" name="TAB" class="radio">登録内容変更</label>-->
+<!--		<div>-->
+<!--			<div>管理者ツール</div>-->
+<!--			<a th:href="@{/update/manage}">登録内容変更</a>-->
+ 
+<!--		</div>-->
 
 
 
@@ -108,7 +141,6 @@
 	</div>
 
 
-
 </body>
-
+ 
 </html>
