@@ -88,6 +88,7 @@ public class IndexController {
 			employeeBean.setAuthority(employee.getAuthority());
 			//employeeBeanに入れた値3つを、user属性でリクエストスコープに代入
 			session.setAttribute("user", employeeBean);
+			session.setAttribute("userId",employeeBean.getEmpId());
 			session.setAttribute("manage", employeeBean.getAuthority());
 
 			// 一覧へリダイレクト
