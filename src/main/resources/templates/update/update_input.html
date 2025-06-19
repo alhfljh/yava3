@@ -3,10 +3,11 @@
 
 <head>
 	<title>会員登録入力 | シェアードショップ</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Insert title here</title>
 </head>
+
 <body class="admin user_update_input_admin">
 	<div class="header-box"></div>
 	<h3>登録変更入力画面</h3>
@@ -15,22 +16,22 @@
 
 			<div class="form">
 				<div class="label">社員ID：</div>
-				<div class="input" >
-					<input type="hidden" th:field="*{empId}"th:text="*{empId}" />
+				<div class="input">
+					<input type="hidden" th:field="*{empId}" th:text="*{empId}" />
 				</div>
 			</div>
-			
+
 			<div class="form">
 				<div class="label">パスワード：</div>
 				<div class="input">
-					<input type="password" th:field="*{empPass}"　placeholder="パスワードを入力" />
+					<input type="password" th:field="*{empPass}" 　placeholder="パスワードを入力" />
 					<span th:errors="*{empPass}"></span>
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">社員名：</div>
 				<div class="input">
-					<input type="text" th:field="*{empName}"placeholder="名前を入力"/>
+					<input type="text" th:field="*{empName}" placeholder="名前を入力" />
 					<span th:errors="*{empName}"></span>
 				</div>
 			</div>
@@ -39,32 +40,32 @@
 				<div class="input">
 					<input type="radio" th:field="*{gender}" value="1" />男性&nbsp;
 					<input type="radio" th:field="*{gender}" value="2" />女性
-			    </div>
+				</div>
 			</div>
 			<div class="form">
 				<div class="label">住所：</div>
 				<div class="input">
-					<input type="text" th:field="*{address}"/>
+					<input type="text" th:field="*{address}" />
 					<span th:errors="*{address}"></span>
 				</div>
 			</div>
 			<div class="form">
 				<div class="label">生年月日：</div>
 				<div class="input">
-					<input type="text" th:field="*{birthday}"/> (YYYY/MM/DD)
+					<input type="text" th:field="*{birthday}" /> (YYYY/MM/DD)
 					<span th:errors="*{birthday}"></span>
 				</div>
 			</div>
 			<div class="form">
-				<div class="label">権限：</div>				
+				<div class="label">権限：</div>
 				<div class="input">
 					<input type="radio" th:field="*{authority}" value="1" />一般&nbsp;&nbsp;
 					<input type="radio" th:field="*{authority}" value="2" />管理者
 				</div>
-			
-						
-			</div>		
-			
+
+
+			</div>
+
 			<div class="form">
 				<div class="label">部署名：</div>
 				<div class="input">
@@ -82,6 +83,32 @@
 				</div>
 			</div>
 		</form>
+		<!--		<form th:action="@{/update/manage}">-->
+		<!--			<div class="form">-->
+		<!--				<div class="label"></div>-->
+		<!--				<div class="input">-->
+		<!--					<input type="submit" value="リセット" />-->
+		<!--				</div>-->
+		<!--			</div>-->
+		<!--		</form>-->
+		<form th:action="@{/update/input}" method="post" th:object="${employeeForm}">
+			<div class="form">
+				<div class="label"></div>
+				<div class="input">
+					<input type="hidden" th:field="*{empId}" />
+					<input type="hidden" th:field="*{empPass}" />
+					<input type="hidden" th:field="*{empName}" />
+					<input type="hidden" th:field="*{gender}" />
+					<input type="hidden" th:field="*{address}" />
+					<input type="hidden" th:field="*{birthday}" />
+					<input type="hidden" th:field="*{authority}" />
+					<input type="hidden" th:field="*{deptId}" />
+
+					<input type="submit" value="リセット" />
+				</div>
+			</div>
+		</form>
+
 		<form th:action="@{/list}">
 			<div class="form">
 				<div class="label"></div>
@@ -92,4 +119,5 @@
 		</form>
 	</div>
 </body>
+
 </html>
