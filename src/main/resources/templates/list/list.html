@@ -26,41 +26,42 @@
 				</div>
 			</th:block>
 
-			<table class="list_table" th:if="${!(#lists.isEmpty(emp))}">
-				<tr>
-					<th class="empId">社員ID</th>
-					<th class="empName">社員名</th>
-					<th class="gender">性別</th>
-					<th class="address">住所</th>
-					<th class="birthday">生年月日</th>
-					<th class="authority">権限</th>
-					<th class="deptName">部署名</th>
-				</tr>
-				<tr th:each="employee:${emp}">
-					<td th:text="${employee.empId}"></td>
-					<td th:text="${employee.empName}"></td>
-					<td th:switch="${employee.gender}">
-						<span th:case="1">男性</span>
-						<span th:case="2">女性</span>
-					</td>
-					<td th:text="${employee.address}"></td>
-					<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
-					<td th:switch="${employee.authority}">
-						<span th:case="1">一般</span>
-						<span th:case="2">管理者</span>
-					</td>
+			<th:block th:unless="${#lists.isEmpty(emp)}">
+				<table class="list_table">
+					<tr>
+						<th class="empId">社員ID</th>
+						<th class="empName">社員名</th>
+						<th class="gender">性別</th>
+						<th class="address">住所</th>
+						<th class="birthday">生年月日</th>
+						<th class="authority">権限</th>
+						<th class="deptName">部署名</th>
+					</tr>
+					<tr th:each="employee:${emp}">
+						<td th:text="${employee.empId}"></td>
+						<td th:text="${employee.empName}"></td>
+						<td th:switch="${employee.gender}">
+							<span th:case="1">男性</span>
+							<span th:case="2">女性</span>
+						</td>
+						<td th:text="${employee.address}"></td>
+						<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
+						<td th:switch="${employee.authority}">
+							<span th:case="1">一般</span>
+							<span th:case="2">管理者</span>
+						</td>
 
-					<td th:text="${employee.department.deptName}"></td>
-				</tr>
-				</tr>
-			</table>
-			<p class="back_to_top_link">
-				<a th:href="@{/list}">
-					<span class="pipeline" th:text="${ToTheList}">
-
-					</span>
-				</a>
-			</p>
+						<td th:text="${employee.department.deptName}"></td>
+					</tr>
+					</tr>
+				</table>
+				<p class="back_to_top_link">
+					<a th:href="@{/list}">
+						<span class="pipeline" th:text="${ToTheList}">
+						</span>
+					</a>
+				</p>
+			</th:block>
 
 		</div>
 
@@ -75,13 +76,20 @@
 					<form th:action="@{/list/empName}" , method="get">
 						<input type="text" name="empName" placeholder="名前を入力">
 						<input type="submit" value="検索" />
+						<button type="reset">リセット</button>
 					</form>
 
 				</div>
 			</aside>
 		</div>
+		<th:block th:if="${session.user.authority == 1}">
 
-
+			<label><input type="radio" name="TAB" class="radio">登録</label>
+			<div class"tab-content">
+				<div class="title">ユーザツール</div>
+				<a th:href="@{/update/manage1}">登録内容変更</a>
+			</div>
+		</th:block>
 
 		<th:block th:if="${session.user.authority == 2}">
 
@@ -103,7 +111,7 @@
 			<label><input type="radio" name="TAB" class="radio">登録内容変更</label>
 			<div class"tab-content">
 				<div class="title">管理者ツール</div>
-				<a th:href="@{/update/manage}">登録内容変更</a>
+				<a th:href="@{/update/manage2}">登録内容変更</a>
 			</div>
 		</th:block>
 	</div>
