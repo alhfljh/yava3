@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
-
+ 
 <head>
 	<title>社員一覧 | 社員管理システム</title>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-
+ 
 <body class="admin user_list">
 	<div class="header-box"></div>
 	<h3>社員管理</h3>
-
+ 
 	<!-- セッション中にユーザ情報が存在する場合のみ以下の処理を実行する。 -->
 	<!-- なお、セッション中のユーザ情報がない（null）の場合、-->
 	<!-- フィルターの処理により、当該Thymeleaf処理完了後にログイン画面にリダイレクトする。 -->
 	<!--　　　↓コメントアウトした。タブスイッチ追加。-->
 	<div class="tab-switch">
-
+ 
 		<label><input type="radio" name="TAB" checked class="radio">社員一覧</label>
 		<div class=tab-content>
 			<th:block th:if="${#lists.isEmpty(emp)}">
@@ -26,59 +26,71 @@
 				</div>
 			</th:block>
 
-			<th:block th:unless="${#lists.isEmpty(emp)}">
-				<table class="list_table">
-					<tr>
-						<th class="empId">社員ID</th>
-						<th class="empName">社員名</th>
-						<th class="gender">性別</th>
-						<th class="address">住所</th>
-						<th class="birthday">生年月日</th>
-						<th class="authority">権限</th>
-						<th class="deptName">部署名</th>
-					</tr>
-					<tr th:each="employee:${emp}">
-						<td th:text="${employee.empId}"></td>
-						<td th:text="${employee.empName}"></td>
-						<td th:switch="${employee.gender}">
-							<span th:case="1">男性</span>
-							<span th:case="2">女性</span>
-						</td>
-						<td th:text="${employee.address}"></td>
-						<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
-						<td th:switch="${employee.authority}">
-							<span th:case="1">一般</span>
-							<span th:case="2">管理者</span>
-						</td>
+ 			<th:block th:unless="${#lists.isEmpty(emp)}">
+			<table class="list_table">
+				<tr>
+					<th class="empId">社員ID</th>
+					<th class="empName">社員名</th>
+					<th class="gender">性別</th>
+					<th class="address">住所</th>
+					<th class="birthday">生年月日</th>
+					<th class="authority">権限</th>
+					<th class="deptName">部署名</th>
+<!--					<th >顔</th>-->
+				</tr>
+				<tr th:each="employee:${emp}">
+					<td th:text="${employee.empId}"></td>
+					<td th:text="${employee.empName}"></td>
+					<td th:switch="${employee.gender}">
+						<span th:case="1">男性</span>
+						<span th:case="2">女性</span>
+					</td>
+					<td th:text="${employee.address}"></td>
+					<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
+					<td th:switch="${employee.authority}">
+						<span th:case="1">一般</span>
+						<span th:case="2">管理者</span>
+					</td>
+					<td th:text="${employee.department.deptName}"></td>
+					
+<!--					<td th:switch="${employee.empId%8}">-->
+<!--						<span th:case="0"><img th:src="@{/img/santaisyou.jpg}"width="90" ></span>-->
+<!--						<span th:case="1"><a th:href="@{/img/俺.jpg}"><img th:src="@{/img/俺.jpg}" width="90"></a></span>-->
+<!--						<span th:case="2"><a th:href="@{/img/rukaku.gif}"><img th:src="@{/img/rukaku.gif}" width="90"></a></span>-->
+<!--						<span th:case="3"><a th:href="@{/img/R.gif}"><img th:src="@{/img/R.gif}"width="90" ></a></span>-->
+<!--						<span th:case="4"><a th:href="@{/img/原田.jpg}"><img th:src="@{/img/原田.jpg}"width="90" ></a></span>-->
+<!--						<span th:case="5"><a th:href="@{/img/th.gif}"><img th:src="@{/img/th.gif}"width="90" ></a></span>-->
+<!--						<span th:case="6"><a th:href="@{/img/man.jpg}"><img th:src="@{/img/man.jpg}" width="90"></a></span>-->
+<!--						<span th:case="7"><a th:href="@{/img/man2.jpg}"><img th:src="@{/img/man2.jpg}"width="90" ></a></span>-->
+<!--						<span th:case="8"><a th:href="@{/img/man3.jpg}"><img th:src="@{/img/man3.jpg}" width="90"></a></span>-->
+<!--					</td>-->
+				</tr>
+				</tr>
+			</table>
+			<p class="back_to_top_link">
+				<a th:href="@{/list}">
+					<span class="pipeline" th:text="${ToTheList}">
 
-						<td th:text="${employee.department.deptName}"></td>
-					</tr>
-					</tr>
-				</table>
-				<p class="back_to_top_link">
-					<a th:href="@{/list}">
-						<span class="pipeline" th:text="${ToTheList}">
-						</span>
-					</a>
-				</p>
-			</th:block>
-
+					</span>
+				</a>
+			</p>
+ 			</th:block>
 		</div>
-
-
+ 
+ 
 		<label><input type="radio" name="TAB" class="radio">検索</label>
 		<div class"tab-content">
 			<aside th:fragment="layout-sidebar"
 				th:class="${session.user == null or session.user.authority == 1} ? ${'search'} : ${'admin_menu'}">
 				<div class="title">社員名検索</div>
-
+ 
 				<div class="form">
 					<form th:action="@{/list/empName}" , method="get">
 						<input type="text" name="empName" placeholder="名前を入力">
 						<input type="submit" value="検索" />
 						<button type="reset">リセット</button>
 					</form>
-
+ 
 				</div>
 			</aside>
 		</div>
@@ -117,7 +129,6 @@
 	</div>
 
 
-
 </body>
-
+ 
 </html>
