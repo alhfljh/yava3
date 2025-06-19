@@ -12,27 +12,55 @@
 	<th:block th:fragment="layout-main">
 		<div th:object="${loginForm}">
 			<div class="update">
-			<h3>登録内容変更</h3>
-			<!-- 入力フォーム(CSS)からclass名を作成してください。-->
-			<div class="spece">変更したい社員の社員IDを入力してください</div>
-			<div class="form">
-				<div class="label">社員ID：</div>
-				<form th:action="@{/update/input}" , method="post">
-					<input type="text" name="empId" />
+				<h3>登録内容変更</h3>
+				<!-- 入力フォーム(CSS)からclass名を作成してください。-->
+				<div class="spece">変更したい社員の社員IDを入力してください</div>
+				<div class="form">
+					<div class="label">社員ID：</div>
+					<form th:action="@{/update/input}" , method="post">
+						<input type="text" name="empId" />
 
-					<input type="submit" value="検索" />
+						<input type="submit" value="検索" />
+					</form>
+				</div>
 				</form>
 			</div>
-		</form>
 		</div>
-		</div>
+		<table class="list_table">
+			<tr>
+				<th class="empId">社員ID</th>
+				<th class="empName">社員名</th>
+				<th class="gender">性別</th>
+				<th class="address">住所</th>
+				<th class="birthday">生年月日</th>
+				<th class="authority">権限</th>
+				<th class="deptName">部署名</th>
+			</tr>
+			<tr th:each="employee:${emp}">
+				<td th:text="${employee.empId}"></td>
+				<td th:text="${employee.empName}"></td>
+				<td th:switch="${employee.gender}">
+					<span th:case="1">男性</span>
+					<span th:case="2">女性</span>
+				</td>
+				<td th:text="${employee.address}"></td>
+				<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
+				<td th:switch="${employee.authority}">
+					<span th:case="1">一般</span>
+					<span th:case="2">管理者</span>
+				</td>
+
+				<td th:text="${employee.department.deptName}"></td>
+			</tr>
+			</tr>
+		</table>
 		<form th:action="@{/list}">
 			<div class="form">
 				<div class="spe">
-				<div class="input">
-					<input type="submit" value="一覧表示に戻る"/>
+					<div class="input">
+						<input type="submit" value="戻る" />
+					</div>
 				</div>
-			</div>
 		</form>
 	</th:block>
 </body>
