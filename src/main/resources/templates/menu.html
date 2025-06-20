@@ -1,13 +1,191 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{common/layout_3block :: layout(~{::body/content()})}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_3block :: layout(~{::body/content()})}">
+
 <head>
-<title>メニュー| 社員管理システム</title>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>メニュー| 社員管理システム</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
+
 <body>
 	<div class="header-box"></div>
 
+	<nav id="header-nav">
+		<ul class="header-list">
+
+			<li class="menu-item a">
+				<a href="">社員情報</a>
+				<ul class="sub-menu">
+					<li class="sub-menu-item a">
+						<a th:href="@{/list}">現社員一覧</a>
+					</li>
+					<li class="sub-menu-item a">
+						<a href="">退職含む一覧</a>
+					</li>
+				</ul><!-- /.sub-menu -->
+			</li><!-- /.menu-item a -->
+
+			<li class="menu-item b">
+				<a href="">検索</a>
+				<ul class="sub-menu">
+					<li class="sub-menu-item b">
+						<a th:href="@{/search}">名前検索</a>
+					</li>
+					<li class="sub-menu-item b">
+						<a href="">〇〇検索</a>
+					</li>
+				</ul><!-- /.sub-menu -->
+			</li><!-- /.menu-item b -->
+
+			<li class="menu-item c">
+				<a href="">登録</a>
+				<ul class="sub-menu">
+					<li class="sub-menu-item c">
+						<a th:href="@{/regist/input}">新規社員登録</a>
+					</li>
+					<li class="sub-menu-item c">
+						<a href="">新規部署登録</a>
+					</li>
+				</ul><!-- /.sub-menu -->
+			</li><!-- /.menu-item c-->
+
+			<li class="menu-item d">
+				<a href="" th:if="${session.user.authority == 2}">管理者のみ</a>
+				<ul class="sub-menu">
+					<li class="sub-menu-item d">
+						<a th:href="@{/delete/input}">削除</a>
+					</li>
+					<li class="sub-menu-item d">
+						<a th:href="@{/update/manage1}">変更</a>
+					</li>
+				</ul><!-- /.sub-menu -->
+			</li><!-- /.menu-item d -->
+
+		</ul><!-- /.header-nav-list -->
+	</nav><!-- /#header-nav -->
+
+	<br><br><br><br><br>
+
+	<div class="tab-switch">
+		<label><input type="radio" name="TAB" checked class="radio">社員一覧</label>
+		<div class=tab-content>
+			<th:block th:if="${#lists.isEmpty(emp)}">
+				<div class="message">
+					<p class="back_to_top_message">該当する社員が存在しません。</p>
+				</div>
+			</th:block>
+
+			<th:block th:unless="${#lists.isEmpty(emp)}">
+				<table class="list_table">
+					<tr>
+						<th class="empId">社員ID</th>
+						<th class="empName">社員名</th>
+						<th class="gender">性別</th>
+						<th class="address">住所</th>
+						<th class="birthday">生年月日</th>
+						<th class="authority">権限</th>
+						<th class="deptName">部署名</th>
+						<!--					<th >顔</th>-->
+					</tr>
+					<tr th:each="employee:${emp}">
+						<td th:text="${employee.empId}"></td>
+						<td th:text="${employee.empName}"></td>
+						<td th:switch="${employee.gender}">
+							<span th:case="1">男性</span>
+							<span th:case="2">女性</span>
+						</td>
+						<td th:text="${employee.address}"></td>
+						<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
+						<td th:switch="${employee.authority}">
+							<span th:case="1">一般</span>
+							<span th:case="2">管理者</span>
+						</td>
+						<td th:text="${employee.department.deptName}"></td>
+
+					</tr>
+					</tr>
+				</table>
+			</th:block>
+		</div>
+
+
+		<label><input type="radio" name="TAB" class="radio">検索</label>
+		<div class"tab-content">
+			<aside2 th:fragment="layout-sidebar"
+				th:class="${session.user == null or session.user.authority == 1} ? ${'search'} : ${'admin_menu'}">
+				<div class="title">社員名検索</div>
+
+
+				<form th:action="@{/list/empName}" , method="get">
+					<div class="form">
+						<input type="text" name="empName" placeholder="名前を入力">
+						<input type="submit" value="検索" />
+						<button type="reset">リセット</button>
+					</div>
+				</form>
+
+
+			</aside2>
+		</div>
+		<th:block th:if="${session.user.authority == 1}">
+
+			<label><input type="radio" name="TAB" class="radio">登録</label>
+			<div class"tab-content">
+				<div class="title">ユーザツール</div>
+				
+				<form th:action="@{/update/manage1}">
+					<div class="form">
+						<input type="submit" value="登録内容変更" />
+					</div>
+				</form>
+				
+			</div>
+		</th:block>
+
+		<th:block th:if="${session.user.authority == 2}">
+
+			<label><input type="radio" name="TAB" class="radio">登録</label>
+			<div class"tab-content">
+				<div class="title">管理者ツール</div>
+				<form th:action="@{/regist/input}">
+					<div class="form">
+						<input type="submit" value="新規社員登録" />
+					</div>
+				</form>
+		
+			</div>
+
+
+
+			<label><input type="radio" name="TAB" class="radio">削除</label>
+			<div class"tab-content">
+				<div class="title">管理者ツール</div>
+				
+				<form th:action="@{/delete/input}">
+					<div class="form">
+						<input type="submit" value="社員削除" />
+					</div>
+				</form>
+		
+			</div>
+
+
+			<label><input type="radio" name="TAB" class="radio">登録内容変更</label>
+			<div class"tab-content">
+				<div class="title">管理者ツール</div>
+				
+				<form th:action="@{/update/manage2}">
+					<div class="form">
+						<input type="submit" value="登録内容変更" />
+					</div>
+				</form>
+			</div>
+		</th:block>
+
+
+
+
+	</div>
 </body>
+
 </html>
