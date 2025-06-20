@@ -92,7 +92,7 @@ public class IndexController {
 			session.setAttribute("manage", employeeBean.getAuthority());
 
 			// 一覧へリダイレクト
-			return "redirect:/list";
+			return "redirect:/menu";
 
 			/** 
 			 * 入力した社員ID、パスワードに合致する社員がいなかった場合
