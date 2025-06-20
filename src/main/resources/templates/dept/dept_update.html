@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
+
+<head>
+	<title>会員登録確認 | シェアードショップ</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="admin user_dept_check_admin">
+	<div class="header-box"></div>
+	<h3>部署名変更確認画面</h3>
+	<div class="dept">
+		<div class="form">
+			<div class="label">部署ID：</div>
+			<div class="input" th:text="${dept.deptId}"></div>
+		</div>
+		<div class="form">
+			<div class="label">部署名：</div>
+			<div class="input" th:text="${dept.deptName}"></div>
+		</div>
+		<form th:action="@{/dept/complete/update}" method="post" th:object="${dept}">
+			<div class="form">
+				<div class="label"></div>
+				<div class="input">
+					<input type="hidden" th:field="*{deptId}" />
+					<input type="hidden" th:field="*{deptName}" />
+
+					<input type="submit" value="変更" />
+				</div>
+			</div>
+		</form>
+		<form th:action="@{/dept/back/update}" method="post" th:object="${dept}">
+			<div class="form">
+				<div class="label"></div>
+				<div class="input">
+					<input type="hidden" th:field="*{deptId}" />
+					<input type="hidden" th:field="*{deptName}" />
+
+					<input type="submit" value="戻る" />
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

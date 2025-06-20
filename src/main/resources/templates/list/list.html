@@ -15,66 +15,9 @@
 	<!-- なお、セッション中のユーザ情報がない（null）の場合、-->
 	<!-- フィルターの処理により、当該Thymeleaf処理完了後にログイン画面にリダイレクトする。 -->
 	<!--　　　↓コメントアウトした。タブスイッチ追加。-->
-	<!--	<div class="tab-switch">-->
 
-	<!--		<label><input type="radio" name="TAB" checked class="radio">社員一覧</label>-->
-	<!--		<div class=tab-content>-->
-	<th:block th:if="${#lists.isEmpty(emp)}">
-		<div class="message">
-			<p class="back_to_top_message">該当する社員が存在しません。</p>
-		</div>
-	</th:block>
 
-	<th:block th:unless="${#lists.isEmpty(emp)}">
-		<table class="list_table">
-			<tr>
-				<th class="empId">社員ID</th>
-				<th class="empName">社員名</th>
-				<th class="gender">性別</th>
-				<th class="address">住所</th>
-				<th class="birthday">生年月日</th>
-				<th class="authority">権限</th>
-				<th class="deptName">部署名</th>
-				<!--					<th >顔</th>-->
-			</tr>
-			<tr th:each="employee:${emp}">
-				<td th:text="${employee.empId}"></td>
-				<td th:text="${employee.empName}"></td>
-				<td th:switch="${employee.gender}">
-					<span th:case="1">男性</span>
-					<span th:case="2">女性</span>
-				</td>
-				<td th:text="${employee.address}"></td>
-				<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
-				<td th:switch="${employee.authority}">
-					<span th:case="1">一般</span>
-					<span th:case="2">管理者</span>
-				</td>
-				<td th:text="${employee.department.deptName}"></td>
-
-				<!--					<td th:switch="${employee.empId%8}">-->
-				<!--						<span th:case="0"><img th:src="@{/img/santaisyou.jpg}"width="90" ></span>-->
-				<!--						<span th:case="1"><a th:href="@{/img/俺.jpg}"><img th:src="@{/img/俺.jpg}" width="90"></a></span>-->
-				<!--						<span th:case="2"><a th:href="@{/img/rukaku.gif}"><img th:src="@{/img/rukaku.gif}" width="90"></a></span>-->
-				<!--						<span th:case="3"><a th:href="@{/img/R.gif}"><img th:src="@{/img/R.gif}"width="90" ></a></span>-->
-				<!--						<span th:case="4"><a th:href="@{/img/原田.jpg}"><img th:src="@{/img/原田.jpg}"width="90" ></a></span>-->
-				<!--						<span th:case="5"><a th:href="@{/img/th.gif}"><img th:src="@{/img/th.gif}"width="90" ></a></span>-->
-				<!--						<span th:case="6"><a th:href="@{/img/man.jpg}"><img th:src="@{/img/man.jpg}" width="90"></a></span>-->
-				<!--						<span th:case="7"><a th:href="@{/img/man2.jpg}"><img th:src="@{/img/man2.jpg}"width="90" ></a></span>-->
-				<!--						<span th:case="8"><a th:href="@{/img/man3.jpg}"><img th:src="@{/img/man3.jpg}" width="90"></a></span>-->
-				<!--					</td>-->
-			</tr>
-			</tr>
-		</table>
-	</th:block>
-	</div>
-
-	<form th:action="@{/search}">
-
-		<div class="label">
-			<div class="input">
-				<div class="back_to_top_link">
-					　　　　　　　　　　　　　　　　　　　　<input type="submit" value="検索" />
+ 
 				</div>
 			</div>
 		</div>
@@ -95,27 +38,6 @@
 	<!--			<aside th:fragment="layout-sidebar"-->
 	<!--				th:class="${session.user == null or session.user.authority == 1} ? ${'search'} : ${'admin_menu'}">-->
 	<!--				<div class="title">社員名検索</div>-->
-
-
-	<!--					<form th:action="@{/list/empName}" , method="get">-->
-	<!--						<div class="form">-->
-	<!--						<input type="text" name="empName" placeholder="名前を入力">-->
-	<!--						<input type="submit" value="検索" />-->
-	<!--						<button type="reset">リセット</button>-->
-	<!--						</div>-->
-	<!--					</form>-->
-
-
-	<!--			</aside>-->
-	<!--		</div>-->
-	<!--		<th:block th:if="${session.user.authority == 1}">-->
-
-	<!--			<label><input type="radio" name="TAB" class="radio">登録</label>-->
-	<!--			<div class"tab-content">-->
-	<!--				<div class="title">ユーザツール</div>-->
-	<!--				<a th:href="@{/update/manage1}">登録内容変更</a>-->
-	<!--			</div>-->
-	<!--		</th:block>-->
 
 	<!--		<th:block th:if="${session.user.authority == 2}">-->
 
