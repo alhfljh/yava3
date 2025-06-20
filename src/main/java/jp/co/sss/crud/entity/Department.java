@@ -2,10 +2,7 @@ package jp.co.sss.crud.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 /**
@@ -16,8 +13,8 @@ import jakarta.persistence.Table;
 public class Department {
 	/** 主キー部署ID */
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dept_emp_gen")
-	@SequenceGenerator(name="dept_emp_gen", sequenceName ="dept_emp",allocationSize = 1)
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dept_emp_gen")
+//	@SequenceGenerator(name="dept_emp_gen", sequenceName ="dept_emp",allocationSize = 1)
 	private Integer deptId;
 
 	/** 部署名（文字型）の列を作成*/
