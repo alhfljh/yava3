@@ -23,13 +23,13 @@
 	</th:block>
 
 	<th:block th:unless="${#lists.isEmpty(emp)}">
-		<select onchange="location = this.value;">
-    <th:block th:each="page,iterStat : ${pages}">
-        <option th:value="${page}" th:text="${ascDesc[iterStat.index]}"></option>
-    </th:block>
-</select>
+		<select th:if="${isVisible}" onchange="location = this.value;">
+			<th:block th:each="page,iterStat : ${pages}">
+				<option th:value="${page}" th:text="${ascDesc[iterStat.index]}"></option>
+			</th:block>
+		</select>
 
-					<div class = "empCount">登録社員数：<span th:text="${empCount}"></span>名</div>
+		<div class="empCount">登録社員数：<span th:text="${empCount}"></span>名</div>
 
 		<table class="list_table">
 			<tr>
@@ -76,11 +76,11 @@
 			</div>
 		</div>
 	</form>
-			<label><input type="radio" name="TAB" class="radio">検索</label>
-			<div class"tab-content">
-				<aside th:fragment="layout-sidebar"
-					th:class="${session.user == null or session.user.authority == 1} ? ${'search'} : ${'admin_menu'}">
-					<div class="title">社員名検索</div>
+	<label><input type="radio" name="TAB" class="radio">検索</label>
+	<div class"tab-content">
+		<aside th:fragment="layout-sidebar"
+			th:class="${session.user == null or session.user.authority == 1} ? ${'search'} : ${'admin_menu'}">
+			<div class="title">社員名検索</div>
 
 			<th:block th:if="${session.user.authority == 2}">
 
@@ -105,7 +105,7 @@
 					<a th:href="@{/update/manage2}">登録内容変更</a>
 				</div>
 			</th:block>
-		</div>
+	</div>
 
 
 
