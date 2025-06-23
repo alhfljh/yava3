@@ -14,49 +14,53 @@
 		<ul class="header-list">
 
 			<li class="menu-item a">
-				<a href="">社員情報</a>
+				<a href="" class="tai">社員情報</a>
 				<ul class="sub-menu">
 					<li class="sub-menu-item a">
-						<a th:href="@{/list}">現社員一覧</a>
+						<a th:href="@{/list}" class="tai">現社員一覧</a>
 					</li>
 					<li class="sub-menu-item a">
-						<a href="">退職含む一覧</a>
+						<a href="" class="tai">退職含む一覧</a>
 					</li>
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item a -->
 
 			<li class="menu-item b">
-				<a href="">検索</a>
+				<a href="" class="tai">検索</a>
 				<ul class="sub-menu">
 					<li class="sub-menu-item b">
-						<a th:href="@{/search}">名前検索</a>
+						<a th:href="@{/search}" class="tai">名前検索</a>
 					</li>
 					<li class="sub-menu-item b">
-						<a href="">〇〇検索</a>
+						<a href="" class="tai">〇〇検索</a>
 					</li>
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item b -->
 
 			<li class="menu-item c">
-				<a href="">登録</a>
+				<a href="" class="tai">変更</a>
 				<ul class="sub-menu">
 					<li class="sub-menu-item c">
-						<a th:href="@{/regist/input}">新規社員登録</a>
+						<a th:href="@{/update/manage1}" class="tai">登録内容変更</a>
 					</li>
-					<li class="sub-menu-item c">
-						<a th:href="@{/dept/dept/dept}">新規部署登録</a>
+					<li class="sub-menu-item c" th:if="${session.user.authority == 2}">
+						<a th:href="@{/update/manage2}" th:if="${session.user.authority == 2}" class="tai">社員情報変更</a>
 					</li>
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item c-->
 
 			<li class="menu-item d">
-				<a href="" th:if="${session.user.authority == 2}">管理者のみ</a>
+				<a href="" th:if="${session.user.authority == 2}" class="tai">管理者のみ</a>
 				<ul class="sub-menu">
 					<li class="sub-menu-item d">
-						<a th:href="@{/delete/input}">削除</a>
+						<a th:href="@{/regist/input}" class="tai">新規社員登録</a>
 					</li>
 					<li class="sub-menu-item d">
-						<a th:href="@{/update/manage1}">変更</a>
+						<a th:href="@{/dept/dept/dept}" class="tai">部署登録・変更</a>
+					</li>
+					<li class="sub-menu-item d">
+
+						<a th:href="@{/delete/input}" class="tai">社員情報削除</a>
 					</li>
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item d -->
@@ -66,9 +70,20 @@
 
 	<br><br><br><br><br>
 
+	<div id="current_date">
+		<script>
+			const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+			document.getElementById("current_date").innerHTML = new Date().toLocaleDateString('ja-JP', options);
+		</script>
+	</div>
+
+	<div id="RealtimeClockArea2"></div>
+
 	<div class="tab-switch">
+
 		<label><input type="radio" name="TAB" checked class="radio">社員一覧</label>
 		<div class=tab-content>
+
 			<th:block th:if="${#lists.isEmpty(emp)}">
 				<div class="message">
 					<p class="back_to_top_message">該当する社員が存在しません。</p>
@@ -76,6 +91,11 @@
 			</th:block>
 
 			<th:block th:unless="${#lists.isEmpty(emp)}">
+				<select onchange="location = this.value;">
+					<th:block th:each="page,iterStat : ${pages}">
+						<option th:value="${page}" th:text="${ascDesc[iterStat.index]}"></option>
+					</th:block>
+				</select>
 				<table class="list_table">
 					<tr>
 						<th class="empId">社員ID</th>
@@ -114,8 +134,6 @@
 			<aside2 th:fragment="layout-sidebar"
 				th:class="${session.user == null or session.user.authority == 1} ? ${'search'} : ${'admin_menu'}">
 				<div class="title">社員名検索</div>
-
-
 				<form th:action="@{/list/empName}" , method="get">
 					<div class="form">
 						<input type="text" name="empName" placeholder="名前を入力">
@@ -123,13 +141,13 @@
 						<button type="reset">リセット</button>
 					</div>
 				</form>
-
-
 			</aside2>
 		</div>
+
+
 		<th:block th:if="${session.user.authority == 1}">
 
-			<label><input type="radio" name="TAB" class="radio">登録</label>
+			<label><input type="radio" name="TAB" class="radio">変更</label>
 			<div class"tab-content">
 				<div class="title">ユーザツール</div>
 
@@ -144,48 +162,67 @@
 
 		<th:block th:if="${session.user.authority == 2}">
 
-			<label><input type="radio" name="TAB" class="radio">登録</label>
+			<label><input type="radio" name="TAB" class="radio">変更</label>
 			<div class"tab-content">
-				<div class="title">管理者ツール</div>
-				<form th:action="@{/regist/input}">
-					<div class="form">
-						<input type="submit" value="新規社員登録" />
-					</div>
-				</form>
-
-			</div>
-
-
-
-			<label><input type="radio" name="TAB" class="radio">削除</label>
-			<div class"tab-content">
-				<div class="title">管理者ツール</div>
-
-				<form th:action="@{/delete/input}">
-					<div class="form">
-						<input type="submit" value="社員削除" />
-					</div>
-				</form>
-
-			</div>
-
-
-			<label><input type="radio" name="TAB" class="radio">登録内容変更</label>
-			<div class"tab-content">
-				<div class="title">管理者ツール</div>
-
-				<form th:action="@{/update/manage2}">
+				<div class="title">ユーザツール</div>
+				<form th:action="@{/update/manage1}">
 					<div class="form">
 						<input type="submit" value="登録内容変更" />
 					</div>
 				</form>
 			</div>
+
+
+			<label><input type="radio" name="TAB" class="radio">管理者のみ</label>
+			<div class"tab-content">
+				<div class="title">管理者ツール</div>
+
+				<form th:action="@{/regist/input}">
+					<div class="form">
+						<input type="submit" value="新規社員登録" style="margin-right: 5px;" />
+				</form>
+
+				<form th:action="@{/update/manage2}">
+					<div class="form">
+						<input type="submit" value="社員情報変更" style="margin-right: 5px;" />
+				</form>
+
+				<form th:action="@{/delete/input}">
+					<div class="form">
+						<input type="submit" value="社員情報削除" style="margin-right: 5px;" />
+				</form>
+
+				<form th:action="@{/dept/dept/dept}">
+					<div class="form">
+						<input type="submit" value="部署登録・変更" />
+				</form>
+
+			</div>
 		</th:block>
 
 
-
-
 	</div>
+
+	<script>
+		function set2fig(num) {
+			var ret;
+			if (num < 10) {ret = "0" + num;}
+			else {ret = num;}
+			return ret;
+		}
+		function showClock2() {
+			var nowTime = new Date();
+			var nowHour = set2fig(nowTime.getHours());
+			var nowMin = set2fig(nowTime.getMinutes());
+			var nowSec = set2fig(nowTime.getSeconds());
+			var msg = "現在時刻：" + nowHour + "時" + nowMin + "分" + nowSec + " 秒です。";
+			document.getElementById("RealtimeClockArea2").innerHTML = msg;
+		}
+		setInterval('showClock2()', 1000);
+
+	</script>
 </body>
+
+
 
 </html>

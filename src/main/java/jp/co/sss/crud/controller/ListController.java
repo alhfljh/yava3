@@ -42,12 +42,24 @@ public class ListController {
 		model.addAttribute("pages",pages);
 		List<String> ascDesc = List.of("リスト","昇順","降順");
 		model.addAttribute("ascDesc",ascDesc);
+		//JPAリポジトリに元々入っている機能であるcount()を使って表に表示している数をカウント　それをempCount属性に入れている
+		model.addAttribute("empCount", repository.count());
+
 		return "list/list";
 	}
 	
 	@RequestMapping("/menu")
 	public String menu(Model model) {
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
+		model.addAttribute("dept",deptRepository.findAllByOrderByDeptIdAsc());
+		List<String> pages = List.of(
+				"",
+		        "http://localhost:7779/spring_crud/menu/asc",
+		        "http://localhost:7779/spring_crud/menu/desc"
+		    );
+		model.addAttribute("pages",pages);
+		List<String> ascDesc = List.of("リスト","昇順","降順");
+		model.addAttribute("ascDesc",ascDesc);
 		return "menu";
 	}
 	
@@ -55,5 +67,32 @@ public class ListController {
 	public String search(Model model) {
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		return "search";
+	}
+	
+	@RequestMapping("/menu/asc")
+	public String menuAsc(Model model) {
+		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
+		List<String> pages = List.of(
+				"",
+		        "http://localhost:7779/spring_crud/menu/asc",
+		        "http://localhost:7779/spring_crud/menu/desc"
+		    );
+		model.addAttribute("pages",pages);
+		List<String> ascDesc = List.of("リスト","昇順","降順");
+		model.addAttribute("ascDesc",ascDesc);
+		return "menu";
+	}
+	@RequestMapping("/menu/desc")
+	public String menuDesc(Model model) {
+		model.addAttribute("emp",repository.findAllByOrderByEmpIdDesc());
+		List<String> pages = List.of(
+				"",
+		        "http://localhost:7779/spring_crud/menu/asc",
+		        "http://localhost:7779/spring_crud/menu/desc"
+		    );
+		model.addAttribute("pages",pages);
+		List<String> ascDesc = List.of("リスト","昇順","降順");
+		model.addAttribute("ascDesc",ascDesc);
+		return "menu";
 	}
 }
