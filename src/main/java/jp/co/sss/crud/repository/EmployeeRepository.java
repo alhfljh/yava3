@@ -3,6 +3,7 @@ package jp.co.sss.crud.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import jp.co.sss.crud.entity.Employee;
 
@@ -36,9 +37,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	List<Employee> findByEmpNameContaining(String name);
 
 	Employee findByEmpId(Integer empId);
-
+	@Query("SELECT e FROM Employee e WHERE e.deleteFlag = 0 ORDER BY e.empId ASC")
 	List<Employee> findAllByOrderByEmpIdAsc();
-
+	@Query("SELECT e FROM Employee e WHERE e.deleteFlag = 0 ORDER BY e.empId DESC")
 	List<Employee> findAllByOrderByEmpIdDesc();
 
 	
