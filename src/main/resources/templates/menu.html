@@ -69,15 +69,9 @@
 	</nav><!-- /#header-nav -->
 
 	<br><br><br><br><br>
+	
+	<div id="current_date"></div><div id="RealtimeClockArea2">現在時刻：</div>
 
-	<div id="current_date">
-		<script>
-			const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-			document.getElementById("current_date").innerHTML = new Date().toLocaleDateString('ja-JP', options);
-		</script>
-	</div>
-
-	<div id="RealtimeClockArea2">現在時刻：</div>
 
 	<th:block th:if="${session.user.authority == 1}">
 		<div>権限が一般なため、一部機能を制限しています。</div>
@@ -218,6 +212,11 @@
 			document.getElementById("RealtimeClockArea2").innerHTML = msg;
 		}
 		setInterval('showClock2()', 1000);
+		
+		
+			const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+			document.getElementById("current_date").innerHTML = new Date().toLocaleDateString('ja-JP', options);
+	
 
 	</script>
 </body>
