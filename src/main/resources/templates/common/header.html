@@ -3,15 +3,16 @@
 
 <head>
 	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
 	<th:block id="header" th:fragment="layout-header">
 		<adiv class="content">
-			<div class="title" ><a th:href="@{/menu}"class="tai">社員管理システム</a></div>
-			
-<!--			<a th:href= "@{/gamingChange}" name="gamingTitle">ゲーミングモードをOFFにする</a> -->
-<!--			社員管理システムの動きを無くしたい場合はlayout.cssへ-->
+			<div class="title"><a th:href="@{/menu}" class="tai">社員管理システム</a></div>
+
+			<!--			<a th:href= "@{/gamingChange}" name="gamingTitle">ゲーミングモードをOFFにする</a> -->
+			<!--			社員管理システムの動きを無くしたい場合はlayout.cssへ-->
 			<div th:if="${session.user != null}" class="user_info">
 				ようこそ、<span class="pipeline" th:text="${session.user.empName}"></span>さん
 				<br>
@@ -19,10 +20,22 @@
 					<span th:case="1">一般</span>
 					<span th:case="2">管理者</span>
 				</span>
-				　　<a th:href="@{/logout}">ログアウト</a>
+				　　<a th:href="@{/logout}" onclick="clickCon(event)">ログアウト</a>
+			
+			<script>
+		function clickCon(event) {
+			const userConfirmed = confirm("本当にログアウトしますか？ログイン情報は破棄されます。");
+			if (!userConfirmed) {
+				event.preventDefault();
+			}
+		}
+	</script>
+
 			</div>
-		</div>
+			
+			</div>
 	</th:block>
 </body>
 
+	
 </html>
