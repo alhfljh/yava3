@@ -110,6 +110,7 @@ public class IndexController {
 	public String delete(HttpServletRequest request, Model model) {
 		
 			model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdAsc());
+			model.addAttribute("empDesc", employeeRepository.findAllByOrderByEmpIdDesc());
 			return "delete/delete_input";
 		
 	}
