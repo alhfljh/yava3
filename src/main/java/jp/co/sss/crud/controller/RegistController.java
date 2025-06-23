@@ -21,6 +21,7 @@ public class RegistController {
 	/**エンプロイリポジトリを生成もしくは宣言 */
 	@Autowired
 	EmployeeRepository repository;
+	@Autowired
 	DepartmentRepository deptrepository;
 	
 	/**
