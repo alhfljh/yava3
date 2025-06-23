@@ -23,6 +23,7 @@
 						<div class="input">
 							<input type="text" th:field="*{deptId}" placeholder="登録したい部署IDを入力" />
 							<div th:text="${messege}"></div>
+							<span th:errors="*{deptId}"></span>
 						</div>
 					</div>
 
@@ -30,6 +31,7 @@
 						<div class="label">部署名：</div>
 						<div class="input">
 							<input type="text" th:field="*{deptName}" placeholder="登録したい部署名を入力" />
+							<span th:errors="*{deptName}"></span>
 							<br>
 							<input type="submit" value="送信" />
 						</div>
@@ -55,6 +57,7 @@
 						<div class="label">部署名：</div>
 						<div class="input">
 							<input type="text" th:field="*{deptName}" placeholder="変更したい部署名を入力" />
+							<span th:errors="*{deptName}"></span>
 							<br>
 							<input type="submit" value="送信" />
 						</div>
