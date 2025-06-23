@@ -32,7 +32,8 @@ public class ListController {
 	public String list(Model model) {
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		model.addAttribute("dept",deptRepository.findAllByOrderByDeptIdAsc());
-		
+		//JPAリポジトリに元々入っている機能であるcount()を使って表に表示している数をカウント　それをempCount属性に入れている
+		model.addAttribute("empCount", repository.count());
 		return "list/list";
 	}
 	
