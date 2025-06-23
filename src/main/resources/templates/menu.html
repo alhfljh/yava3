@@ -20,7 +20,7 @@
 						<a th:href="@{/list}" class="tai">現社員一覧</a>
 					</li>
 					<li class="sub-menu-item a">
-						<a href="" class="tai">退職含む一覧</a>
+						<a th:href="@{/de}" class="tai">退職含む一覧</a>
 					</li>
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item a -->
@@ -59,8 +59,10 @@
 						<a th:href="@{/dept/dept/dept}" class="tai">部署登録・変更</a>
 					</li>
 					<li class="sub-menu-item d">
-
 						<a th:href="@{/delete/input}" class="tai">社員情報削除</a>
+					</li>
+					<li class="sub-menu-item d">
+						<a th:href="@{/resurrect}" class="tai">死者蘇生</a>
 					</li>
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item d -->
@@ -68,7 +70,7 @@
 		</ul><!-- /.header-nav-list -->
 	</nav><!-- /#header-nav -->
 
-	<br><br><br><br><br>
+	<br><br><br><br><br><br><br><br>
 
 	<div id="current_date">
 		<script>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
+
+<head>
+	<title>社員登録完了 | 社員管理システム</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body class="admin user_regist_complete_admin">
+	<div class="header-box"></div>
+	<h3 class="title">死者蘇生画面</h3>
+	<div class="message">
+		<p class="complete_message"  th:text="${empName}+'が復活しました。'"></p>
+		<p class="complete_link"><a th:href="@{/menu}">メニューに戻る</a></p>
+	</div>
+</body>
+
+</html>
