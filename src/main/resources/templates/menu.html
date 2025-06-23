@@ -8,30 +8,31 @@
 </head>
 
 <body>
-<style>
-  #banner {
-    position: fixed;
-    top: -100px; /* 初期位置: 画面の外 */
-    left: 0;
-    width: 100%;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 18px;
-    font-family: Arial, sans-serif;
-    transition: top 3s ease-in-out; /* スムーズなアニメーション */
-  }
+	
+<!--<style>-->
+<!--  #banner {-->
+<!--    position: fixed;-->
+<!--    top: -100px; /* 初期位置: 画面の外 */-->
+<!--    left: 0;-->
+<!--    width: 100%;-->
+<!--    text-align: center;-->
+<!--    padding: 20px 0;-->
+<!--    font-size: 18px;-->
+<!--    font-family: Arial, sans-serif;-->
+<!--    transition: top 3s ease-in-out;-->
+<!--  }-->
   
-  #banner.show {
-    top: 100vh; /* 表示される位置 */
-  }
-</style>
-<div id="banner"><a th:href="@{img/rukaku.gif}"><img src="img/98.gif.webp"></a></div>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const banner = document.getElementById("banner");
-    setTimeout(() => banner.classList.add("show"), 500); // 1秒後に表示
-  });
-</script>
+<!--  #banner.show {-->
+<!--    top: 100vh; /* 表示される位置 */-->
+<!--  }-->
+<!--</style>-->
+<!--<div id="banner"><a th:href="@{img/rukaku.gif}"><img src="img/98.gif.webp"></a></div>-->
+<!--<script>-->
+<!--  document.addEventListener("DOMContentLoaded", function() {-->
+<!--    const banner = document.getElementById("banner");-->
+<!--    setTimeout(() => banner.classList.add("show"), 500); // 1秒後に表示-->
+<!--  });-->
+<!--</script>-->
 
 	<div class="header-box"></div>
 
