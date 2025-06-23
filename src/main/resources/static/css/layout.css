@@ -50,7 +50,7 @@ header .title {
 	font-family: "HGP創英角ﾎﾟｯﾌﾟ体";
 	margin-left: 10px;
 	line-height: 45px;
-	font-size: 30pt;
+	font-size: 25pt;
 	background: linear-gradient(to left, #e60000, #f39800, #fff100, #009944, #0068b7, #1d2088, #920783);
 	background-size: 200%;
 	-webkit-background-clip: text;
@@ -183,6 +183,7 @@ article {
 }
 
 
+
 /* ---- フッター ---- */
 footer {
 	height: 30px;
@@ -191,7 +192,7 @@ footer {
 	text-align: center;
 	font-size: 8pt;
 	line-height: 30px;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 }
 
@@ -328,11 +329,11 @@ a:visited {
 }
 
 .c {
-	background: #DBFF71;
+	background: #78FF94;
 }
 
 .d {
-	background: #77EEFF;
+	background:  #DBFF71;
 }
 
 /* ナビゲーションの大きさ */
@@ -349,8 +350,9 @@ a:visited {
 /* メインメニュー */
 .menu-item {
 	display: inline-block;
-	width: 23%;
+	width: 22%;
 	position: relative;
+	text-align: center;
 
 }
 
