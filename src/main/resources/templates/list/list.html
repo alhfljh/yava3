@@ -16,11 +16,50 @@
 	<!-- フィルターの処理により、当該Thymeleaf処理完了後にログイン画面にリダイレクトする。 -->
 	<!--　　　↓コメントアウトした。タブスイッチ追加。-->
 
-
- 
-				</div>
-			</div>
+	<th:block th:if="${#lists.isEmpty(emp)}">
+		<div class="message">
+			<p class="back_to_top_message">該当する社員が存在しません。</p>
 		</div>
+	</th:block>
+
+	<th:block th:unless="${#lists.isEmpty(emp)}">
+		<table class="list_table">
+			<tr>
+				<th class="empId">社員ID</th>
+				<th class="empName">社員名</th>
+				<th class="gender">性別</th>
+				<th class="address">住所</th>
+				<th class="birthday">生年月日</th>
+				<th class="authority">権限</th>
+				<th class="deptName">部署名</th>
+				<!--					<th >顔</th>-->
+			</tr>
+			<tr th:each="employee:${emp}">
+				<td th:text="${employee.empId}"></td>
+				<td th:text="${employee.empName}"></td>
+				<td th:switch="${employee.gender}">
+					<span th:case="1">男性</span>
+					<span th:case="2">女性</span>
+				</td>
+				<td th:text="${employee.address}"></td>
+				<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
+				<td th:switch="${employee.authority}">
+					<span th:case="1">一般</span>
+					<span th:case="2">管理者</span>
+				</td>
+				<td th:text="${employee.department.deptName}"></td>
+
+			</tr>
+			</tr>
+		</table>
+	</th:block>
+	</div>
+
+
+
+
+	</div>
+	</div>
 	</form>
 
 	<form th:action="@{/menu}">
