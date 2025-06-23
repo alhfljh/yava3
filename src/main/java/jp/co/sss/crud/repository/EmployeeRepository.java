@@ -50,6 +50,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	Employee findByEmpId(@Param("empId") Integer empId);
 
 	
-
+	@Query("SELECT e FROM Employee e WHERE e.deleteFlag = 1 ORDER BY e.empId ASC")
+	List<Employee> findDeleteByOrderByEmpIdAsc();
 
 }

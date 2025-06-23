@@ -8,6 +8,31 @@
 </head>
 
 <body>
+	
+<!--<style>-->
+<!--  #banner {-->
+<!--    position: fixed;-->
+<!--    top: -100px; /* 初期位置: 画面の外 */-->
+<!--    left: 0;-->
+<!--    width: 100%;-->
+<!--    text-align: center;-->
+<!--    padding: 20px 0;-->
+<!--    font-size: 18px;-->
+<!--    font-family: Arial, sans-serif;-->
+<!--    transition: top 3s ease-in-out;-->
+<!--  }-->
+<!--  #banner.show {-->
+<!--    top: 100vh; /* 表示される位置 */-->
+<!--  }-->
+<!--</style>-->
+<!--<div id="banner"><a th:href="@{img/rukaku.gif}"><img src="img/98.gif.webp"></a></div>-->
+<!--<script>-->
+<!--  document.addEventListener("DOMContentLoaded", function() {-->
+<!--    const banner = document.getElementById("banner");-->
+<!--    setTimeout(() => banner.classList.add("show"), 500); // 1秒後に表示-->
+<!--  });-->
+<!--</script>-->
+
 	<div class="header-box"></div>
 
 	<nav id="header-nav">
@@ -20,7 +45,7 @@
 						<a th:href="@{/list}" class="tai">現社員一覧</a>
 					</li>
 					<li class="sub-menu-item a">
-						<a href="" class="tai">退職含む一覧</a>
+						<a th:href="@{/list/delete}" class="tai">退職含む一覧</a>
 					</li>
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item a -->
@@ -59,8 +84,10 @@
 						<a th:href="@{/dept/dept/dept}" class="tai">部署登録・変更</a>
 					</li>
 					<li class="sub-menu-item d">
-
 						<a th:href="@{/delete/input}" class="tai">社員情報削除</a>
+					</li>
+					<li class="sub-menu-item d">
+						<a th:href="@{/resurrect}" class="tai">死者蘇生</a>
 					</li>
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item d -->
@@ -68,16 +95,12 @@
 		</ul><!-- /.header-nav-list -->
 	</nav><!-- /#header-nav -->
 
-	<br><br><br><br><br>
+	<br><br><br><br><br><br><br><br>
+	
 
-	<div id="current_date">
-		<script>
-			const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-			document.getElementById("current_date").innerHTML = new Date().toLocaleDateString('ja-JP', options);
-		</script>
-	</div>
-
-	<div id="RealtimeClockArea2"></div>
+	<th:block th:if="${session.user.authority == 1}">
+		<div>権限が一般なため、一部機能を制限しています。</div>
+	</th:block>
 
 	<div class="tab-switch">
 
@@ -219,6 +242,11 @@
 			document.getElementById("RealtimeClockArea2").innerHTML = msg;
 		}
 		setInterval('showClock2()', 1000);
+		
+		
+			const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+			document.getElementById("current_date").innerHTML = new Date().toLocaleDateString('ja-JP', options);
+	
 
 	</script>
 </body>

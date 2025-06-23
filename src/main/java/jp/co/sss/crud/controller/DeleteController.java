@@ -11,11 +11,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jp.co.sss.crud.entity.Employee;
 import jp.co.sss.crud.form.EmployeeForm;
+import jp.co.sss.crud.repository.DepartmentRepository;
 import jp.co.sss.crud.repository.EmployeeRepository;
 
 /** ログイン画面周りの挙動を管理するコントローラ*/
 @Controller
-public class Delete {
+public class DeleteController {
 
 	/** 
 	 * EmployeeRepository（従業員リポジトリ）呼び出し
@@ -23,6 +24,8 @@ public class Delete {
 	 */
 	@Autowired
 	EmployeeRepository employeeRepository;
+	@Autowired
+	DepartmentRepository departmentRepository;
 
 	/** 
 	 * セッションスコープ（クラスライブラリ）呼び出し
@@ -51,6 +54,30 @@ public class Delete {
 		
 		employee = employeeRepository.save(employee);
 		return "delete/delete_complete";
+	}
+	
+	@RequestMapping(path = "/list/delete")
+	public String listDelete(Model model) {
+		model.addAttribute("emp", employeeRepository.findDeleteByOrderByEmpIdAsc());
+		model.addAttribute("dept",departmentRepository.findAllByOrderByDeptIdAsc());
+		//JPAリポジトリに元々入っている機能であるcount()を使って表に表示している数をカウント　それをempCount属性に入れている
+		model.addAttribute("empCount", employeeRepository.count());
+		return "list/list_delete";
+	}
+
+	@RequestMapping(path = "/resurrect")
+	public String resurrect(@ModelAttribute EmployeeForm employeeForm, Model model) {
+		model.addAttribute("emp", employeeRepository.findDeleteByOrderByEmpIdAsc());
+		return "delete/resurrect_input";
+	}
+	@RequestMapping(path = "/resurrect/complete")
+	public String resurrectComp(@ModelAttribute EmployeeForm employeeForm, Model model) {
+	Integer empId = employeeForm.getEmpId();
+	Employee employee = employeeRepository.getReferenceById(empId);
+	employee.setDeleteFlag(0);
+	employee = employeeRepository.save(employee);
+	model.addAttribute("empName", employee.getEmpName());
+		return "delete/resurrect_complete";
 	}
 
 }

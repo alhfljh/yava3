@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
+
+<head>
+	<title>社員一覧 | 社員管理システム</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="admin user_list">
+	<div class="header-box"></div>
+	<h3>こいつらもういないよ管理</h3>
+
+
+	<th:block th:if="${#lists.isEmpty(emp)}">
+		<div class="message">
+			<p class="back_to_top_message">該当する社員が存在しません。</p>
+		</div>
+	</th:block>
+
+	<th:block th:unless="${#lists.isEmpty(emp)}">
+					<div class = "empCount">登録社員数：<span th:text="${empCount}"></span>名</div>
+		<table class="list_table">
+			<tr>
+				<th class="empId">社員ID</th>
+				<th class="empName">社員名</th>
+				<th class="gender">性別</th>
+				<th class="address">住所</th>
+				<th class="birthday">生年月日</th>
+				<th class="authority">権限</th>
+				<th class="deptName">部署名</th>
+<!--									<th >顔</th>-->
+			</tr>
+			<tr th:each="employee:${emp}">
+				<td th:text="${employee.empId}"></td>
+				<td th:text="${employee.empName}"></td>
+				<td th:switch="${employee.gender}">
+					<span th:case="1">男性</span>
+					<span th:case="2">女性</span>
+				</td>
+				<td th:text="${employee.address}"></td>
+				<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
+				<td th:switch="${employee.authority}">
+					<span th:case="1">一般</span>
+					<span th:case="2">管理者</span>
+				</td>
+				<td th:text="${employee.department.deptName}"></td>
+
+			</tr>
+			</tr>
+		</table>
+	</th:block>
+	</div>
+	
+	<form th:action="@{/menu}">
+		<div class="form">
+			<div class="label"></div>
+			<div class="input">
+			<input type="submit" value="メニューに戻る" />
+			</div>
+		</div>
+	</form>
+</body>
+
+</html>
