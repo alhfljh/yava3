@@ -56,6 +56,10 @@ public class Employee {
 	@JoinColumn(name="dept_id", referencedColumnName = "deptId")
 	private Department department;
 	
+	/**削除フラグ*/
+	@Column
+	private Integer deleteFlag;
+	
 	 /**
 	 * 社員IDの取得
 	 * @return　社員ID
@@ -179,6 +183,14 @@ public class Employee {
 	     */
 		public void setDepartment(Department department) {
 			this.department = department;
+		}
+
+		public Integer getDeleteFlag() {
+			return deleteFlag;
+		}
+
+		public void setDeleteFlag(Integer deleteFlag) {
+			this.deleteFlag = deleteFlag;
 		}
 
 }
