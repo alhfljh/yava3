@@ -12,7 +12,7 @@
 	<h3>部署登録・変更画面</h3>
 	<div class="tab-switch">
 		<!--	  class名とボタンの変更は行なわないこと。-->
-		<label><input type="radio" name="TAB" checked class="radio">登録</label>
+		<label><input type="radio" name="TAB" checked  class="radio">登録</label>
 		<div class"tab-content">
 			<div class="title">部署名登録</div>
 			<div class="dept">
@@ -38,7 +38,7 @@
 
 			</div>
 		</div>
-		<label><input type="radio" name="TAB" class="radio">変更</label>
+		<label><input type="radio" name="TAB"  class="radio">変更</label>
 		<div class"tab-content">
 			<div class="title">部署名変更</div>
 			<div class="dept">
@@ -48,6 +48,7 @@
 						<div class="label">部署ID：</div>
 						<div class="input">
 							<input type="text" th:field="*{deptId}" placeholder="変更したい部署IDを入力" />
+							<div th:text="${mess}"></div>
 						</div>
 					</div>
 					<div class="form">
