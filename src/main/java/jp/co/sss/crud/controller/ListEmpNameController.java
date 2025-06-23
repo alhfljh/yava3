@@ -29,7 +29,7 @@ public class ListEmpNameController {
 	@RequestMapping(path = "/list/empName", method = RequestMethod.GET)
 	public String empName(EmployeeForm employeeForm, Model model) {
 		String empName = employeeForm.getEmpName();
-
+		model.addAttribute("isVisible",false);
 		/**
 		 * 検索窓が空欄、または空白文字だった場合の処理
 		 * list.htmlに遷移する
@@ -51,7 +51,6 @@ public class ListEmpNameController {
 			model.addAttribute("ToTheList", "一覧表示に戻る");
 			return "list/list";
 		}
-
 	}
 
 }

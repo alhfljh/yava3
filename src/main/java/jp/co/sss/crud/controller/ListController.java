@@ -32,6 +32,7 @@ public class ListController {
 	 */
 	@RequestMapping("/list")
 	public String list(Model model) {
+		model.addAttribute("isVisible",true);
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		model.addAttribute("dept",deptRepository.findAllByOrderByDeptIdAsc());
 		List<String> pages = List.of(
@@ -50,6 +51,7 @@ public class ListController {
 	
 	@RequestMapping("/menu")
 	public String menu(Model model) {
+		model.addAttribute("isVisible",true);
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		model.addAttribute("dept",deptRepository.findAllByOrderByDeptIdAsc());
 		List<String> pages = List.of(
@@ -71,6 +73,7 @@ public class ListController {
 	
 	@RequestMapping("/menu/asc")
 	public String menuAsc(Model model) {
+		model.addAttribute("isVisible",true);
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		List<String> pages = List.of(
 				"",
@@ -84,6 +87,7 @@ public class ListController {
 	}
 	@RequestMapping("/menu/desc")
 	public String menuDesc(Model model) {
+		model.addAttribute("isVisible",true);
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdDesc());
 		List<String> pages = List.of(
 				"",
