@@ -142,3 +142,11 @@ input[type=submit] {
 	color: #12526d;
 }
 
+button[type=reset]{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #808080;
+	padding: 0px 10px;
+	border-radius: 6px;
+	color: #12526d;
+}

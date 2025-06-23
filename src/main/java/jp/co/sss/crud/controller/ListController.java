@@ -35,4 +35,16 @@ public class ListController {
 		
 		return "list/list";
 	}
+	
+	@RequestMapping("/menu")
+	public String menu(Model model) {
+		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
+		return "menu";
+	}
+	
+	@RequestMapping("/search")
+	public String search(Model model) {
+		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
+		return "search";
+	}
 }

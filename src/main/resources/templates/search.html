@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
+
+<head>
+	<title>社員検索 | 社員管理システム</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body class="admin user_list">
+	<div class="header-box"></div>
+	<h3 class="title">社員検索</h3>
+	<aside th:fragment="layout-sidebar"
+		th:class="${session.user == null or session.user.authority == 1} ? ${'search'} : ${'admin_menu'}">
+		<div class="title">社員名検索</div>
+
+
+		<form th:action="@{/list/empName}" , method="get">
+			<div class="form">
+				<input type="text" name="empName" placeholder="名前を入力">
+				<input type="submit" value="検索" />
+				<button type="reset">リセット</button>
+			</div>
+		</form>
+
+
+	</aside>
+	</div>
+	</div>
+	<br>
+	<form th:action="@{/menu}">
+		　　　　　　　　　　　　　　　　　　<input type="submit" value="メニューに戻る" />
+		</div>
+		</div>
+	</form>
+</body>
+
+</html>
