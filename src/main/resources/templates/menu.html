@@ -89,6 +89,11 @@
 			</th:block>
 
 			<th:block th:unless="${#lists.isEmpty(emp)}">
+				<select onchange="location = this.value;">
+					<th:block th:each="page,iterStat : ${pages}">
+						<option th:value="${page}" th:text="${ascDesc[iterStat.index]}"></option>
+					</th:block>
+				</select>
 				<table class="list_table">
 					<tr>
 						<th class="empId">社員ID</th>
