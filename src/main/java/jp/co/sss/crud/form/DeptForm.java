@@ -1,10 +1,11 @@
 package jp.co.sss.crud.form;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class DeptForm {
-	
+	@NotNull
 	private Integer deptId;
 	@NotBlank
 	@Size(max=15)

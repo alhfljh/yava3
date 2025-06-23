@@ -1,5 +1,7 @@
 package jp.co.sss.crud.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -114,6 +116,34 @@ public class IndexController {
 		// セッションの破棄
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	@RequestMapping(path="/list/asc")
+	public String listAsc(@ModelAttribute LoginForm loginForm,Model model) {	
+		model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdAsc());
+		List<String> pages = List.of(
+				"",
+		        "http://localhost:7779/spring_crud/list/asc",
+		        "http://localhost:7779/spring_crud/list/desc"
+		    );
+		model.addAttribute("pages",pages);
+		List<String> ascDesc = List.of("リスト","昇順","降順");
+		model.addAttribute("ascDesc",ascDesc);
+		return "list/list";
+	}
+	
+	@RequestMapping(path="/list/desc")
+	public String listDesc(@ModelAttribute LoginForm loginForm,Model model) {
+		model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdDesc());
+		List<String> pages = List.of(
+				"",
+		        "http://localhost:7779/spring_crud/list/asc",
+		        "http://localhost:7779/spring_crud/list/desc"
+		    );
+		model.addAttribute("pages",pages);
+		List<String> ascDesc = List.of("リスト","昇順","降順");
+		model.addAttribute("ascDesc",ascDesc);
+		return "list/list";
 	}
 
 }

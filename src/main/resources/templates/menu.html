@@ -70,16 +70,18 @@
 		</ul><!-- /.header-nav-list -->
 	</nav><!-- /#header-nav -->
 
+<<<<<<< HEAD
 	<br><br><br><br><br><br><br><br>
+=======
+	<br><br><br><br><br>
+	
+	<div id="current_date"></div><div id="RealtimeClockArea2">現在時刻：</div>
+>>>>>>> 712579d40e8c2897e945e1ab01831b965f5ff6cb
 
-	<div id="current_date">
-		<script>
-			const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-			document.getElementById("current_date").innerHTML = new Date().toLocaleDateString('ja-JP', options);
-		</script>
-	</div>
 
-	<div id="RealtimeClockArea2"></div>
+	<th:block th:if="${session.user.authority == 1}">
+		<div>権限が一般なため、一部機能を制限しています。</div>
+	</th:block>
 
 	<div class="tab-switch">
 
@@ -93,6 +95,11 @@
 			</th:block>
 
 			<th:block th:unless="${#lists.isEmpty(emp)}">
+				<select onchange="location = this.value;">
+					<th:block th:each="page,iterStat : ${pages}">
+						<option th:value="${page}" th:text="${ascDesc[iterStat.index]}"></option>
+					</th:block>
+				</select>
 				<table class="list_table">
 					<tr>
 						<th class="empId">社員ID</th>
@@ -176,24 +183,24 @@
 
 				<form th:action="@{/regist/input}">
 					<div class="form">
-						<input type="submit" value="新規社員登録" style="margin-right: 5px;"/>
+						<input type="submit" value="新規社員登録" style="margin-right: 5px;" />
 				</form>
 
 				<form th:action="@{/update/manage2}">
 					<div class="form">
-						<input type="submit" value="社員情報変更" style="margin-right: 5px;"/>				
+						<input type="submit" value="社員情報変更" style="margin-right: 5px;" />
 				</form>
 
 				<form th:action="@{/delete/input}">
 					<div class="form">
-						<input type="submit" value="社員情報削除" style="margin-right: 5px;"/>		
+						<input type="submit" value="社員情報削除" style="margin-right: 5px;" />
 				</form>
-				
+
 				<form th:action="@{/dept/dept/dept}">
 					<div class="form">
-						<input type="submit" value="部署登録・変更" />		
+						<input type="submit" value="部署登録・変更" />
 				</form>
-				
+
 			</div>
 		</th:block>
 
@@ -216,6 +223,11 @@
 			document.getElementById("RealtimeClockArea2").innerHTML = msg;
 		}
 		setInterval('showClock2()', 1000);
+		
+		
+			const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+			document.getElementById("current_date").innerHTML = new Date().toLocaleDateString('ja-JP', options);
+	
 
 	</script>
 </body>

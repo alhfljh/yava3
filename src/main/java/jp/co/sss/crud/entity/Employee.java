@@ -57,12 +57,12 @@ public class Employee {
 	@JoinColumn(name = "dept_id", referencedColumnName = "deptId")
 	private Department department;
 
+
 	/**削除フラグ*/
 	@Column
 	private Integer deleteFlag;
-
-	/**
-	 * 社員IDの取得
+	
+	 /* 社員IDの取得
 	 * @return　社員ID
 	 */
 	public Integer getEmpId() {

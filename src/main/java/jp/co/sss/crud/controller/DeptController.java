@@ -4,11 +4,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import jp.co.sss.crud.entity.Department;
 import jp.co.sss.crud.form.DeptForm;
 import jp.co.sss.crud.repository.DepartmentRepository;
@@ -39,10 +41,11 @@ public class DeptController {
 	}
 
 	@RequestMapping(path = "/dept/dept/input", method = RequestMethod.POST)
-	public String deptInput(/*@Valid */ @ModelAttribute DeptForm deptForm, /*BindingResult result,*/Model model) {
-		//		if(result.hasErrors()) {
-		//			return "dept/dept";
-		//		}
+	public String deptInput(@Valid  @ModelAttribute DeptForm deptForm,BindingResult result,Model model) {
+				if(result.hasErrors()) {
+					model.addAttribute("deptall", departmentRepository.findAllByOrderByDeptIdAsc());
+					return "dept/dept_dept";
+				}
 		Integer deptId = deptForm.getDeptId();
 		Department department = departmentRepository.findByDeptId(deptId);
 		if (department == null) {
@@ -77,7 +80,11 @@ public class DeptController {
 	}
 
 	@RequestMapping(path = "/dept/dept/update", method = RequestMethod.POST)
-	public String deptUpdate(@ModelAttribute DeptForm deptForm, Model model) {
+	public String deptUpdate(@Valid @ModelAttribute DeptForm deptForm,BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			model.addAttribute("deptall", departmentRepository.findAllByOrderByDeptIdAsc());
+			return "dept/dept_dept";
+		}
 		Integer deptId = deptForm.getDeptId();
 		Department department = departmentRepository.findByDeptId(deptId);
 		if (department != null) {
