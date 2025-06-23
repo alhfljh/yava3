@@ -63,12 +63,6 @@
 		</table>
 	</th:block>
 	</div>
-
-
-
-
-
-
 	<form th:action="@{/menu}">
 		<div class="form">
 			<div class="label"></div>
@@ -77,36 +71,6 @@
 			</div>
 		</div>
 	</form>
-	<label><input type="radio" name="TAB" class="radio">検索</label>
-	<div class"tab-content">
-		<aside th:fragment="layout-sidebar"
-			th:class="${session.user == null or session.user.authority == 1} ? ${'search'} : ${'admin_menu'}">
-			<div class="title">社員名検索</div>
-
-			<th:block th:if="${session.user.authority == 2}">
-
-				<label><input type="radio" name="TAB" class="radio">登録</label>
-				<div class"tab-content">
-					<div class="title">管理者ツール</div>
-					<a th:href="@{/regist/input}">新規社員登録</a>
-				</div>
-
-
-
-				<label><input type="radio" name="TAB" class="radio">削除</label>
-				<div class"tab-content">
-					<div class="title">管理者ツール</div>
-					<a th:href="@{/delete/input}">社員削除</a>
-				</div>
-
-
-				<label><input type="radio" name="TAB" class="radio">登録内容変更</label>
-				<div class"tab-content">
-					<div class="title">管理者ツール</div>
-					<a th:href="@{/update/manage2}">登録内容変更</a>
-				</div>
-			</th:block>
-	</div>
 
 
 
