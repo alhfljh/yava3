@@ -23,6 +23,10 @@
 	</th:block>
 
 	<th:block th:unless="${#lists.isEmpty(emp)}">
+		<select>
+			<option th:value="${emp}">昇順</option>
+			<option th:value="${empDesc}">降順</option>
+		</select>
 		<table class="list_table">
 			<tr>
 				<th class="empId">社員ID</th>
