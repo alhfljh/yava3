@@ -36,18 +36,15 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	 * @param name
 	 * @return 社員一覧表示画面（list.html）
 	 */
-	@Query("SELECT e FROM Employee e WHERE e.empName LIKE %:name% AND e.deleteFlag = :deleteFlag ORDER BY e.empId ASC")
+	@Query("SELECT e FROM Employee e WHERE e.empName LIKE %:name% AND e.deleteFlag = 0 ORDER BY e.empId ASC")
 	List<Employee> findByEmpNameContaining(@Param("name") String name);
 
-	Employee findByEmpId(Integer empId);
+	@Query("SELECT e FROM Employee e WHERE e.empId = :empId AND e.deleteFlag = 0 ORDER BY e.empId ASC")
+	Employee findByEmpId(@Param("empId") Integer empId);
 
 	@Query("SELECT e FROM Employee e WHERE e.deleteFlag = 0 ORDER BY e.empId ASC")
 	List<Employee> findAllByOrderByEmpIdAsc();
 	
-//	@Query("SELECT e FROM Employee e WHERE e.deleteFlag = 0  ORDER BY e.empId ASC")
-//	List<Employee> findByDeleteFlagQuery();
-
-
 	
 
 
