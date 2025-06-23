@@ -44,8 +44,9 @@ public class DeptController {
 		//			return "dept/dept";
 		//		}
 		Integer deptId = deptForm.getDeptId();
+		String deptName = deptForm.getDeptName();
 		Department department = departmentRepository.findByDeptId(deptId);
-		if (department == null) {
+		if (department == null && !deptName.equals(null)) {
 			DeptForm deptform = new DeptForm();
 			BeanUtils.copyProperties(deptForm, deptform);
 			model.addAttribute("dept", deptform);
