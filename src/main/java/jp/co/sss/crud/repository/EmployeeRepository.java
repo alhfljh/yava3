@@ -15,8 +15,6 @@ import jp.co.sss.crud.entity.Employee;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
 	/**
-	 * findBy○○で、○○を条件とした部分検索を行う
-	 *
 	 *Employeeエンティティの中から、EmpIdとEmpPassを条件にして検索
 	 *→ログイン画面にて入力された社員ID（EmpId）と社員（EmpPass）が存在しているか確認するためのもの
 	 *
@@ -52,5 +50,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	
 	@Query("SELECT e FROM Employee e WHERE e.deleteFlag = 1 ORDER BY e.empId ASC")
 	List<Employee> findDeleteByOrderByEmpIdAsc();
+	
+	@Query("SELECT COUNT(e) FROM Employee e WHERE e.empName LIKE %:searchWord%")
+	long countByEmpNameContaining(@Param("searchWord") String searchWord);
 
 }
