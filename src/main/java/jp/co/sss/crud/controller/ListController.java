@@ -1,5 +1,7 @@
 package jp.co.sss.crud.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +34,14 @@ public class ListController {
 	public String list(Model model) {
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		model.addAttribute("dept",deptRepository.findAllByOrderByDeptIdAsc());
-		
+		List<String> pages = List.of(
+				"",
+		        "http://localhost:7779/spring_crud/list/asc",
+		        "http://localhost:7779/spring_crud/list/desc"
+		    );
+		model.addAttribute("pages",pages);
+		List<String> ascDesc = List.of("リスト","昇順","降順");
+		model.addAttribute("ascDesc",ascDesc);
 		return "list/list";
 	}
 	
