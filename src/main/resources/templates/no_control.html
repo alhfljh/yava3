@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_4block :: layout(~{::body/content()})}">
+
+<head>
+	<title>社員一覧 | 社員管理システム</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="admin user_list">
+	<div class="header-box"></div>
+	<h3>社員管理</h3>
+	<div class="message">
+		<img th:src="@{/img/コビー1.webp}">
+		<img th:src="@{/img/赤犬.webp}">
+		<p class="back_to_top_message" th:text="${messageNot}"></p>
+	</div>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<form th:action="@{/menu}">
+		<div class="form">
+			<div class="label"></div>
+			<div class="input">
+				　　　　　　　　　　<input type="submit" value="メニューに戻る" />
+			</div>
+		</div>
+	</form>
+
+
+
+</body>
+
+</html>

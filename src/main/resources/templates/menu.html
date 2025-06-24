@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	
+
 <!--<style>-->
 <!--  #banner {-->
 <!--    position: fixed;-->
@@ -56,9 +56,7 @@
 					<li class="sub-menu-item b">
 						<a th:href="@{/search}" class="tai">名前検索</a>
 					</li>
-					<li class="sub-menu-item b">
-						<a href="" class="tai">〇〇検索</a>
-					</li>
+					
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item b -->
 
@@ -98,17 +96,18 @@
 	<br><br><br><br><br><br><br><br> 
 	
 	
-	<div id="current_date">
+	<div id="current_date" class="chuou1">
     <script>
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         document.getElementById("current_date").innerHTML = new Date().toLocaleDateString('ja-JP', options);
     </script>
+    </div>
 
 
-<div id="RealtimeClockArea2">現在時刻：</div>
+<div id="RealtimeClockArea2" class="chuou">現在時刻：</div>
 
 	<th:block th:if="${session.user.authority == 1}">
-		<div>権限が一般なため、一部機能を制限しています。</div>
+		<div class="chuou">権限が一般なため、一部機能を制限しています。</div>
 	</th:block>
 
 	<div class="tab-switch">
@@ -123,13 +122,17 @@
 			</th:block>
 
 			<th:block th:unless="${#lists.isEmpty(emp)}">
-				<div class="menuCount">　　　　登録社員：<span th:text="${empCount}"></span>名</div>
+				
 				<select onchange="location = this.value;">
 					<th:block th:each="page,iterStat : ${pages}">
-						<option th:value="${page}" th:text="${ascDesc[iterStat.index]}"></option>
-					</th:block>
+						<option th:value="${page}" th:text="${ascDesc[iterStat.index]}"></option>					
+					</th:block>					
 				</select>
+				
+				
 				<table class="list_table">
+					<caption class="menuCount">　　　　　　　　　　　　　　　　　　　　　　登録社員：<span th:text="${empCount}"></span>名</caption></div>			
+		
 					<tr>
 						<th class="empId">社員ID</th>
 						<th class="empName">社員名</th>

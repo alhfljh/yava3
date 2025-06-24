@@ -43,12 +43,17 @@ public class DeleteController {
 	}
 
 	@RequestMapping(path = "/delete/comp", method = RequestMethod.POST)
-	public String deleteComp(@ModelAttribute EmployeeForm employeeForm, Model model) {
+	public String deleteComp(@ModelAttribute EmployeeForm employeeForm, HttpSession session, Model model) {
 //		物理削除
 //		employeeRepository.deleteById(employeeForm.getEmpId());
 		
 //		論理削除
 		Integer empId = employeeForm.getEmpId();
+		if(empId == session.getAttribute("userId")) {
+			model.addAttribute("messageNot", "もうやめましょうよ!!!命がも˝った˝いた˝い!!!!");
+			return "/no_control";
+			
+		}
 		Employee employee = employeeRepository.getReferenceById(empId);
 		employee.setDeleteFlag(1);
 		

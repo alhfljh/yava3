@@ -24,17 +24,19 @@ public class UpdateController {
 	@RequestMapping(path = "/update/manage1")
 	public String updateUser(@ModelAttribute EmployeeForm employeeForm,HttpSession session, Model model) {
 		Integer empId = (Integer)session.getAttribute("userId");
-//		EmployeeForm emp = (EmployeeForm)session.getAttribute("user");
-//		System.err.println(emp);
 		Employee employee = employeeRepository.findByEmpId(empId);
-		employeeForm.setEmpId(employee.getEmpId());
-		employeeForm.setEmpName(employee.getEmpName());
-		employeeForm.setGender(employee.getGender());
-		employeeForm.setAddress(employee.getAddress());
-		employeeForm.setBirthday(employee.getBirthday());
-		employeeForm.setAuthority(employee.getAuthority());
-
-		return "/update/update_user";
+		if(employee==null) {
+			model.addAttribute("messageNot", "お前が存在しません。");
+			return "/no_control";
+		} else {
+			employeeForm.setEmpId(employee.getEmpId());
+			employeeForm.setEmpName(employee.getEmpName());
+			employeeForm.setGender(employee.getGender());
+			employeeForm.setAddress(employee.getAddress());
+			employeeForm.setBirthday(employee.getBirthday());
+			employeeForm.setAuthority(employee.getAuthority());
+			return "/update/update_user";
+		}
 	}
 
 	@RequestMapping(path = "/update/manage2")

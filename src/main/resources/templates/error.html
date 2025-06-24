@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-   th:replace="~{common/layout_3block :: layout(~{::body/content()})}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_3block :: layout(~{::body/content()})}">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
+
 <body>
-		<div class="container">
-			<p>メンテナンス中です。しばらくお待ちください。</p>
-		</div>
+	<div class="message">
+		<br><br><br>
+		<img th:src="@{/img/ジーク2.jpg}">
+		<h3>なんだよもうう!!!また失敗かよおお!!!!</h3>
+		<h3><a th:href="@{/}">ふりだしへ</a></h3>
+	</div>
 
 </body>
+
 </html>
