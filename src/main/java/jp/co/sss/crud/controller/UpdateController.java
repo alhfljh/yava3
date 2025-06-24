@@ -34,12 +34,7 @@ public class UpdateController {
 			model.addAttribute("messageNot", "お前が存在しません。");
 			return "/no_control";
 		} else {
-			employeeForm.setEmpId(employee.getEmpId());
-			employeeForm.setEmpName(employee.getEmpName());
-			employeeForm.setGender(employee.getGender());
-			employeeForm.setAddress(employee.getAddress());
-			employeeForm.setBirthday(employee.getBirthday());
-			employeeForm.setAuthority(employee.getAuthority());
+			BeanUtils.copyProperties(employee, employeeForm);
 			return "/update/update_user";
 		}
 	}
@@ -70,13 +65,7 @@ public class UpdateController {
 		Employee employee = employeeRepository.findByEmpId(empId);
 
 		if (employee != null) {
-
-			employeeForm.setEmpId(employee.getEmpId());
-			employeeForm.setEmpName(employee.getEmpName());
-			employeeForm.setGender(employee.getGender());
-			employeeForm.setAddress(employee.getAddress());
-			employeeForm.setBirthday(employee.getBirthday());
-			employeeForm.setAuthority(employee.getAuthority());
+			BeanUtils.copyProperties(employee, employeeForm);
 			return "update/update_input";
 
 		} else {
