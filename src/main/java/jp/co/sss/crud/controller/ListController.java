@@ -12,7 +12,6 @@ import jp.co.sss.crud.repository.EmployeeRepository;
 
 /**
  * 社員一覧表示画面の挙動を管理する
- * （社員名検索をしていない、デフォルトの状態での社員一覧表示）
  */
 @Controller
 public class ListController {
