@@ -121,6 +121,7 @@ public class IndexController {
 	@RequestMapping(path="/list/asc")
 	public String listAsc(@ModelAttribute LoginForm loginForm,Model model) {	
 		model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdAsc());
+		model.addAttribute("empCount", employeeRepository.count());
 		List<String> pages = List.of(
 				"",
 		        "http://localhost:7779/spring_crud/list/asc",
@@ -135,6 +136,7 @@ public class IndexController {
 	@RequestMapping(path="/list/desc")
 	public String listDesc(@ModelAttribute LoginForm loginForm,Model model) {
 		model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdDesc());
+		model.addAttribute("empCount", employeeRepository.count());
 		List<String> pages = List.of(
 				"",
 		        "http://localhost:7779/spring_crud/list/asc",
