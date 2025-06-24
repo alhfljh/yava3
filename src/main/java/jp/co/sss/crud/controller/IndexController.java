@@ -80,7 +80,6 @@ public class IndexController {
 		 * エラーメッセージを表示し、もう一回ログイン画面を表示
 		 */
 		if (employee != null) {
-			//employeeBeanのデータの箱を作成（EmployeeBean.javaの設計図を元に）
 			EmployeeBean employeeBean = new EmployeeBean();
 			//employeeBeanの箱に、EmpId、EmpName、Authorityの値を入れる
 			employeeBean.setEmpId(employee.getEmpId());
@@ -121,7 +120,7 @@ public class IndexController {
 	@RequestMapping(path="/list/asc")
 	public String listAsc(@ModelAttribute LoginForm loginForm,Model model) {	
 		model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdAsc());
-		model.addAttribute("empCount", employeeRepository.count());
+		model.addAttribute("empCount", employeeRepository.countDelete0());
 		List<String> pages = List.of(
 				"",
 		        "http://localhost:7779/spring_crud/list/asc",
@@ -136,7 +135,7 @@ public class IndexController {
 	@RequestMapping(path="/list/desc")
 	public String listDesc(@ModelAttribute LoginForm loginForm,Model model) {
 		model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdDesc());
-		model.addAttribute("empCount", employeeRepository.count());
+		model.addAttribute("empCount", employeeRepository.countDelete0());
 		List<String> pages = List.of(
 				"",
 		        "http://localhost:7779/spring_crud/list/asc",
