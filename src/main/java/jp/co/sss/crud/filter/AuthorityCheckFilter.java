@@ -36,8 +36,8 @@ public class AuthorityCheckFilter extends HttpFilter {
 		if (requestURL.endsWith("/update/manage2") ||
 				requestURL.contains("/regist") ||
 				requestURL.contains("/dept") ||
-				requestURL.contains("/delete") ||
-				requestURL.contains("/resurrect")
+				requestURL.contains("/delete") 
+//				|| requestURL.contains("/resurrect")
 				) {
 			//セッション情報を取得 
 

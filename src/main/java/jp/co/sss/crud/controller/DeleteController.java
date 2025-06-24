@@ -50,7 +50,7 @@ public class DeleteController {
 //		論理削除
 		Integer empId = employeeForm.getEmpId();
 		if(empId == session.getAttribute("userId")) {
-			model.addAttribute("messageNot", "");
+			model.addAttribute("messageNot", "もうやめましょうよ!!!命がも˝った˝いた˝い!!!!");
 			return "/no_control";
 			
 		}
@@ -66,7 +66,7 @@ public class DeleteController {
 		model.addAttribute("emp", employeeRepository.findDeleteByOrderByEmpIdAsc());
 		model.addAttribute("dept",departmentRepository.findAllByOrderByDeptIdAsc());
 		//JPAリポジトリに元々入っている機能であるcount()を使って表に表示している数をカウント　それをempCount属性に入れている
-		model.addAttribute("empCount", employeeRepository.count());
+		model.addAttribute("empCount", employeeRepository.countDelete1());
 		return "list/list_delete";
 	}
 

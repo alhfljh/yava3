@@ -80,7 +80,6 @@ public class IndexController {
 		 * エラーメッセージを表示し、もう一回ログイン画面を表示
 		 */
 		if (employee != null) {
-			//employeeBeanのデータの箱を作成（EmployeeBean.javaの設計図を元に）
 			EmployeeBean employeeBean = new EmployeeBean();
 			//employeeBeanの箱に、EmpId、EmpName、Authorityの値を入れる
 			employeeBean.setEmpId(employee.getEmpId());

@@ -35,6 +35,7 @@ public class ListController {
 		model.addAttribute("isVisible",true);
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		model.addAttribute("dept",deptRepository.findAllByOrderByDeptIdAsc());
+		model.addAttribute("empCount", repository.countDelete0());
 		List<String> pages = List.of(
 				"",
 		        "http://localhost:7779/spring_crud/list/asc",
@@ -43,9 +44,6 @@ public class ListController {
 		model.addAttribute("pages",pages);
 		List<String> ascDesc = List.of("リスト","昇順","降順");
 		model.addAttribute("ascDesc",ascDesc);
-		//JPAリポジトリに元々入っている機能であるcount()を使って表に表示している数をカウント　それをempCount属性に入れている
-		model.addAttribute("empCount", repository.count());
-
 		return "list/list";
 	}
 	
