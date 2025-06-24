@@ -14,7 +14,7 @@
 	<div class="update">
 		<form th:action="@{/regist/check}" method="post" th:object="${employeeForm}">
 
-			<div class="form">
+			<div class="form">                      
 				<div class="label">パスワード：</div>
 				<div class="input">
 					<input type="password" th:field="*{empPass}" placeholder="パスワードを入力" />
