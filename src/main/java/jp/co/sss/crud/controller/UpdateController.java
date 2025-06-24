@@ -13,19 +13,24 @@ import jakarta.servlet.http.HttpSession;
 import jp.co.sss.crud.entity.Employee;
 import jp.co.sss.crud.form.EmployeeForm;
 import jp.co.sss.crud.form.LoginForm;
+import jp.co.sss.crud.repository.DepartmentRepository;
 import jp.co.sss.crud.repository.EmployeeRepository;
 
 @Controller
 public class UpdateController {
 	@Autowired
 	EmployeeRepository employeeRepository;
+	@Autowired
+	DepartmentRepository deptRepository;
+
 	HttpSession session;
 
 	@RequestMapping(path = "/update/manage1")
-	public String updateUser(@ModelAttribute EmployeeForm employeeForm,HttpSession session, Model model) {
-		Integer empId = (Integer)session.getAttribute("userId");
+	public String updateUser(@ModelAttribute EmployeeForm employeeForm, HttpSession session, Model model) {
+		Integer empId = (Integer) session.getAttribute("userId");
 		Employee employee = employeeRepository.findByEmpId(empId);
-		if(employee==null) {
+		model.addAttribute("dept", deptRepository.findAllByOrderByDeptIdAsc());
+		if (employee == null) {
 			model.addAttribute("messageNot", "お前が存在しません。");
 			return "/no_control";
 		} else {
@@ -54,7 +59,7 @@ public class UpdateController {
 
 	@RequestMapping(path = "/update/input", method = RequestMethod.POST)
 	public String upDate(@ModelAttribute EmployeeForm employeeForm, Model model) {
-
+		model.addAttribute("dept", deptRepository.findAllByOrderByDeptIdAsc());
 		Integer empId = employeeForm.getEmpId();
 		System.out.println(empId + "ID");
 		Employee employee = employeeRepository.findByEmpId(empId);
@@ -80,6 +85,7 @@ public class UpdateController {
 		EmployeeForm employeeform = new EmployeeForm();
 		BeanUtils.copyProperties(employeeForm, employeeform);
 		model.addAttribute("update_employee", employeeform);
+		model.addAttribute("dept", deptRepository.findAllByOrderByDeptIdAsc());
 		return "update/update_check";
 	}
 

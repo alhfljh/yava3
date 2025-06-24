@@ -44,9 +44,9 @@
 		<div class="form">
 			<div class="label">部署名：</div>
 			<div class="input" th:switch="${employee.deptId}">
-				<span th:case="1">営業部</span>
-				<span th:case="2">経理部</span>
-				<span th:case="3">総務部</span>
+				<span th:each="department : ${dept}" th:case="${department.deptId}">
+					<span th:text="${department.deptName}"></span></span>
+				<!--<div class="input" th:text="${emp.dept.deptName}"></div> -->
 			</div>
 		</div>
 		<form th:action="@{/regist/complete}" method="post" th:object="${employee}">
@@ -60,7 +60,7 @@
 					<input type="hidden" th:field="*{birthday}" />
 					<input type="hidden" th:field="*{authority}" />
 					<input type="hidden" th:field="*{deptId}" />
-										
+
 					<input type="submit" value="登録" />
 				</div>
 			</div>
@@ -76,7 +76,7 @@
 					<input type="hidden" th:field="*{birthday}" />
 					<input type="hidden" th:field="*{authority}" />
 					<input type="hidden" th:field="*{deptId}" />
-					
+
 					<input type="submit" value="戻る" />
 				</div>
 			</div>
