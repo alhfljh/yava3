@@ -80,10 +80,9 @@ header .user_info {
 }
 
 
-
 /* ---- サイドバー ---- */
 aside {
-	width: 300px;
+	width: 320px;
 	padding-left: 200px;
 }
 
@@ -92,12 +91,13 @@ aside {
 aside .title {
 	background-color: #add8e6;
 	margin: 5px 0px 10px 10px;
-	padding: 3px;
+	padding-left: 10px;
 	font-weight: bold;
+
 }
 
 aside .form {
-	padding-left: 15px;
+	padding-left: 60px;
 }
 
 aside input[type=text] {
@@ -172,8 +172,9 @@ article {
 
 }
 
+
 .spe {
-	padding-left: 280px;
+	
 }
 
 .tai {
@@ -185,6 +186,13 @@ article {
 	text-align: center;
 }
 
+.chuou{
+	padding-left: 110px;
+}
+
+.chuou1{
+	padding-left: 110px;
+}
 
 
 /* ---- フッター ---- */
