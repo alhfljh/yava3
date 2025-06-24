@@ -89,7 +89,7 @@ public class IndexController {
 			session.setAttribute("user", employeeBean);
 			session.setAttribute("userId",employeeBean.getEmpId());
 			session.setAttribute("manage", employeeBean.getAuthority());
-
+			
 			// 一覧へリダイレクト
 			return "redirect:/menu";
 
@@ -120,31 +120,44 @@ public class IndexController {
 	@RequestMapping(path="/list/asc")
 	public String listAsc(@ModelAttribute LoginForm loginForm,Model model) {	
 		model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdAsc());
-		model.addAttribute("empCount", employeeRepository.countDelete0());
-		List<String> pages = List.of(
-				"",
-		        "http://localhost:7779/spring_crud/list/asc",
-		        "http://localhost:7779/spring_crud/list/desc"
-		    );
+		List<String> pages = pages();
+		List<String> ascDesc = ascDesc();
 		model.addAttribute("pages",pages);
-		List<String> ascDesc = List.of("リスト","昇順","降順");
 		model.addAttribute("ascDesc",ascDesc);
+		model.addAttribute("isVisible",true);
 		return "list/list";
 	}
 	
 	@RequestMapping(path="/list/desc")
 	public String listDesc(@ModelAttribute LoginForm loginForm,Model model) {
 		model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdDesc());
-		model.addAttribute("empCount", employeeRepository.countDelete0());
+		List<String> pages = pages();
+		List<String> ascDesc = ascDesc();
+		model.addAttribute("pages",pages);
+		model.addAttribute("ascDesc",ascDesc);
+		model.addAttribute("isVisible",true);
+		return "list/list";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<String> ascDesc() {
+		List<String> ascDesc = List.of("リスト","昇順","降順");
+		return ascDesc;
+	}
+
+	public List<String> pages() {
 		List<String> pages = List.of(
 				"",
-		        "http://localhost:7779/spring_crud/list/asc",
+				"http://localhost:7779/spring_crud/list/asc",
 		        "http://localhost:7779/spring_crud/list/desc"
 		    );
-		model.addAttribute("pages",pages);
-		List<String> ascDesc = List.of("リスト","昇順","降順");
-		model.addAttribute("ascDesc",ascDesc);
-		return "list/list";
+		return pages;
 	}
 
 }
