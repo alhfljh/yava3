@@ -50,6 +50,10 @@ public class ListController {
 	public String menu(Model model) {
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		model.addAttribute("dept",deptRepository.findAllByOrderByDeptIdAsc());
+		//社員リポジトリより、削除フラグが0の社員をカウントし、
+		//その結果をempCount属性でリクエストスコープに保存
+		//これをmenu.htmlで使用する
+		model.addAttribute("empCount", repository.countDelete0());
 		List<String> pages = pages();
 		List<String> ascDesc = ascDesc();
 		model.addAttribute("pages",pages);
