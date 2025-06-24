@@ -4,12 +4,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import jp.co.sss.crud.entity.Employee;
 import jp.co.sss.crud.form.EmployeeForm;
 import jp.co.sss.crud.form.LoginForm;
@@ -76,12 +78,20 @@ public class UpdateController {
 	}
 
 	@RequestMapping(path = "/update/back", method = RequestMethod.POST)
-	public String registInp(@ModelAttribute EmployeeForm employeeForm) {
+	public String registInp(@ModelAttribute EmployeeForm employeeForm,Model model) {
+		model.addAttribute("dept", deptRepository.findAllByOrderByDeptIdAsc());
 		return "update/update_input";
 	}
 
 	@RequestMapping(path = "/update/checked", method = RequestMethod.POST)
-	public String updateCheak(@ModelAttribute EmployeeForm employeeForm, Model model) {
+	public String updateCheak(@Valid @ModelAttribute EmployeeForm employeeForm,BindingResult result,HttpSession session, Model model) {
+		if(result.hasErrors()) {
+			Integer empId = (Integer) session.getAttribute("userId");
+			Employee employee = employeeRepository.findByEmpId(empId);
+			model.addAttribute("dept", deptRepository.findAllByOrderByDeptIdAsc());
+			BeanUtils.copyProperties(employee, employeeForm);
+			return "update/update_user";
+		}
 		EmployeeForm employeeform = new EmployeeForm();
 		BeanUtils.copyProperties(employeeForm, employeeform);
 		model.addAttribute("update_employee", employeeform);
