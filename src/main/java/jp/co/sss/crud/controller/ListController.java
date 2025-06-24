@@ -73,6 +73,7 @@ public class ListController {
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		List<String> pages = pages();
 		List<String> ascDesc = ascDesc();
+		model.addAttribute("empCount", repository.countDelete0());
 		model.addAttribute("pages",pages);
 		model.addAttribute("ascDesc",ascDesc);
 		model.addAttribute("isVisible",true);
@@ -81,6 +82,7 @@ public class ListController {
 	@RequestMapping("/menu/desc")
 	public String menuDesc(Model model) {
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdDesc());
+		model.addAttribute("empCount", repository.countDelete0());
 		List<String> pages = pages();
 		List<String> ascDesc = ascDesc();
 		model.addAttribute("pages",pages);
