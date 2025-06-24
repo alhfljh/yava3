@@ -22,30 +22,32 @@ public class RegistController {
 	@Autowired
 	EmployeeRepository repository;
 	@Autowired
-	DepartmentRepository deptrepository;
-	
+	DepartmentRepository deptRepository;
+
 	/**
 	 * @param employeeForm
 	 * @return 社員登録入力画面へ遷移
 	 */
 	@RequestMapping(path = "/regist/input", method = RequestMethod.GET)
-	public String registInput(@ModelAttribute EmployeeForm employeeForm) {
+	public String registInput(@ModelAttribute EmployeeForm employeeForm, Model model) {
 		employeeForm.setAuthority(1);
 		employeeForm.setGender(1);
+		//regist_inputで、登録する部署の選択肢を表示するために必要
+		model.addAttribute("dept", deptRepository.findAllByOrderByDeptIdAsc());
 		return "regist/regist_input";
 	}
-	
-	 
+
 	/**
 	 * @param employeeForm
 	 * @return 社員登録入力画面へ遷移
-
+	
 	 */
 	@RequestMapping(path = "/regist/back", method = RequestMethod.POST)
-	public String registInp(@ModelAttribute EmployeeForm employeeForm) {
+	public String registInp(@ModelAttribute EmployeeForm employeeForm, Model model) {
+		model.addAttribute("dept",deptRepository.findAllByOrderByDeptIdAsc());
 		return "regist/regist_input";
 	}
-	
+
 	/**
 	 * 入力チェック
 	 * 入力画面に入力された情報を表示する。
@@ -58,19 +60,21 @@ public class RegistController {
 	@RequestMapping(path = "/regist/check", method = RequestMethod.POST)
 	public String registCheck(@Valid @ModelAttribute EmployeeForm employeeForm, BindingResult result, Model model) {
 
-		
 		if (result.hasErrors()) {
-			return "regist/regist_input";	
+			//入力画面に戻った時に部署の選択肢が消滅しないように、
+			//ここでもう一回部署データをリクエストスコープに保存する脳筋メソッド
+			model.addAttribute("dept", deptRepository.findAllByOrderByDeptIdAsc());
+			return "regist/regist_input";
 		}
 		
-            
-		    EmployeeForm employeeform = new EmployeeForm();
-			BeanUtils.copyProperties(employeeForm, employeeform);
-			model.addAttribute("employee", employeeform);
+		//regist_check.htmlで部署データを使うため、リクエストスコープに保存
+		model.addAttribute("dept", deptRepository.findAllByOrderByDeptIdAsc());
+		EmployeeForm employeeform = new EmployeeForm();
+		BeanUtils.copyProperties(employeeForm, employeeform);
+		model.addAttribute("employee", employeeform);
 
-			return "regist/regist_check";
-        }
-	
+		return "regist/regist_check";
+	}
 
 	/**
 	 * 入力された情報をエンプロイエンティティに保存
