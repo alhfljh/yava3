@@ -23,7 +23,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	 * @return ログイン画面のHTML（index.html）
 	 * 		 または社員一覧表示画面（list.html）
 	 */
-	Employee findByEmpIdAndEmpPass(int empId, String empPass);
+//	@Query("SELECT e FROM Employee e WHERE e.empId = :empId AND e.empPass = :empPass AND e.deleteFlag = 0 ORDER BY e.empId ASC")
+	Employee findByEmpIdAndEmpPass(@Param("empId") int empId, @Param("empPass") String empPass);
 
 	/** 
 	 * 検索
