@@ -173,9 +173,6 @@ article {
 }
 
 
-.spe {
-	
-}
 
 .tai {
 	text-decoration: none;
@@ -193,6 +190,7 @@ article {
 .chuou1{
 	padding-left: 110px;
 }
+
 
 
 /* ---- フッター ---- */
@@ -370,6 +368,7 @@ a:visited {
 	width: 25%;
 	position: relative;
 	text-align: center;
+	border-radius: 15px;
 
 }
 
@@ -392,6 +391,7 @@ a:visited {
 	position: absolute;
 	width: 100%;
 	top: 50px;
+	
 }
 
 .sub-menu-item {
@@ -401,6 +401,8 @@ a:visited {
 	/*   サブメニューが出現する速度の調整 */
 	-webkit-transition: 0.3s;
 	transition: 0.3s;
+	border-radius: 15px;
+	margin: 4px;
 }
 
 /* メインメニューマウスカーソルが乗ったらサブメニューを出現させる */

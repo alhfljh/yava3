@@ -131,7 +131,9 @@
 				
 				
 				<table class="list_table">
-					<caption class="menuCount">　　　　　　　　　　　　　　　　　　　　　　登録社員：<span th:text="${empCount}"></span>名</caption></div>			
+						<caption style="text-align: right;" class="empCount" th:if="${searchCount == null}">登録社員：<span th:text="${empCount}"></span>名</div></caption>
+		
+<!--					<caption class="menuCount" th:if="${searchCount == null}">　　　　　　　　　　　　　　　　　　　　　　登録社員：<span th:text="${empCount}"></span>名</caption></div>			-->
 		
 					<tr>
 						<th class="empId">社員ID</th>
