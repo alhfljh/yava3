@@ -48,6 +48,7 @@ public class ListEmpNameController {
 			 * 遷移先のlist.htmlで、emp属性の結果に対応する社員に絞って表示する
 			 */
 			model.addAttribute("emp", repository.findByEmpNameContaining(empName));
+			model.addAttribute("searchCount", repository.countByEmpNameContaining(empName));
 			model.addAttribute("ToTheList", "一覧表示に戻る");
 			return "list/list";
 		}
