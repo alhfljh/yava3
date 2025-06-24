@@ -11,8 +11,9 @@
 	<div class="header-box"></div>
 	<h3>社員の削除</h3>
 
-	<form method="post" th:action="@{/delete/comp}" onsubmit="confirmSubmission(event)">
-		　　　　　　社員ID：<input type="text" name="empId" placeholder="IDを入力" />
+	<form method="post" th:action="@{/delete/comp}" 
+	onsubmit="confirmSubmission(event)">
+		　　　　　　社員ID：<input type="text" name="empId" placeholder="IDを入力" required/>
 		<input type="submit" value="削除する" />
 	</form>
 
