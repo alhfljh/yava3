@@ -9,7 +9,7 @@
 
 <body class="admin user_list">
 	<div class="header-box"></div>
-	<h3>こいつらもういないよ管理</h3>
+	<h3>こいつらもういないよ</h3>
 
 
 	<th:block th:if="${#lists.isEmpty(emp)}">
@@ -19,8 +19,9 @@
 	</th:block>
 
 	<th:block th:unless="${#lists.isEmpty(emp)}">
-					<div class = "empCount">　　　　　退職者：<span th:text="${empCount}"></span>名</div>
 		<table class="list_table">
+						<caption class = "empCount" style="text-align: right;">退職者：<span th:text="${empCount}"></span>名</div>
+		
 			<tr>
 				<th class="empId">社員ID</th>
 				<th class="empName">社員名</th>
@@ -56,7 +57,7 @@
 		<div class="form">
 			<div class="label"></div>
 			<div class="input">
-			<input type="submit" value="メニューに戻る" />
+			　　　　　　　　　　<input type="submit" value="メニューに戻る" />
 			</div>
 		</div>
 	</form>

@@ -61,6 +61,17 @@ public class ListController {
 		model.addAttribute("isVisible",true);
 		return "menu";
 	}
+	@RequestMapping("/menu07")
+	public String menu2(Model model) {
+		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
+		model.addAttribute("dept",deptRepository.findAllByOrderByDeptIdAsc());
+		List<String> pages = pages();
+		List<String> ascDesc = ascDesc();
+		model.addAttribute("pages",pages);
+		model.addAttribute("ascDesc",ascDesc);
+		model.addAttribute("isVisible",true);
+		return "menu2";
+	}
 	
 	@RequestMapping("/search")
 	public String search(Model model) {
