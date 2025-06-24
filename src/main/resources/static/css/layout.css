@@ -159,7 +159,8 @@ aside2 input[type=submit] {
 article {
 
 	width: 100%;
-	position: fixed;
+	position: relative;
+	overflow: auto;
 	padding-left: auto;
 	padding-right: auto;
 
