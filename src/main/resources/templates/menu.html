@@ -114,6 +114,7 @@
 			</th:block>
 
 			<th:block th:unless="${#lists.isEmpty(emp)}">
+				<div class="menuCount">　　　　　　登録社員数：<span th:text="${empCount}"></span>名</div>
 				<select onchange="location = this.value;">
 					<th:block th:each="page,iterStat : ${pages}">
 						<option th:value="${page}" th:text="${ascDesc[iterStat.index]}"></option>
