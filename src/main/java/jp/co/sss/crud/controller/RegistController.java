@@ -87,6 +87,9 @@ public class RegistController {
 
 		BeanUtils.copyProperties(employeeForm, employee);
 		employee.setDepartment(department);
+		//regist_checkの登録ボタンの処理だけでは削除フラグがnullになってエラーを吐くため、
+		//こっちで削除フラグ0も追加でセットするようにしたという力技
+		employee.setDeleteFlag(0);
 		employee = repository.save(employee);
 
 		return "regist/regist_complete";

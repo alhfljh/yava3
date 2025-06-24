@@ -11,14 +11,15 @@
 	<div class="header-box"></div>
 	<h3>社員の削除</h3>
 
-	<form method="post" th:action="@{/delete/comp}" onsubmit="confirmSubmission(event)">
-		　　　　　　社員ID：<input type="text" name="empId" placeholder="IDを入力" />
+	<form method="post" th:action="@{/delete/comp}" 
+	onsubmit="confirmSubmission(event)">
+		　　　　　　社員ID：<input type="text" name="empId" placeholder="IDを入力" required/>
 		<input type="submit" value="削除する" />
 	</form>
 
 	<script>
 		function confirmSubmission(event) {
-			const userConfirmed = confirm("本当に削除しますか？");
+			const userConfirmed = confirm("おぉ、辞めてしまうとは情けない。\n本当に削除しますか？");
 			if (!userConfirmed) {
 				event.preventDefault();
 			}

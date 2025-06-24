@@ -35,8 +35,7 @@ public class ListController {
 		model.addAttribute("isVisible",true);
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		model.addAttribute("dept",deptRepository.findAllByOrderByDeptIdAsc());
-		//JPAリポジトリに元々入っている機能であるcount()を使って表に表示している数をカウント　それをempCount属性に入れている
-		model.addAttribute("empCount", repository.count());
+		model.addAttribute("empCount", repository.countDelete0());
 		List<String> pages = List.of(
 				"",
 		        "http://localhost:7779/spring_crud/list/asc",
@@ -50,17 +49,13 @@ public class ListController {
 	
 	@RequestMapping("/menu")
 	public String menu(Model model) {
-		model.addAttribute("isVisible",true);
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		model.addAttribute("dept",deptRepository.findAllByOrderByDeptIdAsc());
-		List<String> pages = List.of(
-				"",
-		        "http://localhost:7779/spring_crud/menu/asc",
-		        "http://localhost:7779/spring_crud/menu/desc"
-		    );
+		List<String> pages = pages();
+		List<String> ascDesc = ascDesc();
 		model.addAttribute("pages",pages);
-		List<String> ascDesc = List.of("リスト","昇順","降順");
 		model.addAttribute("ascDesc",ascDesc);
+		model.addAttribute("isVisible",true);
 		return "menu";
 	}
 	
@@ -72,30 +67,43 @@ public class ListController {
 	
 	@RequestMapping("/menu/asc")
 	public String menuAsc(Model model) {
-		model.addAttribute("isVisible",true);
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
-		List<String> pages = List.of(
-				"",
-		        "http://localhost:7779/spring_crud/menu/asc",
-		        "http://localhost:7779/spring_crud/menu/desc"
-		    );
+		List<String> pages = pages();
+		List<String> ascDesc = ascDesc();
 		model.addAttribute("pages",pages);
-		List<String> ascDesc = List.of("リスト","昇順","降順");
 		model.addAttribute("ascDesc",ascDesc);
+		model.addAttribute("isVisible",true);
 		return "menu";
 	}
 	@RequestMapping("/menu/desc")
 	public String menuDesc(Model model) {
-		model.addAttribute("isVisible",true);
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdDesc());
+		List<String> pages = pages();
+		List<String> ascDesc = ascDesc();
+		model.addAttribute("pages",pages);
+		model.addAttribute("ascDesc",ascDesc);
+		model.addAttribute("isVisible",true);
+		return "menu";
+	}
+	
+	
+	
+	
+	
+	
+	
+	public List<String> ascDesc() {
+		List<String> ascDesc = List.of("リスト","昇順","降順");
+		return ascDesc;
+	}
+
+	public List<String> pages() {
 		List<String> pages = List.of(
 				"",
 		        "http://localhost:7779/spring_crud/menu/asc",
 		        "http://localhost:7779/spring_crud/menu/desc"
 		    );
-		model.addAttribute("pages",pages);
-		List<String> ascDesc = List.of("リスト","昇順","降順");
-		model.addAttribute("ascDesc",ascDesc);
-		return "menu";
+		return pages;
 	}
+	
 }
