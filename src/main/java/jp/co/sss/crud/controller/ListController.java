@@ -58,7 +58,7 @@ public class ListController {
 		model.addAttribute("isVisible",true);
 		return "menu";
 	}
-	@RequestMapping("/menu4545")
+	@RequestMapping("/menu07")
 	public String menu2(Model model) {
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
 		model.addAttribute("dept",deptRepository.findAllByOrderByDeptIdAsc());
