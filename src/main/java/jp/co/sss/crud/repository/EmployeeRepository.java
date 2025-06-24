@@ -52,7 +52,13 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	@Query("SELECT e FROM Employee e WHERE e.deleteFlag = 1 ORDER BY e.empId ASC")
 	List<Employee> findDeleteByOrderByEmpIdAsc();
 	
-	@Query("SELECT COUNT(e) FROM Employee e WHERE e.empName LIKE %:searchWord%")
+	@Query("SELECT COUNT(e) FROM Employee e WHERE e.deleteFlag = 0")
+	long countDelete0();
+	
+	@Query("SELECT COUNT(e) FROM Employee e WHERE e.deleteFlag = 1")
+	long countDelete1();
+	
+	@Query("SELECT COUNT(e) FROM Employee e WHERE e.empName LIKE %:searchWord% AND e.deleteFlag = 0")
 	long countByEmpNameContaining(@Param("searchWord") String searchWord);
 
 }
