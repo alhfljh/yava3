@@ -72,7 +72,6 @@ public class RegistController {
 		EmployeeForm employeeform = new EmployeeForm();
 		BeanUtils.copyProperties(employeeForm, employeeform);
 		model.addAttribute("employee", employeeform);
-
 		return "regist/regist_check";
 	}
 
