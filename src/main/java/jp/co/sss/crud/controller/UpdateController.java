@@ -90,7 +90,9 @@ public class UpdateController {
 	@RequestMapping(path = "/update/checked", method = RequestMethod.POST)
 	public String updateCheak(@Valid @ModelAttribute EmployeeForm employeeForm, BindingResult result,HttpSession session, Model model) {
 		if(result.hasErrors()) {
-			Integer empId = (Integer) session.getAttribute("userId");
+//			Integer empId = (Integer) session.getAttribute("userId");
+			//↓empIdにformのIDを入れる。↑セッションを入れると自分の情報になるためNG
+			Integer empId = (Integer) employeeForm.getEmpId();
 			Employee employee = employeeRepository.findByEmpId(empId);
 			//これでエラーがあった時も部署ドロップダウンメニューがバグらず安心
 			model.addAttribute("dept", deptRepository.findAllByOrderByDeptIdAsc());
