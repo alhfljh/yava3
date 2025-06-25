@@ -13,6 +13,12 @@ import jp.co.sss.crud.repository.EmployeeRepository;
 /**
  * 社員一覧表示画面の挙動を管理する
  */
+/**
+ * 
+ */
+/**
+ * 
+ */
 @Controller
 public class ListController {
 	
@@ -61,6 +67,12 @@ public class ListController {
 		model.addAttribute("isVisible",true);
 		return "menu";
 	}
+	
+	/**
+	 *テスト用、絶対に開いてはいけない
+	 * @param ？？？？？？？？？？？？？？？？？？？
+	 * @return？？？？？？？？？？？？？？？？？？？
+	 */
 	@RequestMapping("/menu07")
 	public String menu2(Model model) {
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
@@ -73,6 +85,13 @@ public class ListController {
 		return "menu2";
 	}
 	
+	
+	/**
+	 * リクエストスコープにエンプロイリポジトリで社員一覧を保存
+	 * 全件検索社員IDを昇順にして社員を表示
+	 * @param model
+	 * @return 社員検索画面へ遷移
+	 */
 	@RequestMapping("/search")
 	public String search(Model model) {
 		model.addAttribute("emp",repository.findAllByOrderByEmpIdAsc());
