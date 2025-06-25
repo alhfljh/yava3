@@ -120,6 +120,7 @@ public class IndexController {
 	@RequestMapping(path="/list/asc")
 	public String listAsc(@ModelAttribute LoginForm loginForm,Model model) {	
 		model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdAsc());
+		model.addAttribute("empCount", employeeRepository.countDelete0());
 		List<String> pages = pages();
 		List<String> ascDesc = ascDesc();
 		model.addAttribute("pages",pages);
@@ -131,6 +132,7 @@ public class IndexController {
 	@RequestMapping(path="/list/desc")
 	public String listDesc(@ModelAttribute LoginForm loginForm,Model model) {
 		model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdDesc());
+		model.addAttribute("empCount", employeeRepository.countDelete0());
 		List<String> pages = pages();
 		List<String> ascDesc = ascDesc();
 		model.addAttribute("pages",pages);

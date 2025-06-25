@@ -9,6 +9,7 @@
 
 <body class="admin user_list">
 	<div class="header-box"></div>
+	
 	<h3>社員管理</h3>
 
 	<!-- セッション中にユーザ情報が存在する場合のみ以下の処理を実行する。 -->
@@ -23,16 +24,21 @@
 	</th:block>
 
 	<th:block th:unless="${#lists.isEmpty(emp)}">
-		<select th:if="${isVisible}" onchange="location = this.value;">
+		
+
+		
+		<table class="list_table">
+			<caption  style="text-align: left;">
+			<select th:if="${isVisible}" onchange="location = this.value; ">
 			<th:block th:each="page,iterStat : ${pages}">
 				<option th:value="${page}" th:text="${ascDesc[iterStat.index]}"></option>
 			</th:block>
 		</select>
+		</caption>
+			
+			<caption style="text-align: right;" class="empCount" th:if="${searchCount == null}">登録社員：<span th:text="${empCount}"></span>名</div></caption>
+		<caption style="text-align: right;" class="searchCount"  th:if="${searchCount != null}">ヒット数：<span th:text="${searchCount}"></span>名</div></caption>
 
-		<div class="empCount" th:if="${searchCount == null}">　　　　　　登録社員：<span th:text="${empCount}"></span>名</div>
-		<div class="searchCount"  th:if="${searchCount != null}">　　　　　　ヒット数：<span th:text="${searchCount}"></span>名</div>
-
-		<table class="list_table">
 			<tr>
 				<th class="empId">社員ID</th>
 				<th class="empName">社員名</th>
@@ -67,7 +73,7 @@
 		<div class="form">
 			<div class="label"></div>
 			<div class="input">
-				　　　　　　　　　　<input type="submit" value="メニューに戻る" />
+				<input type="submit" value="メニューに戻る" class="btn-sticky" />
 			</div>
 		</div>
 	</form>

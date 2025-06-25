@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{common/layout_3block :: layout(~{::body/content()})}">
+
+<head>
+	<title>メニュー| 社員管理システム</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+<style>
+  #banner {
+    position: fixed;
+    top: -30px; /* 初期位置: 画面の外 */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    transition: top 10s ease-in-out;
+  }
+  #banner.show {
+    top: 100vh; /* 表示される位置 */
+  }
+  #banner2 {
+    position: fixed;
+    top: -100px; /* 初期位置: 画面の外 */
+    left: 0;
+    width: 100%;
+    text-align: right;
+    padding: 20px 0;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    transition: top 0.5s ease-in-out;
+  }
+  #banner2.show {
+    top: 100vh; /* 表示される位置 */
+  }
+  #banner3 {
+    position: fixed;
+    top: -100px; /* 初期位置: 画面の外 */
+    left: 0;
+    width: 100%;
+    text-align: left;
+    padding: 20px 0;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    transition: top 0.1s ease-in-out;
+  }
+  #banner3.show {
+    top: 100vh; /* 表示される位置 */
+  }
+</style>
+<div id="banner"><a th:href="@{img/rukaku.gif}"><img src="img/コビー2.webp" width="100
+"></a></div>
+<div id="banner2"><a th:href="@{img/rukaku.gif}"><img src="img/俺.jpg" width="100"></a></div>
+<div id="banner3"><a th:href="@{img/rukaku.gif}"><img src="img/原田.jpg" width="100"></a></div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const banner = document.getElementById("banner");
+    setTimeout(() => banner.classList.add("show"), 300); // 1秒後に表示
+    const banner2 = document.getElementById("banner2");
+    setTimeout(() => banner2.classList.add("show"), 300); // 1秒後に表示
+    const banner3 = document.getElementById("banner3");
+    setTimeout(() => banner3.classList.add("show"), 300); // 1秒後に表示
+  });
+</script>
+
+	<div class="header-box"></div>
+
+
+<div class="scroll-infinity">
+  <div class="scroll-infinity__wrap">
+    <ul class="scroll-infinity__list scroll-infinity__list--left">
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>                        
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+    </ul>
+    <ul class="scroll-infinity__list scroll-infinity__list--left">
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>                        
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+    </ul>
+  </div>
+</div>
+<div class="scroll-infinity">
+  <div class="scroll-infinity__wrap">
+    <ul class="scroll-infinity__list scroll-infinity__list--right">
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>                        
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+    </ul>
+    <ul class="scroll-infinity__list scroll-infinity__list--left">
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>                        
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+    </ul>
+  </div>
+</div>
+
+
+<style>
+	@keyframes infinity-scroll-left {
+from {
+  transform: translateX(0);
+}
+  to {
+  transform: translateX(-100%);
+}
+}
+.scroll-infinity__wrap {
+  display: flex;
+  overflow: hidden;
+}
+.scroll-infinity__list {
+  display: flex;
+  list-style: none;
+  padding: 0
+}
+.scroll-infinity__list--left {
+  animation: infinity-scroll-left 2s infinite linear 0.5s both;
+}
+.scroll-infinity__item {
+  width: calc(100vw / 6);
+}
+.scroll-infinity__item>img {
+  width: 100%;
+}
+.scroll-infinity__wrap:hover .scroll-infinity__list--right{
+  animation-play-state: paused;
+}
+@keyframes infinity-scroll-right {
+from {
+  transform: translateX(-100%);
+}
+  to {
+  transform: translateX(0%);
+}
+}
+.scroll-infinity__list--right{
+  animation :infinity-scroll-right 5s infinite linear 0.5s both;
+}
+.scroll-infinity__item--text {
+  font-family: Comfortaa,cursive;
+  width: calc(500vw / 3);
+  font-size: 15rem;
+  color: #222;
+}
+</style>
+
+	<nav id="header-nav">
+		<ul class="header-list">
+
+			<li class="menu-item a">
+				<a href="" class="tai">社員情報</a>
+				<ul class="sub-menu">
+					<li class="sub-menu-item a">
+						<a th:href="@{/list}" class="tai" style="font-size: 150px">一蘭</a>
+					</li>
+					<li class="sub-menu-item a">
+						<a th:href="@{/list/delete}" class="tai">退職含む一覧</a>
+					</li>
+				</ul><!-- /.sub-menu -->
+			</li><!-- /.menu-item a -->
+
+			<li class="menu-item b">
+				<a href="" class="tai">検索</a>
+				<ul class="sub-menu">
+					<li class="sub-menu-item b">
+						<a th:href="@{/search}" class="tai">名前検索</a>
+					</li>
+					
+				</ul><!-- /.sub-menu -->
+			</li><!-- /.menu-item b -->
+
+			<li class="menu-item c">
+				<a href="" class="tai">変更</a>
+				<ul class="sub-menu">
+					<li class="sub-menu-item c">
+						<a th:href="@{/update/manage1}" class="tai">登録内容変更</a>
+					</li>
+					<li class="sub-menu-item c" th:if="${session.user.authority == 2}">
+						<a th:href="@{/update/manage2}" th:if="${session.user.authority == 2}" class="tai">社員情報変更</a>
+					</li>
+				</ul><!-- /.sub-menu -->
+			</li><!-- /.menu-item c-->
+<div class="scroll-infinity">
+  <div class="scroll-infinity__wrap">
+    <ul class="scroll-infinity__list scroll-infinity__list--right">
+      <li class="scroll-infinity__item"><img src="img/コビー3.webp" /></li>                        
+      <li class="scroll-infinity__item"><img src="img/コビー3.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/コビー3.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/コビー3.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/コビー3.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/コビー3.webp" /></li>
+    </ul>
+    <ul class="scroll-infinity__list scroll-infinity__list--left">
+      <li class="scroll-infinity__item"><img src="img/赤犬.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/赤犬.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/赤犬.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/赤犬.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/赤犬.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/赤犬.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/赤犬.webp" /></li>
+    </ul>
+  </div>
+</div>
+
+			<li class="menu-item d">
+				<a href="" th:if="${session.user.authority == 2}" class="tai">管理者のみ</a>
+				<ul class="sub-menu">
+					<li class="sub-menu-item d">
+						<div class="scroll-infinity">
+<div class="scroll-infinity__wrap">
+  <ul class="scroll-infinity__list scroll-infinity__list--left">
+    <li class="scroll-infinity__item--text"></li>
+  </ul>
+  <ul class="scroll-infinity__list scroll-infinity__list--left">
+  </ul>
+</div>
+</div>
+						<a th:href="@{/regist/input}" class="tai">新規社員登録</a>
+					</li>
+					<li class="sub-menu-item d">
+						<a th:href="@{/dept/dept/dept}" class="tai">部署登録・変更</a>
+					</li>
+					<li class="sub-menu-item d">
+						<a th:href="@{/delete/input}" class="tai">社員情報削除</a>
+					</li>
+					<li class="sub-menu-item d">
+						<a th:href="@{/resurrect}" class="tai">転生</a>
+					</li>
+				</ul><!-- /.sub-menu -->
+			</li><!-- /.menu-item d -->
+
+		</ul><!-- /.header-nav-list -->
+	</nav><!-- /#header-nav -->
+
+	<br><br><br><br><br><br><br><br> 
+	
+	
+	<div id="current_date" class="chuou1">
+    <script>
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById("current_date").innerHTML = new Date().toLocaleDateString('ja-JP', options);
+    </script>
+    </div>
+
+
+<div id="RealtimeClockArea2" class="chuou">現在時刻：</div>
+<div class="scroll-infinity">
+  <div class="scroll-infinity__wrap">
+    <ul class="scroll-infinity__list scroll-infinity__list--left">
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>                        
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+    </ul>
+    <ul class="scroll-infinity__list scroll-infinity__list--left">
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>                        
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+    </ul>
+  </div>
+</div>
+	<th:block th:if="${session.user.authority == 1}">
+		<div class="chuou">権限が一般なため、一部機能を制限しています。</div>
+	</th:block>
+
+	<div class="tab-switch">
+
+		<label><input type="radio" name="TAB" checked class="radio">敗北者じゃけ</label>
+		<div class=tab-content>
+
+			<th:block th:if="${#lists.isEmpty(emp)}">
+				<div class="message">
+					<p class="back_to_top_message">該当する社員が存在しません。</p>
+				</div>
+			</th:block>
+
+			<th:block th:unless="${#lists.isEmpty(emp)}">
+				
+				<select onchange="location = this.value;">
+					<th:block th:each="page,iterStat : ${pages}">
+						<option th:value="${page}" th:text="${ascDesc[iterStat.index]}"></option>					
+					</th:block>					
+				</select>
+				
+				
+				<table class="list_table">
+					<caption class="menuCount">　　　　　　　　　　　　　　　　　　　　　　登録社員：<span th:text="${empCount}"></span>名</caption></div>			
+		
+					<tr>
+						<th class="empId">社員ID</th>
+						<th class="empName">社員名</th>
+						<th class="gender">性別</th>
+						<th class="address">住所</th>
+						<th class="birthday">生年月日</th>
+						<th class="authority">権限</th>
+						<th class="deptName">部署名</th>
+						<!--					<th >顔</th>-->
+					</tr>
+					<tr th:each="employee:${emp}">
+						<td th:text="${employee.empId}"></td>
+						<td th:text="${employee.empName}"></td>
+						<td th:switch="${employee.gender}">
+							<span th:case="1">男性</span>
+							<span th:case="2">女性</span>
+						</td>
+						<td th:text="${employee.address}"></td>
+						<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
+						<td th:switch="${employee.authority}">
+							<span th:case="1">一般</span>
+							<span th:case="2">管理者</span>
+						</td>
+						<td th:text="${employee.department.deptName}"></td>
+
+					</tr>
+					</tr>
+				</table>
+			</th:block>
+		</div>
+
+
+		<label><input type="radio" name="TAB" class="radio">もうやめましょうよ!!!</label>
+		<div class"tab-content">
+			<aside2 th:fragment="layout-sidebar"
+				th:class="${session.user == null or session.user.authority == 1} ? ${'search'} : ${'admin_menu'}">
+				<div class="title">社員名検索</div>
+				<form th:action="@{/list/empName}" , method="get">
+					<div class="form">
+						<input type="text" name="empName" placeholder="名前を入力">
+						<input type="submit" value="検索" />
+						<button type="reset">リセット</button>
+					</div>
+				</form>
+			</aside2>
+		</div>
+
+
+		<th:block th:if="${session.user.authority == 1}">
+
+			<label><input type="radio" name="TAB" class="radio">変更</label>
+			<div class"tab-content">
+				<div class="title">ユーザツール</div>
+
+				<form th:action="@{/update/manage1}">
+					<div class="form">
+						<input type="submit" value="登録内容変更" />
+					</div>
+				</form>
+
+			</div>
+		</th:block>
+
+		<th:block th:if="${session.user.authority == 2}">
+
+			<label><input type="radio" name="TAB" class="radio">変更</label>
+			<div class"tab-content">
+				<div class="title">ユーザツール</div>
+				<form th:action="@{/update/manage1}">
+					<div class="form">
+						<input type="submit" value="登録内容変更" />
+					</div>
+				</form>
+			</div>
+
+
+			<label><input type="radio" name="TAB" class="radio">管理者のみ</label>
+			<div class"tab-content">
+				<div class="title">管理者ツール</div>
+
+				<form th:action="@{/regist/input}">
+					<div class="form">
+						<div class="scroll-infinity">
+<div class="scroll-infinity__wrap">
+  <ul class="scroll-infinity__list scroll-infinity__list--left">
+    <li class="scroll-infinity__item--text">あへあへあへあへ</li>
+    <li class="scroll-infinity__item--text">あへあへあへあへ</li>
+    <li class="scroll-infinity__item--text">あへあへあへあへ</li>
+    <li class="scroll-infinity__item--text">あへあへあへあへ</li>
+  </ul>
+  <ul class="scroll-infinity__list scroll-infinity__list--left">
+    <li class="scroll-infinity__item--text">あへあへあへあへ</li>
+    <li class="scroll-infinity__item--text">あへあへあへあへ</li>
+    <li class="scroll-infinity__item--text">あへあへあへあへ</li>
+    <li class="scroll-infinity__item--text">あへあへあへあへ</li>
+  </ul>
+</div>
+</div>
+<!--						<input type="submit" value="新規社員登録" style="margin-right: 5px;" />-->
+<!--				</form>-->
+
+				<form th:action="@{/update/manage2}">
+					<div class="form">
+						<input type="submit" value="社員情報変更" style="margin-right: 5px;" />
+				</form>
+
+				<form th:action="@{/delete/input}">
+					<div class="form">
+						<input type="submit" value="社員情報削除" style="margin-right: 5px;" />
+				</form>
+
+				<form th:action="@{/dept/dept/dept}">
+					<div class="form">
+						<input type="submit" value="部署登録・変更" />
+				</form>
+
+			</div>
+		</th:block>
+<div class="scroll-infinity">
+  <div class="scroll-infinity__wrap">
+    <ul class="scroll-infinity__list scroll-infinity__list--left">
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>                        
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+    </ul>
+    <ul class="scroll-infinity__list scroll-infinity__list--left">
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>                        
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+      <li class="scroll-infinity__item"><img src="img/98.gif.webp" /></li>
+    </ul>
+  </div>
+</div>
+
+	</div>
+	
+	<script>
+		function set2fig(num) {
+			var ret;
+			if (num < 10) {ret = "0" + num;}
+			else {ret = num;}
+			return ret;
+		}
+		function showClock2() {
+			var nowTime = new Date();
+			var nowHour = set2fig(nowTime.getHours());
+			var nowMin = set2fig(nowTime.getMinutes());
+			var nowSec = set2fig(nowTime.getSeconds());
+			var msg = "現在時刻：" + nowHour + "時" + nowMin + "分" + nowSec + " 秒です。";
+			document.getElementById("RealtimeClockArea2").innerHTML = msg;
+		}
+		setInterval('showClock2()', 1000);
+		
+	
+
+	</script>
+	
+</body>
+
+
+
+</html>
