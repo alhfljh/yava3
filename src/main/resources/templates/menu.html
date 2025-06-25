@@ -82,7 +82,10 @@
 						<a th:href="@{/regist/input}" class="tai">新規社員登録</a>
 					</li>
 					<li class="sub-menu-item d">
-						<a th:href="@{/dept/dept/dept}" class="tai">部署登録・変更</a>
+						<a th:href="@{/dept/dept/dept}" class="tai">部署登録</a>
+					</li>
+					<li class="sub-menu-item d">
+						<a th:href="@{/dept/update/first}" class="tai">部署変更</a>
 					</li>
 					<li class="sub-menu-item d">
 						<a th:href="@{/delete/input}" class="tai">社員情報削除</a>
@@ -235,7 +238,11 @@
 
 				<form th:action="@{/dept/dept/dept}">
 					<div class="form">
-						<input type="submit" value="部署登録・変更" />
+						<input type="submit" value="部署登録" />
+				</form>
+				<form th:action="@{/dept/update/first}">
+					<div class="form">
+						<input type="submit" value="部署変更" />
 				</form>
 
 			</div>

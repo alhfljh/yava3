@@ -14,4 +14,6 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
 	List<Department> findAllByOrderByDeptIdAsc();
 
 	Department findByDeptId(Integer deptId);
+
+//	List<Department> findByDeptId();
 }

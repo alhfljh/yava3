@@ -9,35 +9,36 @@
 
 <body class="admin user_regist_input_admin">
 	<div class="header-box"></div>
-	<h3>部署登録画面</h3>
+	<h3>部署変更画面</h3>
 	<div class="tab-switch">
 		<!--	  class名とボタンの変更は行なわないこと。-->
-		<label><input type="radio" name="TAB" checked class="radio">登録</label>
+		<label><input type="radio" name="TAB" checked class="radio">変更</label>
 		<div class"tab-content">
-			<div class="title">部署名登録</div>
-			<div class="dept">
-				<form th:action="@{/dept/dept/input}" method="post" th:object="${deptForm}">
+			<div class"tab-content">
+				<div class="title">部署名変更</div>
+				<div class="dept">
+					<form th:action="@{/dept/dept/update}" method="post" th:object="${deptForm}">
 
-					<div class="form">
-						<div class="label">部署ID：</div>
-						<div class="input">
-							<input type="text" th:field="*{deptId}" placeholder="登録したい部署IDを入力" />
-							<div th:text="${messege}"></div>
-							<span th:errors="*{deptId}"></span>
+						<div class="form">
+							<div class="label">部署ID：</div>
+							<div class="input">
+								<input type="text" th:field="*{deptId}" placeholder="変更したい部署IDを入力" />
+								<div th:text="${mess}"></div>
+							</div>
 						</div>
-					</div>
-
-					<div class="form">
-						<div class="label">部署名：</div>
-						<div class="input">
-							<input type="text" th:field="*{deptName}" placeholder="登録したい部署名を入力" />
-							<span th:errors="*{deptName}"></span>
-							<br>
-							<input type="submit" value="送信" />
+						<div class="form">
+							<div class="label">部署名：</div>
+							<div class="input">
+								<input type="text" th:field="*{deptName}" placeholder="変更したい部署名を入力" />
+								<span th:errors="*{deptName}"></span>
+								<br>
+								<input type="submit" value="送信" />
+							</div>
 						</div>
-					</div>
-				</form>
 
+					</form>
+
+				</div>
 			</div>
 		</div>
 		<table class="dept_table">
