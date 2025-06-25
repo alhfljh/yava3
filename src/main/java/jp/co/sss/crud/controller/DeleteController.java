@@ -3,14 +3,12 @@ package jp.co.sss.crud.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import jp.co.sss.crud.entity.Employee;
 import jp.co.sss.crud.form.EmployeeForm;
 import jp.co.sss.crud.repository.DepartmentRepository;
@@ -62,29 +60,13 @@ public class DeleteController {
 		return "delete/delete_complete";
 	}
 
-	@RequestMapping(path = "/list/delete")
+	@RequestMapping(path = "/list/delFlg")
 	public String listDelete(Model model) {
 		model.addAttribute("emp", employeeRepository.findDeleteByOrderByEmpIdAsc());
 		model.addAttribute("dept", departmentRepository.findAllByOrderByDeptIdAsc());
 		//JPAリポジトリに元々入っている機能であるcount()を使って表に表示している数をカウント　それをempCount属性に入れている
 		model.addAttribute("empCount", employeeRepository.countDelete1());
 		return "list/list_delete";
-	}
-
-	@RequestMapping(path = "/resurrect")
-	public String resurrect(@ModelAttribute EmployeeForm employeeForm, Model model) {
-		model.addAttribute("emp", employeeRepository.findDeleteByOrderByEmpIdAsc());
-		return "delete/resurrect_input";
-	}
-
-	@RequestMapping(path = "/resurrect/complete")
-	public String resurrectComp(@ModelAttribute EmployeeForm employeeForm, Model model) {
-		Integer empId = employeeForm.getEmpId();
-		Employee employee = employeeRepository.getReferenceById(empId);
-		employee.setDeleteFlag(0);
-		employee = employeeRepository.save(employee);
-		model.addAttribute("empName", employee.getEmpName());
-		return "delete/resurrect_complete";
 	}
 
 }
