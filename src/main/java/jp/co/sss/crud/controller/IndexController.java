@@ -140,6 +140,12 @@ public class IndexController {
 		model.addAttribute("isVisible",true);
 		return "list/list";
 	}
+
+	
+	@RequestMapping(path="/slot")
+	public String slot() {
+		return "slot";
+	}
 	
 	
 	

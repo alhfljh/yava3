@@ -32,7 +32,6 @@ public class AuthorityCheckFilter extends HttpFilter {
 			throws IOException, ServletException {
 		// リクエストURLを取得
 		String requestURL = request.getRequestURI();
-		System.out.println(requestURL);
 		if (requestURL.endsWith("/update/manage2") ||
 				requestURL.contains("/regist") ||
 				requestURL.contains("/dept") ||
@@ -55,7 +54,6 @@ public class AuthorityCheckFilter extends HttpFilter {
 			}
 			
 		} else {
-			System.out.println(requestURL);
 			//リクエスト URL が「ログイン画面への遷移処理」、 
 			//「ログイン処理」宛ての場合、ログインチェックを実施せず、 
 			//リクエスト対象のコントローラの処理に移る 
