@@ -60,7 +60,7 @@ public class DeleteController {
 		return "delete/delete_complete";
 	}
 
-	@RequestMapping(path = "/list/delete")
+	@RequestMapping(path = "/list/delFlg")
 	public String listDelete(Model model) {
 		model.addAttribute("emp", employeeRepository.findDeleteByOrderByEmpIdAsc());
 		model.addAttribute("dept", departmentRepository.findAllByOrderByDeptIdAsc());
