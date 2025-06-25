@@ -26,6 +26,7 @@ public class DeptController {
 
 	int regist = 0;
 	int update = 0;
+
 	@RequestMapping(path = "/dept/dept/dept")
 	public String dept(@ModelAttribute DeptForm deptForm, Model model) {
 		model.addAttribute("deptall", departmentRepository.findAllByOrderByDeptIdAsc());
@@ -33,19 +34,16 @@ public class DeptController {
 			model.addAttribute("messege", "IDが重複しています。");
 			regist = 0;
 		}
-		if (update > 0) {	
-			model.addAttribute("mess", "IDが存在しません。");
-			update = 0;
-		}
 		return "dept/dept_dept";
 	}
 
 	@RequestMapping(path = "/dept/dept/input", method = RequestMethod.POST)
-	public String deptInput(@Valid  @ModelAttribute DeptForm deptForm,BindingResult result,Model model) {
-				if(result.hasErrors()) {
-					model.addAttribute("deptall", departmentRepository.findAllByOrderByDeptIdAsc());
-					return "dept/dept_dept";
-				}
+	public String deptInput(@Valid @ModelAttribute DeptForm deptForm, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("deptall", departmentRepository.findAllByOrderByDeptIdAsc());
+			model.addAttribute("messege", "IDが重複しています。");
+			return "dept/dept_dept";
+		}
 		Integer deptId = deptForm.getDeptId();
 		Department department = departmentRepository.findByDeptId(deptId);
 		if (department == null) {
@@ -78,30 +76,40 @@ public class DeptController {
 		department = departmentRepository.save(department);
 		return "dept/dept_complete";
 	}
+	
+	@RequestMapping(path = "/dept/update/first")
+	public String deptupdatefirst(@ModelAttribute DeptForm deptForm, Model model) {
+		model.addAttribute("deptall", departmentRepository.findAllByOrderByDeptIdAsc());
+		if (update > 0) {
+			model.addAttribute("mess", "IDが存在しません。");
+			update = 0;
+		}
+		return "dept/dept_update_first";
+	}
 
 	@RequestMapping(path = "/dept/dept/update", method = RequestMethod.POST)
-	public String deptUpdate(@Valid @ModelAttribute DeptForm deptForm,BindingResult result, Model model) {
-		if(result.hasErrors()) {
+	public String deptUpdate(@Valid @ModelAttribute DeptForm deptForm, BindingResult result, Model model) {
+		if (result.hasErrors()) {
 			model.addAttribute("deptall", departmentRepository.findAllByOrderByDeptIdAsc());
-			return "dept/dept_dept";
+			model.addAttribute("mess", "IDが存在しません。");
+			return "dept/dept_update_first";
 		}
 		Integer deptId = deptForm.getDeptId();
 		Department department = departmentRepository.findByDeptId(deptId);
 		if (department != null) {
-
 			DeptForm deptform = new DeptForm();
 			BeanUtils.copyProperties(deptForm, deptform);
 			model.addAttribute("dept", deptform);
 			return "dept/dept_update";
 		}
 		update++;
-		return "redirect:http://localhost:7779/spring_crud/dept/dept/dept";
+		return "redirect:/dept/update/first";
 	}
 
-	@RequestMapping(path = "/dept/back/update", method = RequestMethod.POST)
+	@RequestMapping(path = "/back/update/dept", method = RequestMethod.POST)
 	public String deptUpdateBack(@ModelAttribute DeptForm deptForm, Model model) {
 		model.addAttribute("deptall", departmentRepository.findAllByOrderByDeptIdAsc());
-		return "dept/dept_dept";
+		return "dept/dept_update_first";
 	}
 
 	@RequestMapping(path = "/dept/complete/update", method = RequestMethod.POST)

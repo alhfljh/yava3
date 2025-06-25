@@ -72,14 +72,20 @@
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item c-->
 
-			<li class="menu-item d">
-				<a href="" th:if="${session.user.authority == 2}" class="tai">管理者のみ</a>
+			<!-- 一般権限でログインした際に、管理者のみメニューは表示されないようになっているが、
+			　管理者のみメニューがあったちょっと下にカーソルを合わせるとサブメニューが表示されてしまっていたため、
+				th:ifの記述をaタグからliタグに変更してサブメニューも表示されないようにした-->
+			<li class="menu-item d" th:if="${session.user.authority == 2}">
+				<a href="" class="tai">管理者のみ</a>
 				<ul class="sub-menu">
 					<li class="sub-menu-item d">
 						<a th:href="@{/regist/input}" class="tai">新規社員登録</a>
 					</li>
 					<li class="sub-menu-item d">
-						<a th:href="@{/dept/dept/dept}" class="tai">部署登録・変更</a>
+						<a th:href="@{/dept/dept/dept}" class="tai">部署登録</a>
+					</li>
+					<li class="sub-menu-item d">
+						<a th:href="@{/dept/update/first}" class="tai">部署変更</a>
 					</li>
 					<li class="sub-menu-item d">
 						<a th:href="@{/delete/input}" class="tai">社員情報削除</a>
@@ -232,7 +238,11 @@
 
 				<form th:action="@{/dept/dept/dept}">
 					<div class="form">
-						<input type="submit" value="部署登録・変更" />
+						<input type="submit" value="部署登録" />
+				</form>
+				<form th:action="@{/dept/update/first}">
+					<div class="form">
+						<input type="submit" value="部署変更" />
 				</form>
 
 			</div>
