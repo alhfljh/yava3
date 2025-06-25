@@ -37,11 +37,7 @@ public class DeleteController {
 	HttpSession session;
 
 	@RequestMapping(path = "/delete/input")
-	public String delete(@Valid @ModelAttribute EmployeeForm employeeForm, HttpServletRequest request, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdAsc());
-			return "delete/delete_input";
-		}
+	public String delete(HttpServletRequest request, Model model) {
 		model.addAttribute("emp", employeeRepository.findAllByOrderByEmpIdAsc());
 		return "delete/delete_input";
 
