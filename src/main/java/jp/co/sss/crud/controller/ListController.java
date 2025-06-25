@@ -71,7 +71,7 @@ public class ListController {
 	/**
 	 *テスト用、絶対に開いてはいけない
 	 * @param ？？？？？？？？？？？？？？？？？？？
-	 * @return？？？？？？？？？？？？？？？？？？？
+	 * @return？？？？？？？？？？？？？？
 	 */
 	@RequestMapping("/menu07")
 	public String menu2(Model model) {

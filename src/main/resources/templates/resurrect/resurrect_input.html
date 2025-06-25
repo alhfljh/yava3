@@ -10,11 +10,16 @@
 <body class="admin user_list">
 	<div class="header-box"></div>
 	<h3>死者蘇生</h3>
+	<th:block th:unless="${messageNot}==null" >
+		<div class="message">
+		<h3 th:text="${messageNot}"></h3>
+		</div>
+	</th:block>
 
-	<form method="post" th:action="@{/resurrect/complete}" onsubmit="confirmSubmission(event)">
-		　　　　　　社員ID：<input type="text" name="empId" placeholder="IDを入力" />
-		<input type="submit" value="たたき起こす" />
-	</form>
+<!--	<form method="post" th:action="@{/resurrect/complete}" onsubmit="confirmSubmission(event)">-->
+<!--		　　　　　　社員ID：<input type="text" name="empId" placeholder="IDを入力" />-->
+<!--		<input type="submit" value="たたき起こす" />-->
+<!--	</form>-->
 
 	<script>
 		function confirmSubmission(event) {
@@ -38,6 +43,7 @@
 			<th class="authority">権限</th>
 			<th class="deptName">部署名</th>
 <!--			<th >顔</th>-->
+			<th></th>
 		</tr>
 		<tr th:each="employee:${emp}">
 			<td th:text="${employee.empId}"></td>
@@ -65,7 +71,16 @@
 <!--				<span th:case="7"><a th:href="@{/img/man2.jpg}"><img th:src="@{/img/man2.jpg}"width="90" ></a></span>-->
 <!--				<span th:case="8"><a th:href="@{/img/man3.jpg}"><img th:src="@{/img/man3.jpg}" width="90"></a></span>-->
 <!--			</td>-->
-		</tr>
+			<th:block th:unless="${messageNot}==null" <div class="message">
+				
+			</th:block>
+			<td>
+				<form method="post" th:action="@{/resurrect/comp}" onsubmit="confirmSubmission(event)" th:switch="${session.user.authority}">
+					<input type="hidden" name="empId" th:value="${employee.empId}" />
+					<input th:case="1" class="shake-button" type="submit" value="ザオラル" />
+					<input th:case="2" class="shake-button" type="submit" value="ザオリク" />
+				</form>
+			</td>
 		</tr>
 	</table>
 
@@ -77,6 +92,33 @@
 			</div>
 		</div>
 	</form>
+
+	<div class="header-box"></div>
+
+<style>
+  .shake-button {
+    animation: shake 10s infinite; /* 震えるアニメーションを設定 */
+  }
+
+  @keyframes shake {
+    0% { transform: translateX(-5px); }
+    50% { transform: translateX(100px); }
+    100% { transform: translateX(-5px); }
+  }
+</style>
+	
+<script>
+const flashButtons = document.querySelectorAll(".shake-button");
+setInterval(() => {
+  flashButtons.forEach(button => {
+    if (button.style.backgroundColor === "yellow") {
+      button.style.backgroundColor = ""; // 元に戻す
+    } else {
+      button.style.backgroundColor = "yellow"; // 光る色
+    }
+  });
+}, 150); // 3秒間隔
+</script>
 
 
 </body>
