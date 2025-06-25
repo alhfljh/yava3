@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import jp.co.sss.crud.entity.Department;
 import jp.co.sss.crud.entity.Employee;
 import jp.co.sss.crud.form.EmployeeForm;
 import jp.co.sss.crud.form.LoginForm;
@@ -89,7 +90,9 @@ public class UpdateController {
 	@RequestMapping(path = "/update/checked", method = RequestMethod.POST)
 	public String updateCheak(@Valid @ModelAttribute EmployeeForm employeeForm, BindingResult result,HttpSession session, Model model) {
 		if(result.hasErrors()) {
-			Integer empId = (Integer) session.getAttribute("userId");
+//			Integer empId = (Integer) session.getAttribute("userId");
+			//↓empIdにformのIDを入れる。↑セッションを入れると自分の情報になるためNG
+			Integer empId = (Integer) employeeForm.getEmpId();
 			Employee employee = employeeRepository.findByEmpId(empId);
 			//これでエラーがあった時も部署ドロップダウンメニューがバグらず安心
 			model.addAttribute("dept", deptRepository.findAllByOrderByDeptIdAsc());
@@ -107,8 +110,16 @@ public class UpdateController {
 	@RequestMapping(path = "/update/complete", method = RequestMethod.POST)
 	public String updateConpelete(@ModelAttribute EmployeeForm employeeForm, Model model) {
 		Integer empId = employeeForm.getEmpId();
+		//以下、dept関連の3行を追加し、登録情報変更時に部署名のみ変更されないバグを修正
+		//（ちゃんと部署登録も反映されていたRegistControllerを基に追加　無駄な行があるかもしれない）
+		Department department = new Department();
+		int deptId = employeeForm.getDeptId();
+		department.setDeptId(deptId);
+		
 		Employee employee = employeeRepository.getReferenceById(empId);
 		BeanUtils.copyProperties(employeeForm, employee, "empId");
+		//RegistControllerを基にこの行を追加し、部署名のみ変更されないバグを修正
+		employee.setDepartment(department);
 		employee = employeeRepository.save(employee);
 		return "/update/update_complete";
 	}
