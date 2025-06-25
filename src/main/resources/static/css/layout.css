@@ -243,7 +243,7 @@ article {
 	/* 太字                 */
 	color: rgba(255, 255, 255, 0.5);
 	/* 背景透かし文字色     */
-	padding-left: 90px;
+	padding-left: 40px;
 	transform     : skewX(-25deg);
 
 }
