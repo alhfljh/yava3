@@ -31,14 +31,12 @@ public class LoginCheckFilter extends HttpFilter {
       throws IOException, ServletException {
         // リクエストURLを取得
         String requestURL = request.getRequestURI();
-    	System.out.println(requestURL);
         if (requestURL.endsWith("/") ||
         		requestURL.endsWith("/login") ||
         		requestURL.startsWith("/spring_crud/css") ||
         		requestURL.startsWith("/spring_crud/js") ||
         		requestURL.startsWith("/spring_crud/img")
         		) {
-        	System.out.println(requestURL);
             //リクエスト URL が「ログイン画面への遷移処理」、 
             //「ログイン処理」宛ての場合、ログインチェックを実施せず、 
             //リクエスト対象のコントローラの処理に移る 
