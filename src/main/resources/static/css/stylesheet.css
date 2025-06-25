@@ -9,8 +9,7 @@ body {
 
 /* ---- ページタイトル ---- */
 h3 {
-	padding-left: 80px;:]][\]
-	 l.
+	padding-left: 80px
 }
 
 /* ---- 社員登録入力画面へのリンク ---- */
@@ -115,8 +114,7 @@ select {
 
 .login_form {
 	display: flex;
-	padding-left: auto;
-	padding-right: auto;
+	padding-left: 130px;
 	
 	
 }

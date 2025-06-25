@@ -12,7 +12,7 @@
 	<h3>社員の削除</h3>
 
 	<form method="post" th:action="@{/delete/comp}" th:object="${employeeForm}">
-		社員ID：<input type="text" th:field="*{empId}" placeholder="IDを入力" required/>
+		社員ID：<input type="txet" th:field="*{empId}" placeholder="IDを入力" required/>
 		<span th:errors="*{empId}"></span>
 		<input type="submit" value="削除する" />
 	</form>
