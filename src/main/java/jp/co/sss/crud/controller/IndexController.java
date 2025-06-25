@@ -146,6 +146,10 @@ public class IndexController {
 	public String slot() {
 		return "slot";
 	}
+	@RequestMapping(path="/sinkei")
+	public String sinkei() {
+		return "sinkei";
+	}
 	
 	
 	

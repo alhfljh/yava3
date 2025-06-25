@@ -102,213 +102,351 @@
 </head>
 <body>
 
-  <h1>スーパー本格スロットマシン</h1>
-
-  <div class="status">
-    メダル残高: <span id="coins">1000</span> 枚
-  </div>
-  <div class="bet-controls">
-    BET: <button id="betMinus">−</button>
-    <span id="betAmount">10</span>
-    <button id="betPlus">＋</button>
-  </div>
-
-  <div class="machine">
-    <div class="reel-container" id="container1"><div class="reel" id="reel1"></div></div>
-    <div class="reel-container" id="container2"><div class="reel" id="reel2"></div></div>
-    <div class="reel-container" id="container3"><div class="reel" id="reel3"></div></div>
-  </div>
-
-  <div class="controls">
-    <button id="startBtn">スタート</button>
-    <button id="stop1" disabled>STOP 1</button>
-    <button id="stop2" disabled>STOP 2</button>
-    <button id="stop3" disabled>STOP 3</button>
-  </div>
-
-  <audio id="spinSound" src="https://actions.google.com/sounds/v1/transportation/car_door_open_close.ogg" preload="auto"></audio>
-  <audio id="stopSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" preload="auto"></audio>
-  <audio id="winSound" src="https://actions.google.com/sounds/v1/cartoon/concussive_hit_guitar_boing.ogg" preload="auto"></audio>
-
-  <script>
-	const images = ['俺.jpg', '原田.jpg', 'コビー1.webp', 'コビー2.webp'];
-    const imagePath = 'img/';
-    const reels = [document.getElementById('reel1'), document.getElementById('reel2'), document.getElementById('reel3')];
-    const containers = [document.getElementById('container1'), document.getElementById('container2'), document.getElementById('container3')];
-    const spinSound = document.getElementById('spinSound');
-    const stopSound = document.getElementById('stopSound');
-    const winSound = document.getElementById('winSound');
-
-    const startBtn = document.getElementById('startBtn');
-    const stopButtons = [document.getElementById('stop1'), document.getElementById('stop2'), document.getElementById('stop3')];
-    const coinsElem = document.getElementById('coins');
-    const betAmountElem = document.getElementById('betAmount');
-    const betMinus = document.getElementById('betMinus');
-    const betPlus = document.getElementById('betPlus');
-
-    let intervals = [null, null, null];
-    let stopped = [false, false, false];
-    let coins = 1000;
-    let bet = 10;
-    const minBet = 10;
-    const maxBet = 100;
-
-    // 画像をリールに追加
-    function fillReel(reel) {
-      reel.innerHTML = '';
-      for (let i = 0; i < 20; i++) {
-        const img = document.createElement('img');
-        img.src = imagePath + images[Math.floor(Math.random() * images.length)];
-        reel.appendChild(img);
-      }
+  <style>
+  body {
+    background: #111;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    user-select: none;
+  }
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  .machine {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+  }
+  .reel-container {
+    width: 150px;
+    height: 150px;
+    border: 5px solid white;
+    border-radius: 15px;
+    background: black;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    transition: box-shadow 0.4s ease;
+  }
+  .reel-container.win {
+    box-shadow: 0 0 20px 8px #0f0;
+    animation: glow 1s infinite alternate;
+  }
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px 8px #0f0;
     }
-
-    // BET調整
-    betMinus.onclick = () => {
-      if (bet > minBet) {
-        bet -= 10;
-        betAmountElem.textContent = bet;
-      }
-    };
-    betPlus.onclick = () => {
-      if (bet < maxBet) {
-        bet += 10;
-        betAmountElem.textContent = bet;
-      }
-    };
-
-    // スタート処理
-    startBtn.onclick = () => {
-      if (coins < bet) {
-        alert('メダルが足りません！');
-        return;
-      }
-      coins -= bet;
-      coinsElem.textContent = coins;
-
-      stopped = [false, false, false];
-
-      reels.forEach((reel, i) => {
-        fillReel(reel);
-        reel.style.top = '0px';
-      });
-
-      startSpin();
-      // ボタン制御
-      startBtn.disabled = true;
-      stopButtons.forEach((btn, i) => btn.disabled = i !== 0);
-      containers.forEach(c => c.classList.remove('win'));
-    };
-
-    // スピン開始（requestAnimationFrameで連続回転）
-    let spinPositions = [0, 0, 0];
-    let spinSpeeds = [20, 25, 30];
-    let spinning = false;
-
-    function spinStep() {
-      if (!spinning) return;
-      reels.forEach((reel, i) => {
-        spinPositions[i] -= spinSpeeds[i];
-        const totalHeight = reel.scrollHeight;
-        if (spinPositions[i] <= -totalHeight + 150) {
-          spinPositions[i] = 0;
-        }
-        reel.style.top = spinPositions[i] + 'px';
-      });
-      requestAnimationFrame(spinStep);
+    to {
+      box-shadow: 0 0 40px 12px #0f0;
     }
+  }
+  .reel {
+    position: absolute;
+    width: 100%;
+    top: 0;
+  }
+  .reel img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    display: block;
+  }
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  button {
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #0f0;
+    color: black;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  button:disabled {
+    background: #555;
+    color: #999;
+    cursor: not-allowed;
+  }
+  .status {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+  .bet-controls {
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
 
-    function startSpin() {
-      spinning = true;
-      spinPositions = [0, 0, 0];
-      spinSpeeds = [20, 25, 30];
-      spinSound.loop = true;
-      spinSound.play();
-      spinStep();
+<h1>スーパー本格スロット 合体版</h1>
+
+<div class="status">
+  メダル残高: <span id="coins">1000</span> 枚
+</div>
+<div class="bet-controls">
+  BET: <button id="betMinus">−</button>
+  <span id="betAmount">10</span>
+  <button id="betPlus">＋</button>
+</div>
+
+<div class="machine">
+  <div class="reel-container" id="container1"><div class="reel" id="reel1"></div></div>
+  <div class="reel-container" id="container2"><div class="reel" id="reel2"></div></div>
+  <div class="reel-container" id="container3"><div class="reel" id="reel3"></div></div>
+</div>
+
+<div class="controls">
+  <button id="startBtn">スタート</button>
+  <button id="stop1" disabled>STOP 1</button>
+  <button id="stop2" disabled>STOP 2</button>
+  <button id="stop3" disabled>STOP 3</button>
+</div>
+
+<audio id="spinSound" src="https://actions.google.com/sounds/v1/transportation/car_door_open_close.ogg" preload="auto"></audio>
+<audio id="stopSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" preload="auto"></audio>
+<audio id="winSound" src="https://actions.google.com/sounds/v1/cartoon/concussive_hit_guitar_boing.ogg" preload="auto"></audio>
+
+<script>
+  // 画像リスト（imgフォルダに入れてください）
+  const images = ['俺.jpg', '原田.jpg', 'コビー1.webp', 'コビー2.webp'];
+  const imagePath = 'img/';
+  const reels = [
+    document.getElementById('reel1'),
+    document.getElementById('reel2'),
+    document.getElementById('reel3')
+  ];
+  const containers = [
+    document.getElementById('container1'),
+    document.getElementById('container2'),
+    document.getElementById('container3')
+  ];
+  const spinSound = document.getElementById('spinSound');
+  const stopSound = document.getElementById('stopSound');
+  const winSound = document.getElementById('winSound');
+
+  const startBtn = document.getElementById('startBtn');
+  const stopButtons = [
+    document.getElementById('stop1'),
+    document.getElementById('stop2'),
+    document.getElementById('stop3')
+  ];
+  const coinsElem = document.getElementById('coins');
+  const betAmountElem = document.getElementById('betAmount');
+  const betMinus = document.getElementById('betMinus');
+  const betPlus = document.getElementById('betPlus');
+
+  let coins = 1000;
+  let bet = 10;
+  const minBet = 10;
+  const maxBet = 100;
+
+  let spinning = false;
+  let spinPositions = [0, 0, 0];
+  let spinSpeeds = [30, 35, 40];
+  let stopped = [false, false, false];
+
+  const reelHeight = 150;
+  const symbolsCount = 20;
+
+  // BET調整
+  betMinus.onclick = () => {
+    if (bet > minBet) {
+      bet -= 10;
+      betAmountElem.textContent = bet;
     }
-
-    // ストップ処理
-    function stopReel(index) {
-      if (!spinning) return;
-      stopSound.play();
-      clearInterval(intervals[index]); // 念のため
-
-      // リールの速度を0まで減速（簡易版）
-      
-      const decelerate = () => {
-        if (spinSpeeds[index] > 0) {
-          spinSpeeds[index] -= 1;
-          if (spinSpeeds[index] < 0) spinSpeeds[index] = 0;
-          setTimeout(decelerate, 50);
-        } else {
-          spinSpeeds[index] = 0;
-          stopped[index] = true;
-          stopButtons[index].disabled = true;
-          if (index < stopButtons.length -1) {
-            stopButtons[index + 1].disabled = false;
-          } else {
-            spinning = false;
-            spinSound.pause();
-            spinSound.currentTime = 0;
-            setTimeout(checkResult, 500);
-          }
-        }
-      };
-      decelerate();
+  };
+  betPlus.onclick = () => {
+    if (bet < maxBet) {
+      bet += 10;
+      betAmountElem.textContent = bet;
     }
+  };
 
-    stopButtons.forEach((btn, i) => {
-      btn.onclick = () => stopReel(i);
+  // リールにランダムな画像を20個詰める
+  function fillReel(reel) {
+    reel.innerHTML = '';
+    for (let i = 0; i < symbolsCount; i++) {
+      const img = document.createElement('img');
+      img.src = imagePath + images[Math.floor(Math.random() * images.length)];
+      reel.appendChild(img);
+    }
+  }
+
+  // スタート
+  startBtn.onclick = () => {
+    if (coins < bet) {
+      alert('メダルが足りません！');
+      return;
+    }
+    coins -= bet;
+    coinsElem.textContent = coins;
+
+    stopped = [false, false, false];
+
+    reels.forEach((reel) => {
+      fillReel(reel);
+      reel.style.top = '0px';
     });
 
-    // 結果判定＆演出
-    function checkResult() {
-      const getTopSymbol = (reel) => {
-        const top = Math.abs(parseInt(reel.style.top)) || 0;
-        const index = Math.floor(top / 150);
-        const img = reel.getElementsByTagName('img')[index];
-        return img ? img.src.split('/').pop() : '';
-      };
+    startSpin();
 
-      const results = reels.map(getTopSymbol);
+    startBtn.disabled = true;
+    stopButtons.forEach((btn, i) => btn.disabled = i !== 0);
+    containers.forEach(c => c.classList.remove('win'));
+  };
 
-      console.log('結果:', results);
-
-      const containerWins = [];
-
-      if (results.every(r => r === results[0])) {
-        alert(`🎉 大当たり！「${results[0]}」が3つ揃った！`);
-        coins += bet * 10;
-        winSound.play();
-        containerWins.push(0, 1, 2);
-      } else if (new Set(results).size === 2) {
-        alert('😊 2つ揃ったよ！');
-        coins += bet * 2;
-        winSound.play();
-        // 2つ揃いの光り方を適当に指定
-        const first = results.findIndex((v, i, arr) => arr.filter(x => x === v).length === 2);
-        const second = results.findIndex((v, i, arr) => arr.filter(x => x === v).length === 2 && i !== first);
-        containerWins.push(first, second);
-      } else {
-        alert('😢 ハズレ...');
-      }
-
-      coinsElem.textContent = coins;
-
-      // 光る演出
-      containers.forEach((c, i) => {
-        if (containerWins.includes(i)) {
-          c.classList.add('win');
-        } else {
-          c.classList.remove('win');
+  // 回転処理（requestAnimationFrameでスムーズに）
+  function spinStep() {
+    if (!spinning) return;
+    for (let i = 0; i < reels.length; i++) {
+      if (!stopped[i]) {
+        spinPositions[i] -= spinSpeeds[i];
+        const totalHeight = reelHeight * symbolsCount;
+        if (spinPositions[i] <= -totalHeight) {
+          spinPositions[i] += totalHeight;
         }
-      });
-
-      // スタートボタン復活
-      startBtn.disabled = false;
-      stopButtons.forEach(btn => btn.disabled = true);
+        reels[i].style.top = spinPositions[i] + 'px';
+      }
     }
-  </script>
+    requestAnimationFrame(spinStep);
+  }
+
+  function startSpin() {
+    spinning = true;
+    spinPositions = [0, 0, 0];
+    spinSpeeds = [30, 35, 40];
+    spinSound.loop = true;
+    spinSound.play();
+    spinStep();
+  }
+
+  // ストップ処理（順に速度を減速して止める）
+  function stopReel(index) {
+    if (!spinning) return;
+    stopSound.play();
+
+    let speed = spinSpeeds[index];
+
+    function decelerate() {
+      if (speed > 0) {
+        speed -= 1;
+        if (speed < 0) speed = 0;
+        spinSpeeds[index] = speed;
+        setTimeout(decelerate, 50);
+      } else {
+        // 速度0になったら、画像が枠にぴったり止まるように位置調整
+        stopped[index] = true;
+        stopButtons[index].disabled = true;
+
+        // 画像高さ150pxで割り切るようにtop調整（余りを減らす）
+        let top = spinPositions[index];
+        const totalHeight = reelHeight * symbolsCount;
+        // topは負の値で-150の倍数に丸める（上にスライドしてる）
+        let remainder = top % reelHeight;
+        if (remainder !== 0) {
+          top = top - remainder;
+          spinPositions[index] = top;
+          reels[index].style.top = top + 'px';
+        }
+
+        if (index < stopButtons.length - 1) {
+          stopButtons[index + 1].disabled = false;
+        } else {
+          spinning = false;
+          spinSound.pause();
+          spinSound.currentTime = 0;
+          setTimeout(checkResult, 300);
+        }
+      }
+    }
+    decelerate();
+  }
+
+  stopButtons.forEach((btn, i) => {
+    btn.onclick = () => stopReel(i);
+  });
+
+  // 結果判定
+  function checkResult() {
+    // リールの上に表示されている画像を取得
+    const results = reels.map((reel, i) => {
+      // topは負の値なので絶対値をとる
+      let top = Math.abs(spinPositions[i]);
+      // 画像高さ150pxで割った商が画像のindex
+      let idx = Math.floor(top / reelHeight) % symbolsCount;
+      // その画像のファイル名を取得
+      const img = reel.getElementsByTagName('img')[idx];
+      return img ? img.src.split('/').pop() : '';
+    });
+
+    console.log('結果:', results);
+
+    const containerWins = [];
+
+    if (results.every(r => r === results[0])) {
+      alert(`🎉 大当たり！「${results[0]}」が3つ揃った！`);
+      coins += bet * 10;
+      winSound.play();
+      containerWins.push(0, 1, 2);
+    } else if (new Set(results).size === 2) {
+      alert('😊 2つ揃ったよ！');
+      coins += bet * 2;
+      winSound.play();
+      // 2つ揃いの場所特定
+      const first = results.findIndex((v, i, arr) => arr.filter(x => x === v).length === 2);
+      const second = results.findIndex((v, i, arr) => arr.filter(x => x === v).length === 2 && i !== first);
+      containerWins.push(first, second);
+    } else {
+      alert('😢 ハズレ...');
+    }
+
+    coinsElem.textContent = coins;
+
+    // 光る演出
+    containers.forEach((c, i) => {
+      if (containerWins.includes(i)) {
+        c.classList.add('win');
+      } else {
+        c.classList.remove('win');
+      }
+    });
+
+    startBtn.disabled = false;
+    stopButtons.forEach(btn => btn.disabled = true);
+  }
+  
+  // キーボード操作：スペースキーでスタートまたは次のSTOPを実行
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') {
+    e.preventDefault(); // スクロール防止
+
+    if (!spinning) {
+      // スピンしてないならスタート可能
+      if (!startBtn.disabled) startBtn.click();
+    } else {
+      // スピン中：最初の有効なSTOPボタンを探して押す
+      for (let i = 0; i < stopButtons.length; i++) {
+        if (!stopButtons[i].disabled) {
+          stopButtons[i].click();
+          break;
+        }
+      }
+    }
+  }
+});
+
+</script>
 
 
 	

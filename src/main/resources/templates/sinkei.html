@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>神経衰弱ゲーム</title>
+  <style>
+    body {
+      background: #222;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    #game {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      grid-gap: 15px;
+      justify-content: center;
+    }
+    .card {
+      width: 100px;
+      height: 100px;
+      background-color: #444;
+      border: 2px solid #999;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s;
+    }
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+    .card.open img, .card.matched img {
+      display: block;
+    }
+    .card.open {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+<h1>神経衰弱ゲーム</h1>
+<div id="game"></div>
+
+<script>
+  const imageFilenames = [
+    "98.gif.webp",
+    "basukos.jpg",
+    "R.gif",
+    "rukaku.gif",
+    "santaisyou.jpg",
+    "th.gif",
+    "コビー1.webp",
+    "コビー2.webp",
+    "コビー3.webp",
+    "ジーク1.webp",
+    "ジーク2.jpg",
+    "俺.jpg",
+    "原田.jpg",
+    "赤犬.webp"
+  ];
+  const flipSound = new Audio('https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg'); // カードをめくる音
+const matchSound = new Audio('https://freesound.org/data/previews/331/331912_3248244-lq.mp3'); // ペアが一致したときの音
+
+  function getRandomSubset(arr, n) {
+    const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, n);
+  }
+
+  const selectedImages = getRandomSubset(imageFilenames, 8);
+  const images = [...selectedImages, ...selectedImages];
+  const shuffled = images.sort(() => Math.random() - 0.5);
+
+  const game = document.getElementById('game');
+  let firstCard = null;
+  let lock = false;
+  let matchedCount = 0;
+
+  shuffled.forEach((filename, index) => {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.dataset.filename = filename;
+
+    const img = document.createElement('img');
+    img.src = `img/${filename}`;
+    card.appendChild(img);
+
+// カードをめくるとき
+    card.addEventListener('click', () => {
+  flipSound.play(); // カードをめくる音を再生
+      if (lock || card.classList.contains('matched') || card.classList.contains('open')) return;
+
+      card.classList.add('open');
+
+      if (!firstCard) {
+        firstCard = card;
+      } else {
+        lock = true;
+        // ペアが一致したとき
+if (firstCard.dataset.filename === card.dataset.filename) {
+  matchSound.play(); // 一致時の音を再生
+          firstCard.classList.add('matched');
+          card.classList.add('matched');
+          matchedCount += 2;
+          if (matchedCount === shuffled.length) {
+            setTimeout(() => alert('🎉 全部揃いました！'), 300);
+          }
+          firstCard = null;
+          lock = false;
+        } else {
+          setTimeout(() => {
+            firstCard.classList.remove('open');
+            card.classList.remove('open');
+            firstCard = null;
+            lock = false;
+          }, 300);
+        }
+      }
+    });
+
+    game.appendChild(card);
+  });
+</script>
+
+
+</body>
+</html>
