@@ -256,7 +256,7 @@ footer {
 	/* タブを横並びに */
 	flex-wrap: wrap;
 	/* 幅に応じて折り返し */
-	max-width: 500px;
+	max-width: 600px;
 	/* コンテナの最大幅を指定 */
 	margin: auto;
 	/* コンテナの中央寄せ */
@@ -388,6 +388,10 @@ a:visited {
 	background: #FFFF66;
 }
 
+.e{
+	background: #009944;
+}
+
 /* ナビゲーションの大きさ */
 #header-nav {
 	position: fixed;
@@ -403,7 +407,7 @@ a:visited {
 /* メインメニュー */
 .menu-item {
 	display: inline-block;
-	width: 25%;
+	width: 20%;
 	position: relative;
 	text-align: center;
 	border-radius: 15px;
