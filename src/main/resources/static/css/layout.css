@@ -457,10 +457,10 @@ a:visited {
 .btn-cyber {
 	padding: 15px 40px;
 	font-size: 16px;
-	font-weight: 600;
-	color: #0ff;
+	font-weight: 400;
+	color: #12526d;
 	background: rgb(255, 255, 255);
-	border: 2px solid #0ff;
+	border: 2px solid #12526d;
 	cursor: pointer;
 	position: relative;
 	text-transform: uppercase;
@@ -490,7 +490,7 @@ a:visited {
 }
 
 .btn-cyber:hover {
-	color: #000;
+	color:#12526d;
 	background: #0ff;
 	box-shadow: 0 0 30px #0ff, inset 0 0 30px rgba(0, 255, 255, 0.3);
 }
@@ -502,3 +502,5 @@ a:visited {
 .btn-cyber:hover::after {
 	width: 100%;
 }
+
+
