@@ -456,10 +456,9 @@ a:visited {
 
 .btn-cyber {
 	padding: 15px 40px;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 400;
 	color: #12526d;
-	background: rgb(255, 255, 255);
 	border: 2px solid #12526d;
 	cursor: pointer;
 	position: relative;
@@ -467,6 +466,7 @@ a:visited {
 	letter-spacing: 2px;
 	overflow: hidden;
 	transition: all 0.3s ease;
+	height: 20px;
 }
 
 .btn-cyber::before,
@@ -504,3 +504,28 @@ a:visited {
 }
 
 
+.cp_link {
+  position: relative;
+  padding: 5px;
+  color: #ff9800;
+  z-index: 0;
+  transition: .5s ease-in-out .1s;/*テキストは0.1遅れて色が変わる*/
+}
+/*hover後の表示*/
+.cp_link::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: rgb(0, 64, 128);
+  z-index: -1;
+  transition: .5s;
+}
+.cp_link:hover {
+  color: rgb(255, 255, 255);/*hover時の色*/
+}
+.cp_link:hover::after {
+  width: 100%;/*hover時*/
+}
