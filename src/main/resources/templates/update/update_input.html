@@ -69,6 +69,15 @@
 			<div class="form">
 				<div class="label">部署名：</div>
 				<div class="input">
+					<!-- 今までだと、
+					<select th:field="*{deptId}">
+						<option value="1">営業部</option>
+						<option value="2">経理部</option>
+						<option value="3">総務部</option>
+					</select>
+					としてたけど、これだと新しく登録した部署や、名前を変更した部署が反映されない
+					そのため、そうした変更が柔軟に反映されるように下の記述に変更
+					-->
 					<select th:field="*{deptId}">
 						<option th:each="department : ${dept}" th:value="${department.deptId}"><span
 								th:text="${department.deptName}"></span></option>
@@ -112,7 +121,7 @@
 			<div class="form">
 				<div class="label"></div>
 				<div class="input">
-					<input type="submit" value="戻る" />
+					<input type="submit" value="メニューに戻る" />
 				</div>
 			</div>
 		</form>

@@ -7,13 +7,15 @@
 </head>
 
 <body>
+	<div class="header-box"></div>
+	<img th:src="@{/img/ジーク2.jpg}">
 	<div class="message">
-		<br><br><br>
-		<img th:src="@{/img/ジーク2.jpg}">
-		<h3>なんだよもうう!!!また失敗かよおお!!!!</h3>
-		<h3><a th:href="@{/}">ふりだしへ</a></h3>
+		<h1>なんだよもうう!!!また失敗かよおお!!!!</h1>
 	</div>
-
+	<div class="message">
+		<h3><a th:href="@{/menu}">メニュー</a>　　　　<a th:href="@{/}">ログアウト</a></h3>
+		<h3></h3>
+	</div>
 </body>
 
 </html>
