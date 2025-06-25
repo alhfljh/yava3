@@ -9,29 +9,29 @@
 
 <body>
 
-<!--<style>-->
-<!--  #banner {-->
-<!--    position: fixed;-->
-<!--    top: -100px; /* 初期位置: 画面の外 */-->
-<!--    left: 0;-->
-<!--    width: 100%;-->
-<!--    text-align: center;-->
-<!--    padding: 20px 0;-->
-<!--    font-size: 18px;-->
-<!--    font-family: Arial, sans-serif;-->
-<!--    transition: top 3s ease-in-out;-->
-<!--  }-->
-<!--  #banner.show {-->
-<!--    top: 100vh; /* 表示される位置 */-->
-<!--  }-->
-<!--</style>-->
-<!--<div id="banner"><a th:href="@{img/rukaku.gif}"><img src="img/98.gif.webp"></a></div>-->
-<!--<script>-->
-<!--  document.addEventListener("DOMContentLoaded", function() {-->
-<!--    const banner = document.getElementById("banner");-->
-<!--    setTimeout(() => banner.classList.add("show"), 500); // 1秒後に表示-->
-<!--  });-->
-<!--</script>-->
+	<!--<style>-->
+	<!--  #banner {-->
+	<!--    position: fixed;-->
+	<!--    top: -100px; /* 初期位置: 画面の外 */-->
+	<!--    left: 0;-->
+	<!--    width: 100%;-->
+	<!--    text-align: center;-->
+	<!--    padding: 20px 0;-->
+	<!--    font-size: 18px;-->
+	<!--    font-family: Arial, sans-serif;-->
+	<!--    transition: top 3s ease-in-out;-->
+	<!--  }-->
+	<!--  #banner.show {-->
+	<!--    top: 100vh; /* 表示される位置 */-->
+	<!--  }-->
+	<!--</style>-->
+	<!--<div id="banner"><a th:href="@{img/rukaku.gif}"><img src="img/98.gif.webp"></a></div>-->
+	<!--<script>-->
+	<!--  document.addEventListener("DOMContentLoaded", function() {-->
+	<!--    const banner = document.getElementById("banner");-->
+	<!--    setTimeout(() => banner.classList.add("show"), 500); // 1秒後に表示-->
+	<!--  });-->
+	<!--</script>-->
 
 	<div class="header-box"></div>
 
@@ -45,7 +45,8 @@
 						<a th:href="@{/list}" class="tai">現社員一覧</a>
 					</li>
 					<li class="sub-menu-item a">
-						<a th:href="@{/list/delFlg}" class="tai">退職含む一覧</a>
+						<a th:href="@{/list/delFlg}" class="tai">退職者一覧</a>
+
 					</li>
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item a -->
@@ -56,7 +57,7 @@
 					<li class="sub-menu-item b">
 						<a th:href="@{/search}" class="tai">名前検索</a>
 					</li>
-					
+
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item b -->
 
@@ -69,6 +70,9 @@
 					<li class="sub-menu-item c" th:if="${session.user.authority == 2}">
 						<a th:href="@{/update/manage2}" th:if="${session.user.authority == 2}" class="tai">社員情報変更</a>
 					</li>
+					<li class="sub-menu-item c" th:if="${session.user.authority == 2}">
+						<a th:href="@{/dept/update/first}" th:if="${session.user.authority == 2}" class="tai">部署情報変更</a>
+					</li>
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item c-->
 
@@ -76,45 +80,53 @@
 			　管理者のみメニューがあったちょっと下にカーソルを合わせるとサブメニューが表示されてしまっていたため、
 				th:ifの記述をaタグからliタグに変更してサブメニューも表示されないようにした-->
 			<li class="menu-item d" th:if="${session.user.authority == 2}">
-				<a href="" class="tai">管理者のみ</a>
+				<a href="" class="tai">登録</a>
 				<ul class="sub-menu">
 					<li class="sub-menu-item d">
-						<a th:href="@{/regist/input}" class="tai">新規社員登録</a>
+						<a th:href="@{/regist/input}" class="tai">社員登録</a>
 					</li>
 					<li class="sub-menu-item d">
 						<a th:href="@{/dept/dept/dept}" class="tai">部署登録</a>
 					</li>
-					<li class="sub-menu-item d">
-						<a th:href="@{/dept/update/first}" class="tai">部署変更</a>
-					</li>
-					<li class="sub-menu-item d">
+				</ul><!-- /.sub-menu -->
+			</li><!-- /.menu-item d -->
+
+			<li class="menu-item e" th:if="${session.user.authority == 2}">
+				<a href="" class="tai">削除</a>
+				<ul class="sub-menu">
+					<li class="sub-menu-item e">
 						<a th:href="@{/delete/input}" class="tai">社員情報削除</a>
 					</li>
-					<li class="sub-menu-item d">
+					<li class="sub-menu-item e">
 						<a th:href="@{/resurrect}" class="tai">転生</a>
 					</li>
 				</ul><!-- /.sub-menu -->
 			</li><!-- /.menu-item d -->
 
+
+
 		</ul><!-- /.header-nav-list -->
 	</nav><!-- /#header-nav -->
 
-	<br><br><br><br><br><br><br><br> 
-	
-	
+	<br><br><br><br><br><br><br><br>
+
+
 	<div id="current_date" class="chuou1">
-    <script>
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById("current_date").innerHTML = new Date().toLocaleDateString('ja-JP', options);
-    </script>
-    </div>
+		<script>
+			const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+			document.getElementById("current_date").innerHTML = new Date().toLocaleDateString('ja-JP', options);
+		</script>
+	</div>
 
 
-<div id="RealtimeClockArea2" class="chuou">現在時刻：</div>
+	<div id="RealtimeClockArea2" class="chuou">現在時刻：</div>
 
 	<th:block th:if="${session.user.authority == 1}">
 		<div class="chuou">権限が一般なため、一部機能を制限しています。</div>
 	</th:block>
+
+
+	<!--タブ-->
 
 	<div class="tab-switch">
 
@@ -140,125 +152,155 @@
 			</th:block>
 
 			<th:block th:unless="${#lists.isEmpty(emp)}">
-				
-				<select onchange="location = this.value;">
-					<th:block th:each="page,iterStat : ${pages}">
-						<option th:value="${page}" th:text="${ascDesc[iterStat.index]}"></option>					
-					</th:block>					
-				</select>
-				
-				
+
+
+
+
 				<table class="list_table">
-						<caption style="text-align: right;" class="empCount" th:if="${searchCount == null}">登録社員：<span th:text="${empCount}"></span>名</div></caption>
-		
-<!--					<caption class="menuCount" th:if="${searchCount == null}">　　　　　　　　　　　　　　　　　　　　　　登録社員：<span th:text="${empCount}"></span>名</caption></div>			-->
-		
-					<tr>
-						<th class="empId">社員ID</th>
-						<th class="empName">社員名</th>
-						<th class="gender">性別</th>
-						<th class="address">住所</th>
-						<th class="birthday">生年月日</th>
-						<th class="authority">権限</th>
-						<th class="deptName">部署名</th>
-						<!--					<th >顔</th>-->
-					</tr>
-					<tr th:each="employee:${emp}">
-						<td th:text="${employee.empId}"></td>
-						<td th:text="${employee.empName}"></td>
-						<td th:switch="${employee.gender}">
-							<span th:case="1">男性</span>
-							<span th:case="2">女性</span>
-						</td>
-						<td th:text="${employee.address}"></td>
-						<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
-						<td th:switch="${employee.authority}">
-							<span th:case="1">一般</span>
-							<span th:case="2">管理者</span>
-						</td>
-						<td th:text="${employee.department.deptName}"></td>
-
-					</tr>
-					</tr>
-				</table>
-			</th:block>
+					<caption style="text-align: left;">
+						<select onchange="location = this.value;">
+							<th:block th:each="page,iterStat : ${pages}">
+								<option th:value="${page}" th:text="${ascDesc[iterStat.index]}"></option>
+							</th:block>
+						</select>
+						<caption style="text-align: right;" class="empCount" th:if="${searchCount == null}">登録社員：<span
+								th:text="${empCount}"></span>名
 		</div>
+		</caption>
+
+		<!--					<caption class="menuCount" th:if="${searchCount == null}">　　　　　　　　　　　　　　　　　　　　　　登録社員：<span th:text="${empCount}"></span>名</caption></div>			-->
+
+		<tr>
+			<th class="empId">社員ID</th>
+			<th class="empName">社員名</th>
+			<th class="gender">性別</th>
+			<th class="address">住所</th>
+			<th class="birthday">生年月日</th>
+			<th class="authority">権限</th>
+			<th class="deptName">部署名</th>
+			<!--					<th >顔</th>-->
+		</tr>
+		<tr th:each="employee:${emp}">
+			<td th:text="${employee.empId}"></td>
+			<td th:text="${employee.empName}"></td>
+			<td th:switch="${employee.gender}">
+				<span th:case="1">男性</span>
+				<span th:case="2">女性</span>
+			</td>
+			<td th:text="${employee.address}"></td>
+			<td th:text="${#dates.format(employee.birthday, 'yyyy/MM/dd')}"></td>
+			<td th:switch="${employee.authority}">
+				<span th:case="1">一般</span>
+				<span th:case="2">管理者</span>
+			</td>
+			<td th:text="${employee.department.deptName}"></td>
+
+		</tr>
+		</tr>
+		</table>
+		<form th:action="@{/list/delFlg}" style="padding-left: 40px;">
+			<div class="form">
+				<input type="submit" value="退職者一覧" />
+			</div>
+		</form>
+		
+
+		</th:block>
+	</div>
 
 
-		<label><input type="radio" name="TAB" class="radio">検索</label>
+	<label><input type="radio" name="TAB" class="radio">検索</label>
+	<div class"tab-content">
+		<aside2 th:fragment="layout-sidebar"
+			th:class="${session.user == null or session.user.authority == 1} ? ${'search'} : ${'admin_menu'}">
+			<div class="title">社員名検索</div>
+			<form th:action="@{/list/empName}" , method="get">
+				<div class="form">
+					<input type="text" name="empName" placeholder="名前を入力">
+					<input type="submit" value="検索" />
+					<button type="reset">リセット</button>
+				</div>
+			</form>
+		</aside2>
+	</div>
+
+
+	<th:block th:if="${session.user.authority == 1}">
+
+		<label><input type="radio" name="TAB" class="radio">変更</label>
 		<div class"tab-content">
-			<aside2 th:fragment="layout-sidebar"
-				th:class="${session.user == null or session.user.authority == 1} ? ${'search'} : ${'admin_menu'}">
-				<div class="title">社員名検索</div>
-				<form th:action="@{/list/empName}" , method="get">
-					<div class="form">
-						<input type="text" name="empName" placeholder="名前を入力">
-						<input type="submit" value="検索" />
-						<button type="reset">リセット</button>
-					</div>
-				</form>
-			</aside2>
+			<div class="title">ユーザツール</div>
+
+			<form th:action="@{/update/manage1}">
+				<div class="form">
+					<input type="submit" value="登録内容変更" />
+				</div>
+			</form>
+
+		</div>
+	</th:block>
+
+	<th:block th:if="${session.user.authority == 2}">
+
+		<label><input type="radio" name="TAB" class="radio">変更</label>
+		<div class"tab-content">
+			<div class="title">ユーザツール</div>
+			<form th:action="@{/update/manage1}">
+				<div class="form">
+					<input type="submit" value="登録内容変更" />
+				</div>
+			</form>
+
+			<div class="title">管理者ツール</div>
+			<form th:action="@{/update/manage2}">
+				<div class="form">
+					<input type="submit" value="社員情報変更" style="margin-right: 5px;" />
+
+			</form>
+
+			<form th:action="@{/dept/update/first}">
+				<div class="form">
+					<input type="submit" value="部署情報変更" />
+				</div>
+		</div>
+		</form>
 		</div>
 
 
-		<th:block th:if="${session.user.authority == 1}">
 
-			<label><input type="radio" name="TAB" class="radio">変更</label>
-			<div class"tab-content">
-				<div class="title">ユーザツール</div>
+		<label><input type="radio" name="TAB" class="radio">登録</label>
+		<div class"tab-content">
+			<div class="title">管理者ツール</div>
+			<form th:action="@{/regist/input}">
+				<div class="form">
+					<input type="submit" value="社員登録" style="margin-right: 5px;" />
+			</form>
 
-				<form th:action="@{/update/manage1}">
-					<div class="form">
-						<input type="submit" value="登録内容変更" />
-					</div>
-				</form>
+			<form th:action="@{/dept/dept/dept}">
+				<div class="form">
+					<input type="submit" value="部署登録" />
+				</div>
+		</div>
+		</form>
+		</div>
 
-			</div>
-		</th:block>
+		<label><input type="radio" name="TAB" class="radio">削除</label>
+		<div class"tab-content">
+			<div class="title">管理者ツール</div>
+			<form th:action="@{/delete/input}">
+				<div class="form">
+					<input type="submit" value="社員情報削除" style="margin-right: 5px;" />
+			</form>
 
-		<th:block th:if="${session.user.authority == 2}">
+			<form th:action="@{/resurrect}">
+				<div class="form">
+					<input type="submit" value="転生" />
+			</form>
 
-			<label><input type="radio" name="TAB" class="radio">変更</label>
-			<div class"tab-content">
-				<div class="title">ユーザツール</div>
-				<form th:action="@{/update/manage1}">
-					<div class="form">
-						<input type="submit" value="登録内容変更" />
-					</div>
-				</form>
-			</div>
+		</div>
+	</th:block>
 
 
-			<label><input type="radio" name="TAB" class="radio">管理者のみ</label>
-			<div class"tab-content">
-				<div class="title">管理者ツール</div>
-
-				<form th:action="@{/regist/input}">
-					<div class="form">
-						<input type="submit" value="新規社員登録" style="margin-right: 5px;" />
-				</form>
-
-				<form th:action="@{/update/manage2}">
-					<div class="form">
-						<input type="submit" value="社員情報変更" style="margin-right: 5px;" />
-				</form>
-
-				<form th:action="@{/delete/input}">
-					<div class="form">
-						<input type="submit" value="社員情報削除" style="margin-right: 5px;" />
-				</form>
-
-				<form th:action="@{/dept/dept/dept}">
-					<div class="form">
-						<input type="submit" value="部署登録" />
-				</form>
-				<form th:action="@{/dept/update/first}">
-					<div class="form">
-						<input type="submit" value="部署変更" />
-				</form>
-
-			</div>
-		</th:block>
 	</div>
 	
 	
@@ -280,8 +322,8 @@
 			document.getElementById("RealtimeClockArea2").innerHTML = msg;
 		}
 		setInterval('showClock2()', 1000);
-		
-	
+
+
 
 	</script>
 	
