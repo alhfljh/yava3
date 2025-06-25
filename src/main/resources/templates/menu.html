@@ -130,18 +130,6 @@
 
 	<div class="tab-switch">
 
-		
-			<label><input type="radio" name="TAB" class="radio">スロット</label>
-			<div class"tab-content">
-				<div class="title">ユーザツール</div>
-					<div>
-						<iframe th:src="@{/slot}" width="600" height="600"></iframe>
-					</div>
-				</form>
-			</div>
-		
-		
-		
 		<label><input type="radio" name="TAB" checked class="radio">社員一覧</label>
 		<div class=tab-content>
 
@@ -301,10 +289,11 @@
 	</th:block>
 
 
-	</div>
-	
-	
 
+
+
+
+	</div>
 
 	<script>
 		function set2fig(num) {
@@ -321,15 +310,11 @@
 			var msg = "現在時刻：" + nowHour + "時" + nowMin + "分" + nowSec + " 秒です。";
 			document.getElementById("RealtimeClockArea2").innerHTML = msg;
 		}
-		setInterval('showClock2()', 100);
+		setInterval('showClock2()', 1000);
 
 
 
 	</script>
-	
-	
-
-
 </body>
 
 
