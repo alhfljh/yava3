@@ -10,6 +10,8 @@
 
 <body class="admin user_update_input_admin">
 	<div class="header-box"></div>
+	
+<div class="backStr">登録変更入力画面</div>
 	<h3>登録変更入力画面</h3>
 	<div class="update">
 		<form th:action="@{/update/checked}" method="post" th:object="${employeeForm}">
@@ -121,7 +123,7 @@
 			<div class="form">
 				<div class="label"></div>
 				<div class="input">
-					<input type="submit" value="メニューに戻る" />
+					<input type="submit" value="メニューに戻る" class="btn-cyber"/>
 				</div>
 			</div>
 		</form>
